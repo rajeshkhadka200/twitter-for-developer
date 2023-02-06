@@ -22,6 +22,22 @@ const schema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  comments: [
+    {
+      user_id: {
+        type: String,
+        required: true,
+      },
+      content: {
+        type: String,
+        required: true,
+      },
+      createdAt: {
+        required: true,
+        type: String,
+      },
+    },
+  ],
   createdAt: {
     required: true,
     type: String,
