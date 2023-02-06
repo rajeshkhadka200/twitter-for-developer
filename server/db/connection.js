@@ -6,7 +6,7 @@ export const connectDB = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    mongoose.set("strictQuery", true);
+
     if (conn) {
       console.log(`database connected succcessfully !!`);
     }
