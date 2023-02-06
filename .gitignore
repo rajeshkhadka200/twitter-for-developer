@@ -2,3 +2,9 @@
 /server/config
 /server/node_modules
 /server/yarn.lock
+
+
+/bot/.env
+/bot/config
+/bot/node_modules
+/bot/yarn.lock

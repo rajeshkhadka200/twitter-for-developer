@@ -1,0 +1,15 @@
+{
+  "name": "bot",
+  "version": "1.0.0",
+  "description": "bot to fetch the hackathon and popular blogpost from internet.",
+  "main": "index.js",
+  "author": "rajesh, utsav",
+  "license": "MIT",
+  "dependencies": {
+    "mongoose": "^6.9.0",
+    "puppeteer": "^19.6.3"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.3"
+  }
+}
