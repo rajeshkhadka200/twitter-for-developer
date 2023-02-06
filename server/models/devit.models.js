@@ -28,6 +28,10 @@ const schema = new mongoose.Schema({
         type: String,
         required: true,
       },
+      devit_id: {
+        type: String,
+        required: true,
+      },
       content: {
         type: String,
         required: true,
