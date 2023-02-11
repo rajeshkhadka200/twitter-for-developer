@@ -57,7 +57,7 @@ const Hero = () => {
             More.
           </div>
           <Button
-            size="large"
+            size="medium"
             variant="contained"
             sx={{
               color: "var(--text)",
@@ -65,7 +65,8 @@ const Hero = () => {
               fontWeight: "500",
               textTransform: "none",
               backgroundColor: "var(--light-primary)",
-              fontSize: "1.3rem",
+              fontSize: "16px",
+              padding: "7px 15px",
               mt: "3rem",
               "&:hover": {
                 backgroundColor: "var(--primary)",
