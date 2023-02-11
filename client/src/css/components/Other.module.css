@@ -1,0 +1,5 @@
+.other_container{
+    border-left: 1px solid var(--light-text);
+    min-height: 100vh;
+    padding-right:8rem;
+}
