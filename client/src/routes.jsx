@@ -21,10 +21,6 @@ export default function Router() {
       children: [{ path: "", element: <Hero /> }],
     },
     {
-      path: "/join",
-      element: <Auth />,
-    },
-    {
       path: "/",
       element: <NavOnly />,
       children: [
@@ -35,6 +31,10 @@ export default function Router() {
         { path: "profile", element: <Profile /> },
         { path: "api", element: <Api /> },
       ],
+    },
+    {
+      path: "/join",
+      element: <Auth />,
     },
   ]);
 }
