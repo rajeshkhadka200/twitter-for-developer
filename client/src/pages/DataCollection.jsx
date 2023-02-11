@@ -37,6 +37,7 @@ const DataCollection = () => {
             label="Username"
             variant="outlined"
           />
+
           <div className={style.row_send}>
             <TextField
               defaultValue={"Rajesh"}
