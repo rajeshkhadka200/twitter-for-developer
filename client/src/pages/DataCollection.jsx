@@ -15,7 +15,7 @@ const DataCollection = () => {
           <span>Complete your profile!</span>
           <img src="/assets/profile.png" alt="profile" />
         </header>
-        <form>
+        <form className={style.from_data_collection}>
           <TextField
             defaultValue={"rajeshkhadka200"}
             InputLabelProps={{

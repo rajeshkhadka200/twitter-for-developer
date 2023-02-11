@@ -13,7 +13,7 @@ const Auth = () => {
           <h3>WelCome back</h3>
           <p>Please enter your details</p>
         </header>
-        <form>
+        <form className={style.form_auth}>
           <TextField
             InputLabelProps={{
               style: { fontFamily: "Poppins", fontSize: "15px" },
