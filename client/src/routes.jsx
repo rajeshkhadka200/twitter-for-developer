@@ -12,10 +12,10 @@ export default function Router() {
       children: [{ path: "", element: <Hero /> }],
     },
     {
-      path: "/app",
+      path: "/",
       element: <NavOnly />,
       children: [
-        { path: "", element: <Home /> },
+        { path: "app", element: <Home /> },
         { path: "discover", element: <Discover /> },
         { path: "hackathons", element: <Hackathons /> },
         { path: "blogs", element: <Blogs /> },
