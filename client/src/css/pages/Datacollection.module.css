@@ -11,6 +11,7 @@ nav .logo {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 80px;
 }
 
 header {
@@ -42,4 +43,11 @@ header img {
   width: 100%;
   display: flex;
   gap: 10px;
+  margin-bottom: 10px;
+}
+.from_data_collection .common {
+  margin-bottom: 10px;
+}
+.register_btn_con {
+  margin: 30px 0;
 }
