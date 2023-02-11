@@ -33,7 +33,7 @@ const Hero = () => {
       desc: "Devhub has a user friendly UI which is easy to use.",
     },
     {
-      icon: <BsArrowRight />,
+      icon: <RiOpenSourceFill />,
       title: "Open Source",
       desc: "Devhub is an open source project and you can contribute to it.",
     },
