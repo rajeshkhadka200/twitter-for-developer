@@ -29,7 +29,7 @@ const DataCollection = () => {
             }}
             inputProps={{
               style: {
-                height: "15px",
+                // height: "15px",
                 fontSize: "14px",
                 fontFamily: "Poppins",
                 width: "100%",
@@ -53,7 +53,7 @@ const DataCollection = () => {
               }}
               inputProps={{
                 style: {
-                  height: "15px",
+                  // height: "15px",
                   fontSize: "14px",
                   fontFamily: "Poppins",
                 },
@@ -78,7 +78,7 @@ const DataCollection = () => {
               }}
               inputProps={{
                 style: {
-                  height: "15px",
+                  // height: "15px",
                   fontSize: "14px",
                   fontFamily: "Poppins",
                   width: "100%",
@@ -105,7 +105,7 @@ const DataCollection = () => {
             }}
             inputProps={{
               style: {
-                height: "15px",
+                // height: "15px",
                 fontSize: "14px",
                 fontFamily: "Poppins",
                 width: "100%",
