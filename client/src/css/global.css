@@ -27,7 +27,7 @@
   --text: #f7f9f9;
   --light-text: #5b6773;
   --hover: #1c2732;
-  --overlay:#2c3640;
+  --overlay: #2c3640;
   --bg: #15202b;
 }
 
@@ -71,7 +71,7 @@ button {
   cursor: pointer;
 }
 
-.layout_container{
+.layout_container {
   /*make the 3 column grid layout 1 25% 2 50% 3 25%*/
   display: grid;
   grid-template-columns: 25% 40% 35%;

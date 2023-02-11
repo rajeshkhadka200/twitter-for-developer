@@ -1,7 +1,9 @@
 .sidebar_container {
   border-right: 1px solid var(--light-text);
   position: sticky;
-  padding-left: 8rem;
+  padding-left: 3rem;
+  /* display: flex; */
+  /* justify-content: center; */
 }
 .sidebar_wrapper {
   display: flex;
