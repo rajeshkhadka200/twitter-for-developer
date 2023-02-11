@@ -6,7 +6,12 @@
 }
 
 :root {
-  
+  --primary:#00BA7C;
+  --light-primary:#16E9A2;
+  --text:#F7F9F9;
+  --light-text:#5B6773;
+  --hover:#1C2732;
+  --bg:#15202B;
 }
 
 html,
