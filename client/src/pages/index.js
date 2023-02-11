@@ -7,3 +7,4 @@ export { default as Blogs } from "./Blogs";
 export { default as Hero } from "./Hero";
 export { default as Api } from "./Api";
 export { default as Auth } from "./Auth";
+export { default as DataCollection } from "./DataCollection";

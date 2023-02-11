@@ -1,5 +1,5 @@
 import React from "react";
-import style from "../css/pages/login.module.css";
+import style from "../css/pages/Login.module.css";
 import { Button } from "@pankod/refine-mui";
 import { TextField } from "@pankod/refine-mui";
 const Auth = () => {
@@ -37,6 +37,9 @@ const Auth = () => {
             variant="outlined"
           />
           <Button
+            onClick={() => {
+              alert("Please continue with google.");
+            }}
             sx={{
               fontWeight: 500,
               color: "#fff",

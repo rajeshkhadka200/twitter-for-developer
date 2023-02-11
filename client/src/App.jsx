@@ -7,7 +7,7 @@ function App() {
   //defining light and dark theme for the app
   const lightTheme = createTheme({
     palette: {
-      mode: "light",
+      mode: "dark",
       primary: {
         main: "#00BA7C",
         light: "#16E9A2",

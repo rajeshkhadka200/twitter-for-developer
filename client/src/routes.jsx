@@ -11,6 +11,7 @@ import {
   Hero,
   Api,
   Auth,
+  DataCollection,
 } from "./pages";
 
 export default function Router() {
@@ -23,6 +24,10 @@ export default function Router() {
     {
       path: "/join",
       element: <Auth />,
+    },
+    {
+      path: "/complete",
+      element: <DataCollection />,
     },
     {
       path: "/",
