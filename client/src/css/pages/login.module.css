@@ -32,6 +32,7 @@
 .left header h3 {
   font-size: 23px;
   color: var(--text);
+  /* font-weight: 500; */
 }
 .left header p {
   font-size: 13px;

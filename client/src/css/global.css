@@ -5,6 +5,21 @@
   border-color: rgb(243, 244, 246);
   font-family: "Poppins", sans-serif;
 }
+/* scroll bar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+  margin-left: 18px;
+  border-radius: 100vw;
+}
+::-webkit-scrollbar-thumb {
+  /* background: var(--sec-bg); */
+  background-color: #cccccc68;
+  border-radius: 10px;
+}
 
 :root {
   --primary: #00ba7c;

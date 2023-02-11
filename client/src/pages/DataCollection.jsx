@@ -3,12 +3,14 @@ import style from "../css/pages/Datacollection.module.css";
 import { BsArrowRight, BsMicFill, BsFillBookFill } from "react-icons/bs";
 import { Button } from "@pankod/refine-mui";
 import { TextField } from "@pankod/refine-mui";
-
+import { NavLink } from "@pankod/refine-react-router-v6";
 const DataCollection = () => {
   return (
     <>
       <nav>
-        <div className={style.logo}>DevHub</div>
+        <div className={style.logo}>
+          <NavLink to={"/"}>DevHub</NavLink>
+        </div>
       </nav>
       <div className={style.container}>
         <header>
