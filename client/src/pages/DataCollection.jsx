@@ -1,6 +1,6 @@
 import React from "react";
 import style from "../css/pages/Datacollection.module.css";
-
+import { BsArrowRight, BsMicFill, BsFillBookFill } from "react-icons/bs";
 import { Button } from "@pankod/refine-mui";
 import { TextField } from "@pankod/refine-mui";
 
@@ -16,7 +16,9 @@ const DataCollection = () => {
           <img src="/assets/profile.png" alt="profile" />
         </header>
         <form className={style.from_data_collection}>
+          {/* username feild */}
           <TextField
+            className={style.common}
             defaultValue={"rajeshkhadka200"}
             InputLabelProps={{
               style: {
@@ -27,7 +29,7 @@ const DataCollection = () => {
             }}
             inputProps={{
               style: {
-                height: "15px",
+                // height: "15px",
                 fontSize: "14px",
                 fontFamily: "Poppins",
                 width: "100%",
@@ -39,6 +41,7 @@ const DataCollection = () => {
           />
 
           <div className={style.row_send}>
+            {/* first name field */}
             <TextField
               defaultValue={"Rajesh"}
               InputLabelProps={{
@@ -50,7 +53,7 @@ const DataCollection = () => {
               }}
               inputProps={{
                 style: {
-                  height: "15px",
+                  // height: "15px",
                   fontSize: "14px",
                   fontFamily: "Poppins",
                 },
@@ -62,6 +65,8 @@ const DataCollection = () => {
               label="First Name"
               variant="outlined"
             />
+
+            {/* last name field */}
             <TextField
               defaultValue={"Khadka"}
               InputLabelProps={{
@@ -73,7 +78,7 @@ const DataCollection = () => {
               }}
               inputProps={{
                 style: {
-                  height: "15px",
+                  // height: "15px",
                   fontSize: "14px",
                   fontFamily: "Poppins",
                   width: "100%",
@@ -88,7 +93,9 @@ const DataCollection = () => {
             />
           </div>
           <TextField
-            defaultValue={"Rajesh"}
+            disabled
+            className={style.common}
+            defaultValue={"rajeshkhadkaofficial45@gmail.com"}
             InputLabelProps={{
               style: {
                 fontFamily: "Poppins",
@@ -98,7 +105,29 @@ const DataCollection = () => {
             }}
             inputProps={{
               style: {
-                height: "15px",
+                // height: "15px",
+                fontSize: "14px",
+                fontFamily: "Poppins",
+                width: "100%",
+              },
+            }}
+            id="outlined-basic"
+            label="Email"
+            variant="outlined"
+          />
+          <TextField
+            multiline
+            // defaultValue={"Trying to learn new things everyday."}
+            InputLabelProps={{
+              style: {
+                fontFamily: "Poppins",
+                fontSize: "15px",
+                lineHeight: "15px",
+              },
+            }}
+            inputProps={{
+              style: {
+                height: "150px",
                 fontSize: "14px",
                 fontFamily: "Poppins",
                 width: "100%",
@@ -109,6 +138,28 @@ const DataCollection = () => {
             variant="outlined"
           />
         </form>
+        <div className={style.register_btn_con}>
+          <Button
+            size="medium"
+            variant="contained"
+            sx={{
+              color: "var(--text)",
+              fontFamily: "Poppins",
+              fontWeight: "500",
+              textTransform: "none",
+              backgroundColor: "var(--primary)",
+              fontSize: "16px",
+              padding: "7px 15px",
+
+              // "&:hover": {
+              //   backgroundColor: "var(--primary)",
+              // },
+            }}
+            endIcon={<BsArrowRight size={"28"} />}
+          >
+            Register
+          </Button>
+        </div>
       </div>
     </>
   );

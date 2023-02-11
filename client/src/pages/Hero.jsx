@@ -64,13 +64,13 @@ const Hero = () => {
               fontFamily: "Poppins",
               fontWeight: "500",
               textTransform: "none",
-              backgroundColor: "var(--light-primary)",
+              backgroundColor: "var(--primary)",
               fontSize: "16px",
               padding: "7px 15px",
               mt: "3rem",
-              "&:hover": {
-                backgroundColor: "var(--primary)",
-              },
+              // "&:hover": {
+              //   backgroundColor: "var(--light-primary)",
+              // },
             }}
             endIcon={<BsArrowRight size={"28"} />}
           >
