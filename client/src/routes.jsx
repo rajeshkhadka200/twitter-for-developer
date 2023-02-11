@@ -2,7 +2,16 @@ import React from "react";
 import { useRoutes } from "@pankod/refine-react-router-v6";
 import NavOnly from "./layouts/NavOnly";
 import NavFoot from "./layouts/NavFoot";
-import { Home, Discover, Hackathons, Blogs, Profile, Hero, Api } from "./pages";
+import {
+  Home,
+  Discover,
+  Hackathons,
+  Blogs,
+  Profile,
+  Hero,
+  Api,
+  Auth,
+} from "./pages";
 
 export default function Router() {
   return useRoutes([
@@ -10,6 +19,10 @@ export default function Router() {
       path: "/",
       element: <NavFoot />,
       children: [{ path: "", element: <Hero /> }],
+    },
+    {
+      path: "/join",
+      element: <Auth />,
     },
     {
       path: "/",
