@@ -8,7 +8,7 @@ const DataCollection = () => {
   return (
     <>
       <nav>
-        <div className="logo">DevHub</div>
+        <div className={style.logo}>DevHub</div>
       </nav>
       <div className={style.container}>
         <header>

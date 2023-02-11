@@ -84,7 +84,7 @@
 .features_wrapper {
   display: flex;
   flex-wrap: wrap;
-  gap: 5rem;
+  gap: 4rem;
 }
 .feature_box {
   width: 400px;

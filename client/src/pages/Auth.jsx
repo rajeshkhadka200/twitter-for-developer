@@ -10,7 +10,7 @@ const Auth = () => {
           <div className={style.logo}>
             {/* <img src="/assets/logo.png" alt="" /> */}
           </div>
-          <h3>WelCome back </h3>
+          <h3>WelCome back</h3>
           <p>Please enter your details</p>
         </header>
         <form>
