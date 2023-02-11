@@ -41,5 +41,9 @@ export default function Router() {
         { path: "api", element: <Api /> },
       ],
     },
+    {
+      path: "/join",
+      element: <Auth />,
+    },
   ]);
 }
