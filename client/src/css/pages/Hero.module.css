@@ -82,12 +82,11 @@
   font-weight: 500;
 }
 .features_wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 40px;
 }
 .feature_box {
-  width: 400px;
   height: 200px;
   border-radius: 8px;
   border: 2px solid var(--light-text);
