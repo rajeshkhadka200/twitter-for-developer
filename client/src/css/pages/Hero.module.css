@@ -1,0 +1,39 @@
+.hero_container {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - 4.8rem);
+  color: var(--text);
+  padding: 4rem 2rem;
+  justify-content: center;
+}
+.center_con {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+.top_text {
+  color: var(--light-text);
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  margin-bottom: -1rem;
+}
+.center_text {
+  font-size: 3rem;
+  font-weight: 800;
+  width: 75%;
+  text-align: center;
+  display: flex;
+  line-height: 3.8rem;
+}
+.bottom_text {
+  font-size: 1.3rem;
+  font-weight: 400;
+  width: 55%;
+  text-align: center;
+  margin-top: 0.5rem;
+  line-height: 1.8rem;
+}
+.glow {
+  color: var(--primary);
+}

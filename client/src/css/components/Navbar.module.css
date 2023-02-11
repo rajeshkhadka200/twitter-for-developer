@@ -1,28 +1,35 @@
-.navbar_con{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 1.5rem;
-    height:4.5rem;
-    border: 1px solid blue;
+.navbar_con {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  height: 4.8rem;
+  /* position: sticky; */
 }
-.left{
-    display: flex;
-    /* border: 1px solid red; */
+.left {
+  display: flex;
 }
-.logo_con{
+.logo_con {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 2.1rem;
+  font-family: "Ubuntu Mono", sans-serif;
+  color: var(--text);
+  letter-spacing: 1px;
+}
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8rem;
+  background-color: var(--primary);
+  border-radius: 4px;
+  width: 40px;
+  height: 40px;
+}
+.right{
     display: flex;
     align-items: center;
-    border: 1px solid red;
-    gap: 0.5rem;
-    font-size: 2rem;
-    font-family: "Rajdhani", sans-serif;
-}
-.logo{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-    background-color: var(--primary);
-    color: var(--text);
+    gap: 1.2rem;
 }
