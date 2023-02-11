@@ -48,25 +48,25 @@ form {
 }
 
 /* selct placeholder of input */
-form input::placeholder {
+.form_auth input::placeholder {
   color: #cccccc;
   text-transform: capitalize;
   font-size: 14px;
 }
 
-form .login_btn {
+.form_auth .login_btn {
   font-weight: 500 !important;
   border-radius: 5px;
   background-color: var(--primary);
   color: var(--text) !important;
 }
-form .googleBth {
+.form_auth .googleBth {
   display: flex;
   justify-content: center;
   gap: 5px;
   align-items: center;
 }
-form .googleBth img {
+.form_auth .googleBth img {
   height: 30px;
   width: 30px;
 }

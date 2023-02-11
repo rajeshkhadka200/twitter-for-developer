@@ -8,14 +8,14 @@ const DataCollection = () => {
   return (
     <>
       <nav>
-        <div className="logo">DevHub</div>
+        <div className={style.logo}>DevHub</div>
       </nav>
       <div className={style.container}>
         <header>
           <span>Complete your profile!</span>
           <img src="/assets/profile.png" alt="profile" />
         </header>
-        <form>
+        <form className={style.from_data_collection}>
           <TextField
             defaultValue={"rajeshkhadka200"}
             InputLabelProps={{

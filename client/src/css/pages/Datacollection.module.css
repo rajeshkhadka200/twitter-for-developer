@@ -3,6 +3,9 @@ nav {
   padding: 30px 50px;
   font-size: 20px;
 }
+nav .logo {
+  color: var(--text);
+}
 .container {
   width: 100%;
   display: flex;
@@ -21,6 +24,7 @@ header {
 header span {
   font-size: 20px;
   margin-bottom: 20px;
+  color: var(--text);
 }
 header img {
   height: 150px;
@@ -30,11 +34,11 @@ header img {
   -webkit-user-drag: none;
 }
 
-form {
+.from_data_collection {
   width: 35%;
 }
 
-form .row_send {
+.from_data_collection .row_send {
   width: 100%;
   display: flex;
   gap: 10px;

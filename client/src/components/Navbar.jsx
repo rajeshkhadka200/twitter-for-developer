@@ -18,12 +18,12 @@ const Navbar = () => {
         <div className={styles.right}>
           <Button
             variant="text"
-            size="medium"
+            size="small"
             sx={{
               color: "var(--text)",
               fontFamily: "Poppins",
               fontWeight: "400",
-              fontSize: "1.1rem",
+              fontSize: "15px",
               borderRadius: "4px",
               px: "1rem",
             }}
@@ -32,18 +32,18 @@ const Navbar = () => {
           </Button>
           <Button
             variant="contained"
-            size="medium"
+            size="small"
             sx={{
               color: "var(--light-text)",
               fontFamily: "Poppins",
               fontWeight: "400",
-              fontSize: "1.1rem",
+              fontSize: "15px",
               borderRadius: "4px",
-              backgroundColor:"var(--text)",
+              backgroundColor: "var(--text)",
               //hover effect in mui
-              '&:hover': {
+              "&:hover": {
                 backgroundColor: "var(--text)",
-              }
+              },
             }}
           >
             Sign up
