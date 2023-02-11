@@ -7,6 +7,13 @@
 }
 
 :root {
+  
+  --primary: #00ba7c;
+  --light-primary: #16e9a2;
+  --text: #f7f9f9;
+  --light-text: #5b6773;
+  --hover: #1c2732;
+  --bg: #15202b;
 }
 
 html,
