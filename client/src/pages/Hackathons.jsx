@@ -1,9 +1,12 @@
 import React from 'react'
+import PageTop from '../components/PageTop';
 
 const Hackathons = () => {
   return (
-    <div>Hackathons</div>
-  )
+    <>
+      <PageTop label="Hackathons" />
+    </>
+  );
 }
 
 export default Hackathons

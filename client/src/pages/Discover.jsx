@@ -1,9 +1,12 @@
 import React from 'react'
+import PageTop from '../components/PageTop';
 
 const Discover = () => {
   return (
-    <div>Discover</div>
-  )
+    <>
+      <PageTop label="Discover" />
+    </>
+  );
 }
 
 export default Discover

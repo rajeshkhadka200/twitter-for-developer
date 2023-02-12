@@ -27,12 +27,13 @@ header span {
   margin-bottom: 20px;
   color: var(--text);
 }
-header img {
+header .complete_profile_img {
   height: 150px;
   width: 150px;
   border-radius: 50%;
   border: 3px solid var(--primary);
   -webkit-user-drag: none;
+  object-fit: cover;
 }
 
 .from_data_collection {

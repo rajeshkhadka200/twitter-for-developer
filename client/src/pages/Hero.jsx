@@ -5,6 +5,8 @@ import { BsArrowRight, BsMicFill, BsFillBookFill } from "react-icons/bs";
 import { FaPencilAlt, FaUserAstronaut } from "react-icons/fa";
 import { BiGlobe } from "react-icons/bi";
 import { RiOpenSourceFill } from "react-icons/ri";
+import { NavLink } from "@pankod/refine-react-router-v6";
+
 const Hero = () => {
   const features = [
     {
@@ -56,26 +58,28 @@ const Hero = () => {
             in <span className={styles.glow}>`Voice Channels`</span>, and Much
             More.
           </div>
-          <Button
-            size="medium"
-            variant="contained"
-            sx={{
-              color: "var(--text)",
-              fontFamily: "Poppins",
-              fontWeight: "500",
-              textTransform: "none",
-              backgroundColor: "var(--primary)",
-              fontSize: "16px",
-              padding: "7px 15px",
-              mt: "3rem",
-              // "&:hover": {
-              //   backgroundColor: "var(--light-primary)",
-              // },
-            }}
-            endIcon={<BsArrowRight size={"28"} />}
-          >
-            Let's Connect
-          </Button>
+          <NavLink to="/join">
+            <Button
+              size="medium"
+              variant="contained"
+              sx={{
+                color: "var(--text)",
+                fontFamily: "Poppins",
+                fontWeight: "500",
+                textTransform: "none",
+                backgroundColor: "var(--primary)",
+                fontSize: "16px",
+                padding: "7px 15px",
+                mt: "3rem",
+                // "&:hover": {
+                //   backgroundColor: "var(--light-primary)",
+                // },
+              }}
+              endIcon={<BsArrowRight size={"28"} />}
+            >
+              Let's Connect
+            </Button>
+          </NavLink>
         </div>
       </div>
       <div className={styles.mid_con}>

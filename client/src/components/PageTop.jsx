@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import styles from "../css/components/PageTop.module.css";
 
-const PageTop = () => {
+const PageTop = ({ label }) => {
   return (
-    <div>PageTop</div>
-  )
-}
+    <>
+      <div className={styles.page_top_con}>
+        <span className={styles.label}>{label}</span>
+      </div>
+    </>
+  );
+};
 
-export default PageTop
+export default PageTop;

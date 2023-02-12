@@ -2,8 +2,22 @@
   box-sizing: border-box;
   border-width: 0;
   border-style: solid;
-  border-color: rgb(243, 244, 246);
   font-family: "Poppins", sans-serif;
+}
+/* scroll bar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+  margin-left: 18px;
+  border-radius: 100vw;
+}
+::-webkit-scrollbar-thumb {
+  /* background: var(--sec-bg); */
+  background-color: #cccccc68;
+  border-radius: 10px;
 }
 
 :root {
@@ -12,8 +26,9 @@
   --text: #f7f9f9;
   --light-text: #5b6773;
   --hover: #1c2732;
-  --overlay:#2c3640;
+  --overlay: #2c3640;
   --bg: #15202b;
+  --border: #505f6db6;
 }
 
 html,
@@ -56,9 +71,10 @@ button {
   cursor: pointer;
 }
 
-.layout_container{
+.layout_container {
+  /*make the 3 column grid layout 1 25% 2 50% 3 25%*/
   display: grid;
-  grid-template-columns: 25% 40% 35%;
+  grid-template-columns: 25% 45% 30%;
   grid-template-rows: 100%;
   grid-template-areas: "left main right";
 }

@@ -3,17 +3,23 @@ import style from "../css/pages/Datacollection.module.css";
 import { BsArrowRight, BsMicFill, BsFillBookFill } from "react-icons/bs";
 import { Button } from "@pankod/refine-mui";
 import { TextField } from "@pankod/refine-mui";
-
+import { NavLink } from "@pankod/refine-react-router-v6";
 const DataCollection = () => {
   return (
     <>
       <nav>
-        <div className={style.logo}>DevHub</div>
+        <div className={style.logo}>
+          <NavLink to={"/"}>DevHub</NavLink>
+        </div>
       </nav>
       <div className={style.container}>
         <header>
           <span>Complete your profile!</span>
-          <img src="/assets/profile.png" alt="profile" />
+          <img
+            className={style.complete_profile_img}
+            src="/assets/profile-img.jpg"
+            alt="profile"
+          />
         </header>
         <form className={style.from_data_collection}>
           {/* username feild */}

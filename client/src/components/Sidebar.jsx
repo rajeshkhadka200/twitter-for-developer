@@ -6,7 +6,7 @@ import { AiFillHome, AiOutlineHome } from "react-icons/ai";
 import { FiGlobe } from "react-icons/fi";
 import { BsLaptop, BsLaptopFill } from "react-icons/bs";
 import { MdOutlineLibraryBooks, MdLibraryBooks } from "react-icons/md";
-// import { HiUserCircle, HiOutlineUserCircle } from "react-icons/hi";
+import { HiUserCircle, HiOutlineUserCircle } from "react-icons/hi";
 import { IoSettingsSharp, IoSettingsOutline } from "react-icons/io5";
 import { NavLink, useLocation } from "@pankod/refine-react-router-v6";
 
@@ -39,12 +39,12 @@ const Sidebar = () => {
       icon2: <MdLibraryBooks />,
       link: "/blogs",
     },
-    // {
-    //   name: "Profile",
-    //   icon1: <HiUserCircle />,
-    //   icon2: <HiOutlineUserCircle />,
-    //   links: "/profile",
-    // },
+    {
+      name: "Profile",
+      icon2: <HiUserCircle />,
+      icon1: <HiOutlineUserCircle />,
+      link: "/profile",
+    },
     {
       name: "Api Key",
       icon2: <IoSettingsSharp />,
@@ -114,8 +114,8 @@ const Sidebar = () => {
               />
             </div>
             <div className={styles.name_con}>
-                <div className={styles.name}>Utsav Bhattarai</div>
-                <div className={styles.username}>@utsav</div>
+              <div className={styles.name}>Utsav Bhattarai</div>
+              <div className={styles.username}>@utsav</div>
             </div>
           </div>
         </div>

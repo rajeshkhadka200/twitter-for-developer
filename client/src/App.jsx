@@ -21,6 +21,7 @@ function App() {
       text: {
         normal: "#0F1419",
         light: "#E6E7E9",
+        adv: "#859CB4",
       },
       hover: "#F7F7F7",
     },
@@ -42,6 +43,7 @@ function App() {
       text: {
         normal: "#F7F9F9",
         light: "#5B6773",
+        adv: "#859CB4",
       },
       hover: "#1C2732",
     },

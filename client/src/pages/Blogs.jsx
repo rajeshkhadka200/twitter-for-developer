@@ -1,9 +1,12 @@
 import React from 'react'
+import PageTop from '../components/PageTop';
 
 const Blogs = () => {
   return (
-    <div>Blogs</div>
-  )
+    <>
+      <PageTop label="Blogs" />
+    </>
+  );
 }
 
 export default Blogs
