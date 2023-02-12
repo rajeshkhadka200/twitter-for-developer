@@ -74,7 +74,7 @@ button {
 .layout_container {
   /*make the 3 column grid layout 1 25% 2 50% 3 25%*/
   display: grid;
-  grid-template-columns: 25% 45% 30%;
+  grid-template-columns: 25% 40% 35%;
   grid-template-rows: 100%;
   grid-template-areas: "left main right";
 }

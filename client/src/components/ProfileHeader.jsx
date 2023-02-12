@@ -10,7 +10,9 @@ const ProfileHeader = () => {
           <img src="/assets/profile-img.jpg" alt="profile_pic" />
           <h3>Rajesh Khadka</h3>
           <p className={style.username}>@rajeshkhadka200</p>
-          <p className={style.bio}>Trying to learn Full stack development</p>
+          <p className={style.bio}>
+            Trying to learn Full stack development in my own!
+          </p>
         </div>
       </header>
     </>
