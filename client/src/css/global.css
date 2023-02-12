@@ -2,7 +2,6 @@
   box-sizing: border-box;
   border-width: 0;
   border-style: solid;
-  border-color: rgb(243, 244, 246);
   font-family: "Poppins", sans-serif;
 }
 /* scroll bar */
@@ -29,6 +28,7 @@
   --hover: #1c2732;
   --overlay: #2c3640;
   --bg: #15202b;
+  --border: #505f6db6;
 }
 
 html,
@@ -74,7 +74,7 @@ button {
 .layout_container {
   /*make the 3 column grid layout 1 25% 2 50% 3 25%*/
   display: grid;
-  grid-template-columns: 25% 40% 35%;
+  grid-template-columns: 25% 45% 30%;
   grid-template-rows: 100%;
   grid-template-areas: "left main right";
 }
