@@ -46,4 +46,6 @@
   font-size: 14px;
   color: #c1c1c1;
   margin-top: 8px;
+  max-width: 350px;
+  text-align: center;
 }
