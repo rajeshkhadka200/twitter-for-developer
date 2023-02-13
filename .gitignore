@@ -3,6 +3,7 @@
 /server/node_modules
 /server/yarn.lock
 
+/client/dist
 
 /bot/.env
 /bot/config
