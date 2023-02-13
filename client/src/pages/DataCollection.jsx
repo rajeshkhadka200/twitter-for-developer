@@ -156,10 +156,6 @@ const DataCollection = () => {
               backgroundColor: "var(--primary)",
               fontSize: "16px",
               padding: "7px 15px",
-
-              // "&:hover": {
-              //   backgroundColor: "var(--primary)",
-              // },
             }}
             endIcon={<BsArrowRight size={"28"} />}
           >
