@@ -58,7 +58,7 @@ const Hero = () => {
             in <span className={styles.glow}>`Voice Channels`</span>, and Much
             More.
           </div>
-          <NavLink to="/join">
+          <NavLink to="/app">
             <Button
               size="medium"
               variant="contained"
