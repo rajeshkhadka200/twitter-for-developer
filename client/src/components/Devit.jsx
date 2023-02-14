@@ -31,7 +31,6 @@ const Devit = () => {
               fontSize: "1.1rem",
               fontFamily: "Poppins",
               color: "text.normal",
-
               // style the placeholder
               "& .MuiInputBase-input::placeholder": {
                 color: "text.light",
@@ -46,7 +45,13 @@ const Devit = () => {
             multiline
             value={value}
             onChange={handleChange}
-          />
+
+            // dangerouslySetInnerHTML={{
+            //   __html: value
+            //     .replace(/#(\w+)/g, '<span style="color: #1DA1F2;">#$1</span>')
+            //     .replace(/@(\w+)/g, '<span style="color: #1DA1F2;">@$1</span>'),
+            // }}
+          ></InputBase>
           <div className={styles.bottom_part}>
             <div className={styles.icon_con}>
               <Tooltip
