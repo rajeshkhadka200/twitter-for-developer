@@ -75,4 +75,11 @@
   display: flex;
   align-items: center;
   gap: 5px;
+  padding: 3px 3px;
+  border-radius: 50vw;
+}
+.footer_desc span:hover {
+  /* color: var(--primary); */
+  cursor: pointer;
+  background-color: var(--hover);
 }

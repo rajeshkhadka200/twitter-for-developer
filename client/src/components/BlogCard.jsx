@@ -16,7 +16,9 @@ const BlogCard = () => {
       </div>
       <div className={style.card_body}>
         <div className={style.left}>
-          <p className={style.tittle}>How to write a GitHub action in Rust.</p>
+          <p className={style.tittle}>
+            How to write a GitHub action in Rust with python and php
+          </p>
           <div className={style.footer_desc}>
             <span>
               <BsBook /> 11 min
