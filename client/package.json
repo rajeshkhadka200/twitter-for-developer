@@ -15,7 +15,9 @@
     "@pankod/refine-inferencer": "^2.4.0",
     "@pankod/refine-mui": "^3.61.5",
     "@pankod/refine-react-router-v6": "^3.38.0",
+    "codemirror": "^6.0.1",
     "react": "^18.2.0",
+    "react-awesome-lightbox": "^1.8.1",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
     "react-typist": "^2.0.5"
