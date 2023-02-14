@@ -31,7 +31,6 @@ const Post = () => {
     <>
       {
         //open the lightbox when the image is clicked
-       
       }
       <div className={styles.post_container}>
         <div className={styles.post_left}>

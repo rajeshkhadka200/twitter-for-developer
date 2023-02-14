@@ -7,6 +7,13 @@ const Blogs = () => {
     <>
       <PageTop label="Blogs" />
       <BlogCard />
+      <BlogCard />
+      <BlogCard />
+      <BlogCard />
+      <BlogCard />
+      <BlogCard />
+      <BlogCard />
+      <BlogCard />
       {/* <BlogCard /> */}
     </>
   );
