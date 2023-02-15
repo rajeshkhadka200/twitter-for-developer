@@ -2,6 +2,10 @@
   border-right: 1px solid var(--light-text);
   position: sticky;
   padding-left: 5rem;
+  min-height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 .sidebar_wrapper {
   display: flex;
