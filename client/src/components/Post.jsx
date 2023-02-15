@@ -26,7 +26,7 @@ const Post = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const text = "Hi, It's me Full stack developer #dev";
+  const text = "Hi, It's me Full stack developer #dev @rajesh";
   return (
     <>
       {
