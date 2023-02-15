@@ -7,6 +7,11 @@ const Hackathons = () => {
     <>
       <PageTop label="Hackathons" />
       <HackathonCard />
+      <HackathonCard />
+      <HackathonCard />
+      <HackathonCard />
+      <HackathonCard />
+      <HackathonCard />
     </>
   );
 };
