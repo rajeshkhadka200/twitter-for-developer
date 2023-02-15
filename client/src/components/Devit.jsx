@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../css/components/Devit.module.css";
+import Codemirror from "codemirror";
 import {
   Avatar,
   Button,
@@ -22,22 +23,23 @@ import { BiCodeBlock } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
 import { CgPoll } from "react-icons/cg";
 
-//code mirror
-import CodeMirror from "@uiw/react-codemirror";
-import { javascript } from "@codemirror/lang-javascript";
-import { dracula } from "@uiw/codemirror-theme-dracula";
 //import the theme
 import { tags as t } from "@lezer/highlight";
 
-const Devit = () => {
+// codemirror setup
+import "codemirror/lib/codemirror.css";
+import "codemirror/theme/dracula.css";
+import "codemirror/mode/javascript/javascript";
+import "codemirror/addon/edit/closebrackets";
+import "codemirror/addon/edit/closebrackets";
+
+function Devit() {
   //input state
-  const [codeInput, setCodeInput] = React.useState("");
   const [value, setValue] = React.useState("");
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [emoji, setEmoji] = React.useState(false);
-
-  //on off state
   const [code, setCode] = React.useState(false);
+
   const [img, setImg] = React.useState(null);
 
   const open = Boolean(anchorEl);
@@ -56,14 +58,35 @@ const Devit = () => {
     setEmoji(!emoji);
   };
 
-  const onCodeChange = React.useCallback((value, viewUpdate) => {
-    setCodeInput(value);
-  }, []);
-
   const getImg = (e) => {
     const [file] = e.target.files;
     setImg(URL.createObjectURL(file));
   };
+
+  // handle code mirror editor
+  async function Editorinit() {
+    codeRef.current = Codemirror.fromTextArea(
+      document.getElementById("editor"),
+      {
+        mode: { name: "javascript", json: true },
+        theme: "dracula",
+        autoCloseTags: true,
+        autoCloseBrackets: true,
+        lineNumbers: true,
+        lineWrapping: true,
+      }
+    );
+    codeRef.current.on("change", (ins, changes) => {
+      const { origin } = changes;
+      const code = ins.getValue();
+      console.log(code);
+    });
+  }
+  const codeRef = React.useRef(null);
+  React.useEffect(() => {
+    Editorinit();
+  }, [code]);
+
   return (
     <>
       <div className={styles.devit_container}>
@@ -93,58 +116,39 @@ const Devit = () => {
             multiline
             value={value}
             onChange={handleChange}
-
-            // dangerouslySetInnerHTML={{
-            //   __html: value
-            //     .replace(/#(\w+)/g, '<span style="color: #1DA1F2;">#$1</span>')
-            //     .replace(/@(\w+)/g, '<span style="color: #1DA1F2;">@$1</span>'),
-            // }}
           ></InputBase>
+
           {code && (
             <div className={styles.code_container}>
-              <CodeMirror
-                value={codeInput}
-                minHeight="100px"
-                theme={dracula}
-                extensions={[javascript()]}
-                onChange={onCodeChange}
-                //style the code mirror
-                style={{
-                  fontFamily: "Poppins",
-                  fontSize: "1.1rem",
-                  color: "text.normal",
-                  backgroundColor: "background.default",
-                  borderRadius: "10px",
-                  overflow: "hidden",
-                }}
-              />
+              <textarea id="editor" wrap="hard" />
             </div>
           )}
+
           {img && (
             <div className={styles.img_container}>
-              <IconButton sx={{
-                position: "absolute",
-                top: "5px",
-                right: "5px",
-                color: "text.light",
-                backgroundColor: "background.default",
-                borderRadius: "50%",
-                width: "30px",
-                height: "30px",
-                fontSize: "1.1rem",
-                padding: "0px",
-                "&:hover": {
-                  backgroundColor: "hover",
-                },
-              }}
-              onClick={() => setImg("")}
+              <IconButton
+                sx={{
+                  position: "absolute",
+                  top: "5px",
+                  right: "5px",
+                  color: "text.light",
+                  backgroundColor: "background.default",
+                  borderRadius: "50%",
+                  width: "30px",
+                  height: "30px",
+                  fontSize: "1.1rem",
+                  padding: "0px",
+                  "&:hover": {
+                    backgroundColor: "hover",
+                  },
+                }}
+                onClick={() => setImg("")}
               >
-                <RxCross2/>
+                <RxCross2 />
               </IconButton>
               <img src={img} alt="img" />
             </div>
-          )  
-          }
+          )}
           <div className={styles.bottom_part}>
             <div className={styles.icon_con}>
               <Tooltip
@@ -299,6 +303,6 @@ const Devit = () => {
       </div>
     </>
   );
-};
+}
 
 export default Devit;
