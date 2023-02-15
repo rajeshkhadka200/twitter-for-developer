@@ -10,7 +10,7 @@ import {
 } from "@pankod/refine-mui";
 import React from "react";
 import styles from "../css/components/Post.module.css";
-import { FiMoreHorizontal, FiEdit } from "react-icons/fi";
+import { FiMoreHorizontal, FiEdit,FiX } from "react-icons/fi";
 import { MdVerified, MdDelete } from "react-icons/md";
 import { AiOutlineHeart, AiFillHeart, AiOutlineRetweet } from "react-icons/ai";
 import { BiComment } from "react-icons/bi";
@@ -31,7 +31,29 @@ const Post = () => {
     <>
       {
         //open the lightbox when the image is clicked
-       
+        openLightbox && (
+          <div className={styles.lightbox}>
+            <div className={styles.lightbox_container}>
+              <img src="./pic.jpg" alt="post" />
+              <div className={styles.lightbox_close}>
+                <IconButton
+                  sx={{
+                    width: "35px",
+                    height: "35px",
+                    color: "text.light",
+                    "&:hover": {
+                      color: "primary.main",
+                      backgroundColor: "rgba(29,161,242,0.1)",
+                    },
+                  }}
+                  onClick={() => setOpenLightbox(false)}
+                >
+                  <FiX />
+                </IconButton>
+              </div>
+            </div>
+          </div>
+        )
       }
       <div className={styles.post_container}>
         <div className={styles.post_left}>
