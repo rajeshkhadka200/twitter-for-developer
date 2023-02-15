@@ -1,12 +1,14 @@
 import React from "react";
 import styles from "../css/components/Other.module.css";
 import SearchBox from "./SearchBox";
-
+import { useLocation } from "@pankod/refine-react-router-v6";
 const Other = () => {
+  const location = useLocation();
+  const path = location.pathname;
   return (
     <>
       <div className={styles.other_container}>
-        <SearchBox />
+        {path !== "/discover" && <SearchBox />}
         <div className={styles.trends_container}>
           <span className={styles.trend_title}>Trends for you</span>
           <div className={styles.trend}>

@@ -13,6 +13,7 @@ import {
   Auth,
   DataCollection,
 } from "./pages";
+import SpecificPost from "./pages/SpecificPost";
 
 export default function Router() {
   return useRoutes([
@@ -39,6 +40,7 @@ export default function Router() {
         { path: "blogs", element: <Blogs /> },
         { path: "profile", element: <Profile /> },
         { path: "api", element: <Api /> },
+        { path: "devit/:id", element: <SpecificPost /> },
       ],
     },
     {

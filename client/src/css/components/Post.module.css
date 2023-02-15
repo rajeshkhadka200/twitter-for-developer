@@ -4,6 +4,10 @@
   padding: 1rem;
   border-bottom: 1px solid var(--light-text);
   gap: 0.8rem;
+  transition: 0.3s;
+}
+.post_container:hover {
+  background-color: var(--hover);
 }
 .post_right {
   display: flex;
