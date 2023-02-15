@@ -10,7 +10,7 @@ import {
 } from "@pankod/refine-mui";
 import React from "react";
 import styles from "../css/components/Post.module.css";
-import { FiMoreHorizontal, FiEdit,FiX } from "react-icons/fi";
+import { FiMoreHorizontal, FiEdit, FiX } from "react-icons/fi";
 import { MdVerified, MdDelete } from "react-icons/md";
 import { AiOutlineHeart, AiFillHeart, AiOutlineRetweet } from "react-icons/ai";
 import { BiComment } from "react-icons/bi";
@@ -34,7 +34,10 @@ const Post = () => {
         openLightbox && (
           <div className={styles.lightbox}>
             <div className={styles.lightbox_container}>
-              <img src="./pic.jpg" alt="post" />
+              <img
+                src="https://cdn.pixabay.com/photo/2018/03/22/02/37/email-3249062_960_720.png"
+                alt="post"
+              />
               <div className={styles.lightbox_close}>
                 <IconButton
                   sx={{
@@ -181,7 +184,7 @@ const Post = () => {
               }}
             >
               <img
-                src="./pic.jpg"
+                src="https://cdn.pixabay.com/photo/2018/03/22/02/37/email-3249062_960_720.png"
                 alt="post"
                 style={{
                   width: "100%",
