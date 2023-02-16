@@ -3,6 +3,7 @@ import Router from "./routes";
 import { ThemeProvider, CssBaseline, createTheme } from "@pankod/refine-mui";
 import { ContextProvider } from "./config/Context";
 
+
 function App() {
   // defining light and dark theme for the app
   const lightTheme = createTheme({
