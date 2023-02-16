@@ -8,6 +8,7 @@ const HackathonCard = () => {
   return (
     <>
       <div className={style.hack_card}>
+        {/* div */}
         <div className={style.hack_left}>
           <div className={style.img}>
             <img src="/assets/hack.avif" alt="hack_cover" />
