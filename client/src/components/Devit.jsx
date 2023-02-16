@@ -121,6 +121,27 @@ function Devit() {
 
           {code && (
             <div className={styles.code_container}>
+              <IconButton sx={{
+                width: "24px",
+                height: "24px",
+                position: "absolute",
+                top: "30px",
+                left: "-8px",
+                color: "text.normal",
+                backgroundColor: "primary.main",
+                borderRadius: "50%",
+                padding: "0px",
+                fontSize: "1.2rem",
+                zIndex:999,
+                "&:hover": {
+                  //dark green
+                  backgroundColor: "#1b5e20",
+                },
+              }}
+              onClick={() => setCode(!code)}
+              >
+                <RxCross2 />
+              </IconButton>
               <textarea id="editor" wrap="hard" />
             </div>
           )}
@@ -132,15 +153,16 @@ function Devit() {
                   position: "absolute",
                   top: "5px",
                   right: "5px",
-                  color: "text.light",
-                  backgroundColor: "background.default",
+                  color: "text.normal",
+                  backgroundColor: "primary.main",
                   borderRadius: "50%",
-                  width: "30px",
-                  height: "30px",
-                  fontSize: "1.1rem",
+                  width: "28px",
+                  height: "28px",
+                  fontSize: "1.3rem",
                   padding: "0px",
                   "&:hover": {
-                    backgroundColor: "hover",
+                    //light dark green
+                    backgroundColor: "#2e7d32",
                   },
                 }}
                 onClick={() => setImg("")}
