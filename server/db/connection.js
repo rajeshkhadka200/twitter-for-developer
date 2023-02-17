@@ -8,7 +8,7 @@ export const connectDB = async () => {
     });
 
     if (conn) {
-      console.log(`database connected succcessfully !!`);
+      console.log(`MongoDB connected: ${conn.connection.host}`);
     }
   } catch (error) {
     console.error(error);
