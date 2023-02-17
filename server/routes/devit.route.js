@@ -12,6 +12,7 @@ import {
   likeDevit,
   redevitDevit,
   commentDevit,
+  deleteComment,
 } from "../controllers/devit.controllers.js";
 
 router.post("/post", postDevit); // to post a devit
@@ -23,4 +24,5 @@ router.get("/getmydevits/:user_id", getMyDevits); // to get all devits of a spec
 router.patch("/like/:id", likeDevit); // to like a devit
 router.patch("/redevit/:id", redevitDevit); // to redevit a devit
 router.post("/comment/:id", commentDevit); // to comment on a devit
+router.delete("/comment/:id", deleteComment); // to delete a comment on a devit
 export default router;

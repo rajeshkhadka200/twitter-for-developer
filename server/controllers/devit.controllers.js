@@ -175,3 +175,20 @@ export const commentDevit = async (req, res) => {
     res.status(500).json({ error: true, msg: "Internal Server Error" });
   }
 };
+
+export const deleteComment = async (req, res) => {
+  try {
+    const devit = await Devit.findById(req.params.id);
+    if (!devit)
+      return res.status(404).json({ error: true, msg: "Devit not found" });
+    //get the comment index
+    const removeIndex = devit.comments
+      .map((comment) => comment._id)
+      .indexOf(req.params.comment_id);
+    devit.comments.splice(removeIndex, 1);
+    await devit.save();
+    res.status(200).json({ error: false, msg: "Comment deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ error: true, msg: "Internal Server Error" });
+  }
+}
