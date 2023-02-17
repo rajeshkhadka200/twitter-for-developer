@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import Router from "./routes";
-import { ThemeProvider, CssBaseline, createTheme } from "@pankod/refine-mui";
+import { ThemeProvider, createTheme } from "@pankod/refine-mui";
 import { ContextProvider } from "./config/Context";
 
 
