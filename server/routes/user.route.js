@@ -2,9 +2,9 @@ import express from "express";
 const router = express.Router();
 
 // import controlers
-import { login, register } from "../controllers/user.controllers.js";
+import { auth, updateProfile } from "../controllers/user.controllers.js";
 
-router.post("/register", register); // to post a devit
-router.post("/login", login); // to post a devit
+router.post("/auth", auth); // auth is the route
+router.patch("/:userId", updateProfile); // auth is the route
 
 export default router;

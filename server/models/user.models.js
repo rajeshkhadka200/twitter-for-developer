@@ -3,29 +3,29 @@ import mongoose from "mongoose";
 const schema = new mongoose.Schema({
   email: {
     type: String,
-    required: true,
-    unique: true,
+  },
+  firstname: {
+    type: String,
+  },
+  lastname: {
+    type: String,
   },
   username: {
     type: String,
-    required: true,
-    unique: true,
   },
-  password: {
+  bio: {
     type: String,
-    required: true,
-  },
-  name: {
-    type: String,
-    required: true,
+    default: "I am a developer",
   },
   avatar: {
     type: String,
-    required: false,
+  },
+  apiKey: {
+    type: String,
   },
   createdAt: {
-    required: true,
     type: String,
+    default: new Date().toISOString(),
   },
 });
 
