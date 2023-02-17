@@ -3,49 +3,65 @@ import mongoose from "mongoose";
 const schema = new mongoose.Schema({
   user_id: {
     type: String,
-    required: true,
+  },
+  user_name: {
+    type: String,
+  },
+  name: {
+    type: String,
   },
   content: {
     type: String,
-    required: true,
   },
   image: {
     type: String,
-    required: false,
   },
   code: {
     type: String,
-    required: false,
   },
   status: {
     // to identify if it is a original post or a re-devit
     type: String,
-    required: true,
   },
+  likes: [
+    {
+      user_id: {
+        type: String,
+      },
+    },
+  ],
+  redevits: [
+    {
+      user_id: {
+        type: String,
+      },
+      user_name: {
+        type: String,
+      },
+    },
+  ],
   comments: [
     {
       user_id: {
         type: String,
-        required: true,
       },
-      devit_id: {
+      user_name: {
         type: String,
-        required: true,
+      },
+      name: {
+        type: String,
       },
       content: {
         type: String,
-        required: true,
       },
       createdAt: {
-        required: true,
         type: String,
       },
     },
   ],
   createdAt: {
-    required: true,
     type: String,
   },
 });
 
-export default mongoose.models.devit || mongoose.model("devit", schema);
+export default mongoose.models.devit || mongoose.model("Devit", schema);
