@@ -2,7 +2,7 @@ import express from "express";
 const router = express.Router();
 
 // import controlers
-import { login, register } from "../controllers/user.controllers";
+import { login, register } from "../controllers/user.controllers.js";
 
 router.post("/register", register); // to post a devit
 router.post("/login", login); // to post a devit
