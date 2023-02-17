@@ -7,13 +7,13 @@ export const auth = async (req, res) => {
   if (isUser) {
     return res.status(200).json({
       username: isUser.username,
-      message: "Login successfully",
+      message: "User Login successfully.",
     });
   }
   const isUserName = await User.findOne({ username }).exec();
   if (isUserName) {
     return res.status(400).json({
-      message: "Username should be unique",
+      message: "Username already exist.",
     });
   }
 
@@ -29,13 +29,13 @@ export const auth = async (req, res) => {
     if (err) {
       console.log("SAVE USER IN DATABASE ERROR", err);
       return res.status(400).json({
-        error: "Error saving user in database. Try signup again",
+        error: "Trouble while registering user. Try signup again",
       });
     }
 
     res.status(201).json({
       userId: user._id,
-      message: "Signup success! Please signin.",
+      message: "User registered successfully",
     });
   });
 };
@@ -55,7 +55,7 @@ export const updateProfile = async (req, res) => {
   const isUserName = await User.findOne({ username }).exec();
   if (isUserName) {
     return res.status(400).json({
-      message: "Username should be unique",
+      message: "Username already exist.",
     });
   }
 
@@ -68,12 +68,23 @@ export const updateProfile = async (req, res) => {
       if (err) {
         console.log("UPDATE USER PROFILE ERROR", err);
         return res.status(400).json({
-          error: "Error updating user profile",
+          error: "Trouble while updating your profile. Try again later",
         });
       }
       res.status(201).json({
-        message: "Update profile success",
+        message: "Profile updated successfully.",
       });
     }
   );
+};
+
+// get user
+export const getMyprofile = async (req, res) => {
+  const { userId } = req.params;
+  const user = await User.findById(userId).exec();
+  if (user) {
+    return res.status(200).json({
+      user,
+    });
+  }
 };

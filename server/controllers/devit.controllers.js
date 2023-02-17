@@ -191,4 +191,4 @@ export const deleteComment = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: true, msg: "Internal Server Error" });
   }
-}
+};
