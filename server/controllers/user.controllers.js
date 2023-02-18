@@ -1,19 +1,14 @@
 import User from "../models/user.models.js";
 export const auth = async (req, res) => {
-  const { email, firstname, lastname, username, bio, avatar } = req.body;
+  const { email, firstname, lastname, avatar } = req.body;
 
   const isUser = await User.findOne({ email }).exec();
 
   if (isUser) {
     return res.status(200).json({
+      userId: isUser._id,
       username: isUser.username,
       message: "User Login successfully.",
-    });
-  }
-  const isUserName = await User.findOne({ username }).exec();
-  if (isUserName) {
-    return res.status(400).json({
-      message: "Username already exist.",
     });
   }
 
@@ -44,7 +39,7 @@ export const auth = async (req, res) => {
 export const updateProfile = async (req, res) => {
   const { userId } = req.params;
   const { firstname, lastname, username, bio } = req.body;
-
+  console.log(req.body);
   const isUser = await User.findById(userId).exec();
   if (!isUser) {
     return res.status(400).json({

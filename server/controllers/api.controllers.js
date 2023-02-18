@@ -59,13 +59,11 @@ export const deleteDevit = async (req, res) => {
     if (!devit)
       return res.status(404).json({ error: true, msg: "Devit not found" });
     await devit.remove();
-    res
-      .status(200)
-      .json({ error: false, msg: "Devit deleted successfully" });
+    res.status(200).json({ error: false, msg: "Devit deleted successfully" });
   } catch (error) {
     res.status(500).json({ error: true, msg: "Internal Server Error" });
   }
-}
+};
 
 export const updateDevit = async (req, res) => {
   try {
@@ -81,4 +79,4 @@ export const updateDevit = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: true, msg: "Internal Server Error" });
   }
-}
+};

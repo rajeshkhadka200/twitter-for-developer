@@ -5,9 +5,13 @@
   "main": "index.js",
   "author": "rajesh, utsav",
   "license": "MIT",
+  "type": "module",
   "dependencies": {
     "mongoose": "^6.9.0",
-    "puppeteer": "^19.6.3"
+    "puppeteer": "^19.7.1"
+  },
+  "scripts": {
+    "start": "node crawlers/blogPost.js"
   },
   "devDependencies": {
     "dotenv": "^16.0.3"

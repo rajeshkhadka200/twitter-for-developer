@@ -27,7 +27,7 @@ export default function Router() {
       element: <Auth />,
     },
     {
-      path: "/complete",
+      path: "/complete/:id",
       element: <DataCollection />,
     },
     {

@@ -1,10 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import style from "../css/pages/Datacollection.module.css";
 import { BsArrowRight, BsMicFill, BsFillBookFill } from "react-icons/bs";
 import { Button } from "@pankod/refine-mui";
 import { TextField } from "@pankod/refine-mui";
 import { NavLink } from "@pankod/refine-react-router-v6";
+import { useParams, useLocation } from "@pankod/refine-react-router-v6";
+import provider from "../config/axios.js";
 const DataCollection = () => {
+  // useloaction
+  const { state } = useLocation();
+  const { res } = state;
+  const { id } = useParams();
+  // handle local state
+  const [details, setdetails] = useState({
+    firstname: res.givenName,
+    lastname: res.familyName,
+    bio: "I am full stack developer.",
+    username: "",
+    email: res.email,
+  });
+  console.log(details);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setdetails({ ...details, [name]: value });
+  };
+
+  // generare unique username based on firstname and lastname
+  useEffect(() => {
+    const username =
+      details.firstname.toLowerCase() + "_" + details.lastname.toLowerCase();
+    setdetails({ ...details, username });
+  }, [details.firstname, details.lastname]);
+
+  const handleSubmit = async (e) => {
+    try {
+      const res = await provider.patch(`/user/${id}`, details);
+      alert(res.data.message);
+      localStorage.setItem("token", id);
+      window.location.href = "/app";
+    } catch (error) {
+      console.log(error);
+      alert(error.response.data.message);
+    }
+  };
+
   return (
     <>
       <nav>
@@ -17,13 +56,16 @@ const DataCollection = () => {
           <span>Complete your profile!</span>
           <img
             className={style.complete_profile_img}
-            src="/assets/profile-img.jpg"
+            src={res.imageUrl}
             alt="profile"
           />
         </header>
         <form className={style.from_data_collection}>
           {/* username feild */}
           <TextField
+            name={"username"}
+            onChange={handleChange}
+            value={details.username}
             className={style.common}
             defaultValue={"rajeshkhadka200"}
             InputLabelProps={{
@@ -49,7 +91,9 @@ const DataCollection = () => {
           <div className={style.row_send}>
             {/* first name field */}
             <TextField
-              defaultValue={"Rajesh"}
+              name={"firstname"}
+              value={details.firstname}
+              onChange={handleChange}
               InputLabelProps={{
                 style: {
                   fontFamily: "Poppins",
@@ -74,7 +118,9 @@ const DataCollection = () => {
 
             {/* last name field */}
             <TextField
-              defaultValue={"Khadka"}
+              name={"lastname"}
+              onChange={handleChange}
+              value={details.lastname}
               InputLabelProps={{
                 style: {
                   fontFamily: "Poppins",
@@ -99,9 +145,11 @@ const DataCollection = () => {
             />
           </div>
           <TextField
+            name={"email"}
+            onChange={handleChange}
+            value={res.email}
             disabled
             className={style.common}
-            defaultValue={"rajeshkhadkaofficial45@gmail.com"}
             InputLabelProps={{
               style: {
                 fontFamily: "Poppins",
@@ -122,8 +170,10 @@ const DataCollection = () => {
             variant="outlined"
           />
           <TextField
+            name={"bio"}
+            onChange={handleChange}
+            value={details.bio}
             multiline
-            // defaultValue={"Trying to learn new things everyday."}
             InputLabelProps={{
               style: {
                 fontFamily: "Poppins",
@@ -146,6 +196,7 @@ const DataCollection = () => {
         </form>
         <div className={style.register_btn_con}>
           <Button
+            onClick={handleSubmit}
             size="medium"
             variant="contained"
             sx={{
