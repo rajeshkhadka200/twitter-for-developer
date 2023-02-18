@@ -1,14 +1,14 @@
 import { Avatar, Badge } from "@pankod/refine-mui";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SearchBox from "../components/SearchBox";
 import styles from "../css/pages/Discover.module.css";
 import Post from "../components/Post";
 import Loader from "../components/Loader";
 import { MdVerified, MdDelete } from "react-icons/md";
-
+import provider from "../config/axios.js";
 const Discover = () => {
   const [search, setSearch] = React.useState("");
-  const user = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const user = [1, 2];
   //get the search query
 
   const query = new URLSearchParams(window.location.search);
@@ -19,6 +19,21 @@ const Discover = () => {
       setSearch(q);
     }
   }, [q]);
+
+  const [allUser, setallUser] = React.useState([]);
+
+  useEffect(() => {
+    const fetchallUser = async () => {
+      try {
+        const res = await provider.get(`/user/getall`);
+        setallUser(res.data.users);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchallUser();
+  }, []);
 
   const handleSearch = () => {};
   return (
@@ -31,7 +46,7 @@ const Discover = () => {
         />
       </div>
       <div className={styles.user_list}>
-        {user.map((user) => (
+        {allUser.map((user) => (
           <div className={styles.user}>
             <Badge
               overlap="circular"
@@ -43,7 +58,7 @@ const Discover = () => {
               }
             >
               <Avatar
-                src="./pic.jpg"
+                src={user.avatar}
                 sx={{
                   width: "50px",
                   height: "50px",
@@ -52,13 +67,13 @@ const Discover = () => {
                 }}
               />
             </Badge>
-            <span className={styles.user_info}>Utsav</span>
+            <span className={styles.user_info}>{user.firstname}</span>
           </div>
         ))}
       </div>
       {/* <Post />
       <Post /> */}
-      <Loader height="50vh"/>
+      <Loader height="50vh" />
     </>
   );
 };
