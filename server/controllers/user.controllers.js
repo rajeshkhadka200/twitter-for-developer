@@ -88,3 +88,18 @@ export const getMyprofile = async (req, res) => {
     });
   }
 };
+
+export const getAllUsers = async (req, res) => {
+  try {
+    // get all users
+    const users = await User.find().exec();
+    if (!users)
+      return res.status(404).json({ error: true, msg: "Users not found" });
+    res
+      .status(200)
+      .json({ error: false, msg: "Users fetched successfully", users });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: true, msg: "Internal Server Error" });
+  }
+};

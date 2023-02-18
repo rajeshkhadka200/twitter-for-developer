@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
 const schema = new mongoose.Schema({
-  user_id: {
+  userid: {
     type: String,
   },
-  user_name: {
+  username: {
     type: String,
   },
   name: {
@@ -25,27 +25,27 @@ const schema = new mongoose.Schema({
   },
   likes: [
     {
-      user_id: {
+      userid: {
         type: String,
       },
     },
   ],
   redevits: [
     {
-      user_id: {
+      userid: {
         type: String,
       },
-      user_name: {
+      username: {
         type: String,
       },
     },
   ],
   comments: [
     {
-      user_id: {
+      userid: {
         type: String,
       },
-      user_name: {
+      username: {
         type: String,
       },
       name: {
@@ -64,4 +64,5 @@ const schema = new mongoose.Schema({
   },
 });
 
-export default mongoose.models.devit || mongoose.model("Devit", schema);
+const Devit = mongoose.model("Devit", schema);
+export default Devit;

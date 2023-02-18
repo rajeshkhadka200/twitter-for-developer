@@ -28,4 +28,5 @@ const schema = new mongoose.Schema({
   },
 });
 
-export default mongoose.models.hackathon || mongoose.model("hackathon", schema);
+const Hackathon = mongoose.model("Hackathon", schema);
+export default Hackathon;

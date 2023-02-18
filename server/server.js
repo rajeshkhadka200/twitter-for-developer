@@ -5,6 +5,7 @@ import { connectDB } from "./db/connection.js";
 // import routes
 import devitRoutes from "./routes/devit.route.js";
 import userRoutes from "./routes/user.route.js";
+import apiRoutes from "./routes/api.route.js";
 
 const app = express();
 
@@ -17,6 +18,7 @@ connectDB();
 // define routes
 app.use("/api/devit", devitRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api",apiRoutes);
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {

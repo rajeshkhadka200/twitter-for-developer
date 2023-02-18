@@ -2,22 +2,20 @@ import Devit from "../models/devit.models.js";
 export const postDevit = async (req, res) => {
   try {
     const {
-      user_id,
-      user_name,
+      userid,
+      username,
       name,
       content,
       image,
-      code,
       status,
       createdAt,
     } = req.body;
     const newDevit = new Devit({
-      user_id,
-      user_name,
+      userid,
+      username,
       name,
       content,
       image,
-      code,
       status,
       createdAt,
     });
@@ -87,8 +85,8 @@ export const getMyDevits = async (req, res) => {
     //get all devits of a specific user by user_id and redevit's user_id
     const devits = await Devit.find({
       $or: [
-        { user_id: req.params.user_id },
-        { "redevit.user_id": req.params.user_id },
+        { userid: req.params.userid },
+        { "redevit.user_id": req.params.userid },
       ],
     }).sort({ createdAt: -1 });
     res
@@ -106,19 +104,19 @@ export const likeDevit = async (req, res) => {
       return res.status(404).json({ error: true, msg: "Devit not found" });
     //check if the user already liked the devit
     if (
-      devit.likes.filter((like) => like.user_id === req.body.user_id).length > 0
+      devit.likes.filter((like) => like.userid === req.body.userid).length > 0
     ) {
       //remove the like
       const removeIndex = devit.likes
-        .map((like) => like.user_id)
-        .indexOf(req.body.user_id);
+        .map((like) => like.userid)
+        .indexOf(req.body.userid);
       devit.likes.splice(removeIndex, 1);
       await devit.save();
       return res
         .status(200)
         .json({ error: false, msg: "Devit unliked successfully" });
     }
-    devit.likes.unshift({ user_id: req.body.user_id });
+    devit.likes.unshift({ userid: req.body.userid });
     await devit.save();
     res.status(200).json({ error: false, msg: "Devit liked successfully" });
   } catch (error) {
@@ -134,20 +132,20 @@ export const redevitDevit = async (req, res) => {
       return res.status(404).json({ error: true, msg: "Devit not found" });
     //check if the user already redevited the devit
     if (
-      devit.redevits.filter((redevit) => redevit.user_id === req.body.user_id)
+      devit.redevits.filter((redevit) => redevit.userid === req.body.userid)
         .length > 0
     ) {
       //remove the redevit
       const removeIndex = devit.redevits
-        .map((redevit) => redevit.user_id)
-        .indexOf(req.body.user_id);
+        .map((redevit) => redevit.userid)
+        .indexOf(req.body.userid);
       devit.redevits.splice(removeIndex, 1);
       await devit.save();
       return res
         .status(400)
         .json({ error: true, msg: "Devit unredevited successfully" });
     }
-    devit.redevits.unshift({ user_id: req.body.user_id });
+    devit.redevits.unshift({ userid: req.body.userid });
     await devit.save();
     res.status(200).json({ error: false, msg: "Devit redevited successfully" });
   } catch (error) {
@@ -162,8 +160,8 @@ export const commentDevit = async (req, res) => {
       return res.status(404).json({ error: true, msg: "Devit not found" });
     const { user_id, user_name, name, content, createdAt } = req.body;
     const newComment = {
-      user_id,
-      user_name,
+      userid,
+      username,
       name,
       content,
       createdAt,
