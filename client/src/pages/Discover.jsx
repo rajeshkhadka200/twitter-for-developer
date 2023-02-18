@@ -39,6 +39,21 @@ const Discover = () => {
     }
   }, [q]);
 
+  const [allUser, setallUser] = React.useState([]);
+
+  useEffect(() => {
+    const fetchallUser = async () => {
+      try {
+        const res = await provider.get(`/user/getall`);
+        setallUser(res.data.users);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchallUser();
+  }, []);
+
   const handleSearch = () => {};
   return (
     <>
@@ -50,7 +65,7 @@ const Discover = () => {
         />
       </div>
       <div className={styles.user_list}>
-        {user.map((user) => (
+        {allUser.map((user) => (
           <div className={styles.user}>
             <Badge
               overlap="circular"
@@ -62,7 +77,7 @@ const Discover = () => {
               }
             >
               <Avatar
-                src="./pic.jpg"
+                src={user.avatar}
                 sx={{
                   width: "50px",
                   height: "50px",
@@ -71,7 +86,7 @@ const Discover = () => {
                 }}
               />
             </Badge>
-            <span className={styles.user_info}>Utsav</span>
+            <span className={styles.user_info}>{user.firstname}</span>
           </div>
         ))}
       </div>

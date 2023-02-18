@@ -45,3 +45,12 @@
   max-width: 350px;
   text-align: center;
 }
+
+.button_con {
+  /* margin-right: 35px; */
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;
+}
