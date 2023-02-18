@@ -105,13 +105,17 @@ export const likeDevit = async (req, res) => {
         .indexOf(req.body.userid);
       devit.likes.splice(removeIndex, 1);
       await devit.save();
+      const count = devit?.likes?.length;
       return res
         .status(200)
-        .json({ error: false, msg: "Devit unliked successfully" });
+        .json({ error: false, msg: "Devit unliked successfully", count });
     }
     devit.likes.unshift({ userid: req.body.userid });
     await devit.save();
-    res.status(200).json({ error: false, msg: "Devit liked successfully" });
+    const count = devit?.likes?.length;
+    res
+      .status(201)
+      .json({ error: false, msg: "Devit liked successfully", count });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: true, msg: "Internal Server Error" });
@@ -134,13 +138,21 @@ export const redevitDevit = async (req, res) => {
         .indexOf(req.body.userid);
       devit.redevits.splice(removeIndex, 1);
       await devit.save();
+      const count = devit?.redevits?.length;
+
       return res
-        .status(400)
-        .json({ error: true, msg: "Devit unredevited successfully" });
+        .status(200)
+        .json({ error: true, msg: "Devit unredevited successfully", count });
     }
-    devit.redevits.unshift({ userid: req.body.userid });
+    devit.redevits.unshift({
+      userid: req.body.userid,
+      username: req.body.username,
+    });
     await devit.save();
-    res.status(200).json({ error: false, msg: "Devit redevited successfully" });
+    const count = devit?.redevits?.length;
+    res
+      .status(201)
+      .json({ error: false, msg: "Devit redevited successfully", count });
   } catch (error) {
     res.status(500).json({ error: true, msg: "Internal Server Error" });
   }
@@ -241,7 +253,7 @@ export const getTrends = async (req, res) => {
 };
 
 export const searchDevits = async (req, res) => {
-  try {    
+  try {
     const devits = await Devit.find({
       $or: [
         { content: { $regex: req.params.search, $options: "i" } },

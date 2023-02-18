@@ -8,13 +8,14 @@ const Context = ({ children }) => {
   console.log(token);
   const [theme, setTheme] = useState("dark");
   const [user, setUser] = useState();
+  const [alldevits, setAllDevits] = useState([]);
 
   // fetch user
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const res = await provider.get(`/user/profile/${token}`);
-        console.log(res.data);
+        console.log("User:" + res.data);
         setUser(res.data.user);
       } catch (error) {
         console.log(error);
@@ -25,12 +26,16 @@ const Context = ({ children }) => {
     }
   }, []);
 
+  
+
+  console.log(alldevits);
   return (
     <>
       <ContextProvider.Provider
         value={{
           t: [theme, setTheme],
           userDetails: [user, setUser],
+          devits:[alldevits,setAllDevits]
         }}
       >
         {children}

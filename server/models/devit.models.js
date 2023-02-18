@@ -4,6 +4,9 @@ const schema = new mongoose.Schema({
   userid: {
     type: String,
   },
+  avatar: {
+    type: String,
+  },
   username: {
     type: String,
   },
@@ -15,9 +18,11 @@ const schema = new mongoose.Schema({
   },
   image: {
     type: String,
+    default: "",
   },
   code: {
     type: String,
+    default: "",
   },
   status: {
     // to identify if it is a original post or a re-devit

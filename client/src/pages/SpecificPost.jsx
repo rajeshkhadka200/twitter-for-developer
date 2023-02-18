@@ -1,13 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "@pankod/refine-react-router-v6";
 import styles from "../css/components/SpecificPost.module.css";
 import { Avatar, Button, IconButton, InputBase } from "@pankod/refine-mui";
 import { BiArrowBack } from "react-icons/bi";
 import Post from "../components/Post";
 import Comment from "../components/Comment";
+import provider from "../config/axios";
+import Loader from "../components/Loader";
 const SpecificPost = () => {
   const { id } = useParams();
   const [comment, setComment] = React.useState("");
+  const [loading, setLoading] = React.useState(true);
+  const [data, setData] = React.useState({});
+
+  useEffect(() => {
+    fetchDevit();
+  }, [id]);
+
+  const fetchDevit = async () => {
+    try {
+      const res = await provider.get(`/devit/get/${id}`);
+      if (res) {
+        setData(res.data.devit);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  if (loading) return <Loader height="50vh" />;
   const GoBack = () => {
     window.history.back();
   };
@@ -26,15 +47,15 @@ const SpecificPost = () => {
           </IconButton>
           <span className={styles.heading}>Devit</span>
         </div>
-        <Post />
+        <Post data={data} />
         <div className={styles.post_comment}>
-          <Avatar
+          {/* <Avatar
             src="./pic.jpg"
             sx={{
               width: "45px",
               height: "45px",
             }}
-          />
+          /> */}
           <InputBase
             sx={{
               flex: 1,

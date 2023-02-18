@@ -1,18 +1,37 @@
 import { Avatar, Badge } from "@pankod/refine-mui";
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import SearchBox from "../components/SearchBox";
 import styles from "../css/pages/Discover.module.css";
 import Post from "../components/Post";
 import Loader from "../components/Loader";
 import { MdVerified, MdDelete } from "react-icons/md";
+import { ContextProvider } from "../config/Context";
+import provider from "../config/axios";
 
 const Discover = () => {
   const [search, setSearch] = React.useState("");
   const user = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  //get the search query
+  const [loading, setLoading] = React.useState(false);
+  const [alldevits, setAllDevits] = React.useState([]);
 
+  //get the search query
   const query = new URLSearchParams(window.location.search);
   const q = query.get("q");
+
+  useEffect(() => {
+      getAllDevits();
+  }, []);
+
+  const getAllDevits = async () => {
+    try {
+      const res = await provider.get("/devit/getall");
+      if (res) {
+        setAllDevits(res?.data?.devits);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (q) {
@@ -56,9 +75,17 @@ const Discover = () => {
           </div>
         ))}
       </div>
-      {/* <Post />
-      <Post /> */}
-      <Loader height="50vh"/>
+      {alldevits.length > 0 ? (
+        alldevits.map((data) => (
+          <Post
+            key={data._id}
+            data={data}
+          />
+        ))
+      ) : (
+        <span className={styles.no_content}>No Devits yet</span>
+      )}
+      {/* <Loader height="50vh" /> */}
     </>
   );
 };
