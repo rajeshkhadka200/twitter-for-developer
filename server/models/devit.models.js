@@ -57,6 +57,9 @@ const schema = new mongoose.Schema({
       createdAt: {
         type: String,
       },
+      verified: {
+        type: Boolean,
+      },
     },
   ],
   createdAt: {

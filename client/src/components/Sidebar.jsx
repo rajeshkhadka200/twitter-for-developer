@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "../css/components/Sidebar.module.css";
 import { Button, IconButton } from "@pankod/refine-mui";
 import { SiCodemagic } from "react-icons/si";
@@ -9,8 +9,11 @@ import { MdOutlineLibraryBooks, MdLibraryBooks } from "react-icons/md";
 import { HiUserCircle, HiOutlineUserCircle } from "react-icons/hi";
 import { IoSettingsSharp, IoSettingsOutline } from "react-icons/io5";
 import { NavLink, useLocation } from "@pankod/refine-react-router-v6";
+import { ContextProvider } from "../config/Context";
 
 const Sidebar = () => {
+  const { userDetails } = useContext(ContextProvider);
+  const [user, setuser] = userDetails;
   const location = useLocation();
   const { pathname } = location;
 
@@ -52,6 +55,7 @@ const Sidebar = () => {
       link: "/api",
     },
   ];
+  const name = user?.firstname + " " + user?.lastname;
   return (
     <>
       <div className={styles.sidebar_container}>
@@ -108,14 +112,14 @@ const Sidebar = () => {
           <div className={styles.profile_handle}>
             <div className={styles.profile}>
               <img
-                src="/pic.jpg"
+                src={user?.avatar}
                 alt="profile"
                 className={styles.profile_img}
               />
             </div>
             <div className={styles.name_con}>
-              <div className={styles.name}>Utsav Bhattarai</div>
-              <div className={styles.username}>@utsav</div>
+              <div className={styles.name}>{name}</div>
+              <div className={styles.username}>@{user?.username}</div>
             </div>
           </div>
         </div>

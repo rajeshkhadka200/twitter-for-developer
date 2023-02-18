@@ -5,10 +5,21 @@ import { useLocation } from "@pankod/refine-react-router-v6";
 const Other = () => {
   const location = useLocation();
   const path = location.pathname;
+  const [search, setSearch] = React.useState("");
+  const handleSearch = () => {
+    if (search === "") return;
+    window.location.href = `/discover/?q=${search}`;
+  };
   return (
     <>
       <div className={styles.other_container}>
-        {path !== "/discover" && <SearchBox />}
+        {path !== "/discover" && (
+          <SearchBox
+            handleSearch={handleSearch}
+            search={search}
+            setSearch={setSearch}
+          />
+        )}
         <div className={styles.trends_container}>
           <span className={styles.trend_title}>Trends for you</span>
           <div className={styles.trend}>

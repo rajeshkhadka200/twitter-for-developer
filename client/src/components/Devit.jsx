@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "../css/components/Devit.module.css";
 import Codemirror from "codemirror";
 import {
@@ -33,8 +33,11 @@ import "codemirror/mode/javascript/javascript";
 import "codemirror/mode/python/python";
 import "codemirror/addon/edit/closebrackets";
 import "codemirror/addon/edit/closebrackets";
+import { ContextProvider } from "../config/Context";
 
 function Devit() {
+  const { userDetails } = useContext(ContextProvider);
+  const [user, setuser] = userDetails;
   //input state
   const [value, setValue] = React.useState("");
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -92,7 +95,7 @@ function Devit() {
     <>
       <div className={styles.devit_container}>
         <div className={styles.left}>
-          <Avatar src="/pic.jpg" sx={{ width: "45px", height: "45px" }} />
+          <Avatar src={user?.avatar} sx={{ width: "45px", height: "45px" }} />
         </div>
         <div className={styles.right}>
           <InputBase
@@ -121,24 +124,25 @@ function Devit() {
 
           {code && (
             <div className={styles.code_container}>
-              <IconButton sx={{
-                width: "24px",
-                height: "24px",
-                position: "absolute",
-                top: "30px",
-                left: "-8px",
-                color: "text.normal",
-                backgroundColor: "primary.main",
-                borderRadius: "50%",
-                padding: "0px",
-                fontSize: "1.2rem",
-                zIndex:999,
-                "&:hover": {
-                  //dark green
-                  backgroundColor: "#1b5e20",
-                },
-              }}
-              onClick={() => setCode(!code)}
+              <IconButton
+                sx={{
+                  width: "24px",
+                  height: "24px",
+                  position: "absolute",
+                  top: "30px",
+                  left: "-8px",
+                  color: "text.normal",
+                  backgroundColor: "primary.main",
+                  borderRadius: "50%",
+                  padding: "0px",
+                  fontSize: "1.2rem",
+                  zIndex: 999,
+                  "&:hover": {
+                    //dark green
+                    backgroundColor: "#1b5e20",
+                  },
+                }}
+                onClick={() => setCode(!code)}
               >
                 <RxCross2 />
               </IconButton>

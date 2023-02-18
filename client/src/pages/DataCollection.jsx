@@ -7,6 +7,12 @@ import { NavLink } from "@pankod/refine-react-router-v6";
 import { useParams, useLocation } from "@pankod/refine-react-router-v6";
 import provider from "../config/axios.js";
 const DataCollection = () => {
+  let token = localStorage.getItem("token");
+  useEffect(() => {
+    if (token) {
+      window.location.href = "/app";
+    }
+  }, [token]);
   // useloaction
   const { state } = useLocation();
   const { res } = state;
@@ -19,7 +25,7 @@ const DataCollection = () => {
     username: "",
     email: res.email,
   });
-  console.log(details);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setdetails({ ...details, [name]: value });
