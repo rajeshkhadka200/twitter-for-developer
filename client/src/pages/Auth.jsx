@@ -7,14 +7,14 @@ import provider from "../config/axios.js";
 //login imports
 import { useGoogleLogin } from "react-google-login";
 import { gapi } from "gapi-script";
-import { useNavigate } from "@pankod/refine-react-router-v6";
+import { Navigate, useNavigate } from "@pankod/refine-react-router-v6";
 import { SiCodemagic } from "react-icons/si";
 
 const Auth = () => {
   let token = localStorage.getItem("token");
   useEffect(() => {
     if (token) {
-      window.location.href = "/app";
+      return <Navigate to="/app" replace />;
     }
   }, [token]);
 
