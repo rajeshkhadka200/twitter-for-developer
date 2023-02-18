@@ -34,6 +34,7 @@ import "codemirror/mode/python/python";
 import "codemirror/addon/edit/closebrackets";
 import "codemirror/addon/edit/closebrackets";
 import { ContextProvider } from "../config/Context";
+import { toast } from "react-hot-toast";
 
 function Devit() {
   const { userDetails } = useContext(ContextProvider);
@@ -61,6 +62,10 @@ function Devit() {
   const handleEmoji = () => {
     setEmoji(!emoji);
   };
+
+  const handleDevit = () => {
+    toast.success("Devit posted successfully");
+  }
 
   const getImg = (e) => {
     const [file] = e.target.files;
@@ -302,6 +307,7 @@ function Devit() {
                 textTransform: "none",
                 fontSize: "15px",
               }}
+              onClick={handleDevit}
             >
               Devit
             </Button>
