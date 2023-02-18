@@ -8,9 +8,8 @@ import { MdVerified, MdDelete } from "react-icons/md";
 import provider from "../config/axios.js";
 const Discover = () => {
   const [search, setSearch] = React.useState("");
-  const user = [1, 2];
-  //get the search query
 
+  //get the search query
   const query = new URLSearchParams(window.location.search);
   const q = query.get("q");
 
@@ -21,14 +20,14 @@ const Discover = () => {
   }, [q]);
 
   const [allUser, setallUser] = React.useState([]);
-
+  console.log(allUser);
   useEffect(() => {
     const fetchallUser = async () => {
       try {
         const res = await provider.get(`/user/getall`);
         setallUser(res.data.users);
       } catch (error) {
-        console.log(error);
+        alert("Something went wrong");
       }
     };
 
@@ -53,7 +52,7 @@ const Discover = () => {
               anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
               badgeContent={
                 <span className={styles.green_tick}>
-                  <MdVerified />
+                  {user.verified && <MdVerified />}
                 </span>
               }
             >

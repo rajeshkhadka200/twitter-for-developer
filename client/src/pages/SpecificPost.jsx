@@ -1,16 +1,49 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useParams } from "@pankod/refine-react-router-v6";
 import styles from "../css/components/SpecificPost.module.css";
 import { Avatar, Button, IconButton, InputBase } from "@pankod/refine-mui";
 import { BiArrowBack } from "react-icons/bi";
 import Post from "../components/Post";
 import Comment from "../components/Comment";
+import { ContextProvider } from "../config/Context";
+import provider from "../config/axios";
+import momnet from "moment";
+s;
 const SpecificPost = () => {
+  const { userDetails } = useContext(ContextProvider);
+  const [user, setuser] = userDetails;
+
+  const { username, _id, firstname, lastname, avatar } = user;
+
   const { id } = useParams();
   const [comment, setComment] = React.useState("");
+
   const GoBack = () => {
     window.history.back();
   };
+
+  // create a comment
+  const createComment = async () => {
+    try {
+      const res = await provider.post(
+        `/devit/comment/63f083752039190626c09443`,
+        {
+          userid: _id,
+          username,
+          name: firstname + " " + lastname,
+          content: comment,
+          timestamp: Date.now(),
+          avatar,
+          actual_date: momnet().format("MMM Do YY"),
+        }
+      );
+      console.log(res);
+      setComment("");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <div className={styles.specificpost_container}>
@@ -29,7 +62,7 @@ const SpecificPost = () => {
         <Post />
         <div className={styles.post_comment}>
           <Avatar
-            src="./pic.jpg"
+            src={user?.avatar}
             sx={{
               width: "45px",
               height: "45px",
@@ -45,8 +78,8 @@ const SpecificPost = () => {
               "& .MuiInputBase-input::placeholder": {
                 color: "text.light",
                 opacity: 1,
-                fontSize: "1.1rem",
-                fontWeight: "500",
+                fontSize: "1rem",
+                // fontWeight: "500",
                 fontFamily: "Poppins",
               },
             }}
@@ -57,6 +90,7 @@ const SpecificPost = () => {
           />
 
           <Button
+            onClick={createComment}
             variant="contained"
             sx={{
               width: "80px",

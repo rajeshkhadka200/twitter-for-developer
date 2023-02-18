@@ -151,17 +151,23 @@ export const commentDevit = async (req, res) => {
     const devit = await Devit.findById(req.params.id);
     if (!devit)
       return res.status(404).json({ error: true, msg: "Devit not found" });
-    const { user_id, user_name, name, content, createdAt } = req.body;
+
+    const { userid, username, name, content, timestamp, avatar, actual_date } =
+      req.body;
     const newComment = {
       userid,
       username,
       name,
       content,
-      createdAt,
+      timestamp,
+      avatar,
+      actual_date,
     };
     devit.comments.unshift(newComment);
     await devit.save();
-    res.status(200).json({ error: false, msg: "Devit commented successfully" });
+    res
+      .status(200)
+      .json({ error: false, msg: `${name} replied to this devit.` });
   } catch (error) {
     res.status(500).json({ error: true, msg: "Internal Server Error" });
   }
@@ -241,7 +247,7 @@ export const getTrends = async (req, res) => {
 };
 
 export const searchDevits = async (req, res) => {
-  try {    
+  try {
     const devits = await Devit.find({
       $or: [
         { content: { $regex: req.params.search, $options: "i" } },

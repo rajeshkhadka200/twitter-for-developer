@@ -20,6 +20,7 @@
     "codemirror": "5.65.2",
     "emoji-picker-react": "^4.4.7",
     "gapi-script": "^1.2.0",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-google-login": "^5.2.2",

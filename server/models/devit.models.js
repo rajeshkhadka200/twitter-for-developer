@@ -54,7 +54,13 @@ const schema = new mongoose.Schema({
       content: {
         type: String,
       },
-      createdAt: {
+      timestamp: {
+        type: String,
+      },
+      actual_date: {
+        type: String,
+      },
+      avatar: {
         type: String,
       },
       verified: {

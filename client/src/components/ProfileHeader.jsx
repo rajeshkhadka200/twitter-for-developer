@@ -39,6 +39,10 @@ const ProfileHeader = () => {
               Edit Profile
             </Button>
             <Button
+              onClick={() => {
+                localStorage.removeItem("token");
+                window.location.reload();
+              }}
               size="small"
               variant="contained"
               sx={{
