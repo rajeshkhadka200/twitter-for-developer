@@ -2,15 +2,17 @@ import React from "react";
 import style from "../css/pages/Login.module.css";
 import { Button } from "@pankod/refine-mui";
 import { TextField } from "@pankod/refine-mui";
+import { SiCodemagic } from "react-icons/si";
+
 const Auth = () => {
   return (
     <div className={style.container}>
       <div className={style.left}>
         <header>
-          <div className={style.logo}>
-            {/* <img src="/assets/logo.png" alt="" /> */}
+          <div className={style.logo_wrapper}>
+            <SiCodemagic />
           </div>
-          <h3>WelCome back</h3>
+          <h3>Welcome User</h3>
           <p>Please enter your details</p>
         </header>
         <form className={style.form_auth}>
@@ -24,6 +26,7 @@ const Auth = () => {
             id="outlined-basic"
             label="Username"
             variant="outlined"
+            disabled={true}
           />
           <TextField
             InputLabelProps={{
@@ -35,6 +38,7 @@ const Auth = () => {
             id="outlined-basic"
             label="Password"
             variant="outlined"
+            disabled={true}
           />
           <Button
             onClick={() => {
@@ -50,6 +54,7 @@ const Auth = () => {
             disableElevation
             className={style.login_btn}
             variant="contained"
+            disabled={true}
           >
             Continue
           </Button>
@@ -77,7 +82,9 @@ const Auth = () => {
           </Button>
         </form>
       </div>
-      <div className={style.right}></div>
+      <div className={style.right}>
+         <img src="./auth.svg" className={style.auth_img}/>
+      </div>
     </div>
   );
 };
