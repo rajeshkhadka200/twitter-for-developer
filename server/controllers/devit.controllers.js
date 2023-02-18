@@ -1,15 +1,8 @@
 import Devit from "../models/devit.models.js";
 export const postDevit = async (req, res) => {
   try {
-    const {
-      userid,
-      username,
-      name,
-      content,
-      image,
-      status,
-      createdAt,
-    } = req.body;
+    const { userid, username, name, content, image, status, createdAt } =
+      req.body;
     const newDevit = new Devit({
       userid,
       username,
@@ -187,6 +180,85 @@ export const deleteComment = async (req, res) => {
     await devit.save();
     res.status(200).json({ error: false, msg: "Comment deleted successfully" });
   } catch (error) {
+    res.status(500).json({ error: true, msg: "Internal Server Error" });
+  }
+};
+
+export const getTrends = async (req, res) => {
+  try {
+    const devits = await Devit.find();
+    // const trends = [
+    //   "#dev",
+    //   "#dev",
+    //   "#dev",
+    //   "#opensource",
+    //   "#opensource",
+    //   "#pro",
+    //   "#devhub",
+    //   "#pro",
+    //   "#devhub",
+    //   "#hello",
+    //   "#hello",
+    //   "#hi",
+    // ];
+    const trends = [];
+    devits.forEach((devit) => {
+      const { content } = devit;
+      const words = content.split(" ");
+      words.forEach((word) => {
+        if (word.startsWith("#")) {
+          const trend = word.toLowerCase();
+          if (trends.includes(trend)) return;
+          trends.push(trend);
+        }
+      });
+    });
+    const topTrends = [];
+    //get the top 5 different trends with their count in array of objects and remove the repeated trends
+    trends.forEach((trend) => {
+      const index = topTrends.findIndex((t) => t.trend === trend);
+      if (index === -1) {
+        topTrends.push({ trend, count: 1 });
+      } else {
+        topTrends[index].count++;
+      }
+    });
+    //sort the array of objects by count
+    topTrends.sort((a, b) => b.count - a.count);
+    //get the top 5 trends
+    topTrends.splice(5);
+
+    if (topTrends.length === 0)
+      return res
+        .status(200)
+        .json({ error: false, msg: "No trends found", topTrends });
+    res
+      .status(200)
+      .json({ error: false, msg: "Trends fetched successfully", topTrends });
+  } catch (error) {
+    res.status(500).json({ error: true, msg: "Internal Server Error" });
+  }
+};
+
+export const searchDevits = async (req, res) => {
+  try {    
+    const devits = await Devit.find({
+      $or: [
+        { content: { $regex: req.params.search, $options: "i" } },
+        { username: { $regex: req.params.search, $options: "i" } },
+        { name: { $regex: req.params.search, $options: "i" } },
+        { createdAt: { $regex: req.params.search, $options: "i" } },
+      ],
+    });
+    if (devits.length === 0)
+      return res
+        .status(200)
+        .json({ error: false, msg: "No devits found", devits });
+    res
+      .status(200)
+      .json({ error: false, msg: "Devits fetched successfully", devits });
+  } catch (error) {
+    console.log(error);
     res.status(500).json({ error: true, msg: "Internal Server Error" });
   }
 };

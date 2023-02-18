@@ -23,6 +23,10 @@ const schema = new mongoose.Schema({
   apiKey: {
     type: String,
   },
+  verified: {
+    type: Boolean,
+    default: false,
+  },
   createdAt: {
     type: String,
     default: new Date().toISOString(),
