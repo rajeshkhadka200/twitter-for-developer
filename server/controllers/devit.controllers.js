@@ -74,22 +74,11 @@ export const deleteDevit = async (req, res) => {
   }
 };
 export const getMyDevits = async (req, res) => {
-  try {
-    const devits = await Devit.find({
-      $or: [
-        { userid: req.params.id },
-        { redevits: { $elemMatch: { userid: req.params.id } } },
-      ],
-    }).sort({ createdAt: -1 });
-    if (!devits)
-      return res.status(404).json({ error: true, msg: "Devits not found" });
-
-    res
-      .status(200)
-      .json({ error: false, msg: "Devits fetched successfully", devits });
-  } catch (error) {
-    res.status(500).json({ error: true, msg: "Internal Server Error" });
-  }
+  const { user_id } = req.params;
+  const devits = await Devit.find({ userid: user_id });
+  if (!devits)
+    return res.status(404).json({ msg: "You don't have any devits." });
+  res.status(200).json({ devits });
 };
 
 export const likeDevit = async (req, res) => {

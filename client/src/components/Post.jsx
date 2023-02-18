@@ -8,6 +8,7 @@ import {
   Container,
   Card,
 } from "@pankod/refine-mui";
+// import { CopyBlock, dracula } from "react-code-blocks";
 import React, { useContext, useEffect } from "react";
 import styles from "../css/components/Post.module.css";
 import { FiMoreHorizontal, FiEdit, FiX } from "react-icons/fi";
@@ -287,7 +288,15 @@ const Post = ({ data }) => {
                   </Card>
                 )}
               </NavLink>
-              {data?.code !== "" && "Code to be included here"}
+              {/* {data?.code !== "" && "Code to be included here"} */}
+              <div className={styles.codeBlock}>
+                {/* <CopyBlock
+                  text={"console.log('Hello World')"}
+                  language={"javascript"}
+                  showLineNumbers={true}
+                  theme={dracula}
+                /> */}
+              </div>
             </div>
             <div className={styles.action_con}>
               <IconButton

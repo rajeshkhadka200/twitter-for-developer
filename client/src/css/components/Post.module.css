@@ -11,7 +11,7 @@
   color: var(--light-text);
   font-family: "Poppins", sans-serif;
   padding-left: 4.5rem;
-  margin-top:10px;
+  margin-top: 10px;
   line-height: 10px;
 }
 .wrapper {
@@ -117,4 +117,8 @@
   font-size: 2rem;
   color: var(--text);
   cursor: pointer;
+}
+
+.codeBlock {
+  width: 100%;
 }

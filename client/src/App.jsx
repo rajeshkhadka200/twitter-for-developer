@@ -53,6 +53,8 @@ function App() {
   // use context to get the theme state
   const { t } = useContext(ContextProvider);
   const [theme, setTheme] = t;
+  // window.global ||= window;
+
   return (
     <>
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
