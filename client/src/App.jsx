@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import Router from "./routes";
 import { ThemeProvider, createTheme } from "@pankod/refine-mui";
 import { ContextProvider } from "./config/Context";
-
+import { Toaster } from "react-hot-toast";
 
 function App() {
   // defining light and dark theme for the app
@@ -57,6 +57,18 @@ function App() {
     <>
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
         <Router />
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+          toastOptions={{
+            style: {
+              borderRadius: "10px",
+              background: "#2c3640",
+              color: "#fff",
+              fontFamily: "Poppins",
+            },
+          }}
+        />
       </ThemeProvider>
     </>
   );
