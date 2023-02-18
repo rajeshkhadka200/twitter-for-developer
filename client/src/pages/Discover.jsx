@@ -7,12 +7,14 @@ import Loader from "../components/Loader";
 import { MdVerified, MdDelete } from "react-icons/md";
 import { ContextProvider } from "../config/Context";
 import provider from "../config/axios";
+import { toast } from "react-hot-toast";
 
 const Discover = () => {
   const [search, setSearch] = React.useState("");
   const user = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const [loading, setLoading] = React.useState(false);
   const [alldevits, setAllDevits] = React.useState([]);
+  const [srhDevits, setSrhDevits] = React.useState([]);
 
   //get the search query
   const query = new URLSearchParams(window.location.search);
@@ -32,6 +34,11 @@ const Discover = () => {
       console.log(error);
     }
   };
+  useEffect(() => {
+    if (srhDevits.length === 0) {
+      setSearch("");
+    }
+  }, [srhDevits]);
 
   useEffect(() => {
     if (q) {
@@ -54,7 +61,23 @@ const Discover = () => {
     fetchallUser();
   }, []);
 
-  const handleSearch = () => {};
+  const handleSearch = async () => {
+    if (search === "") return;
+    try {
+      setLoading(true);
+      const res = await provider.get(`/devit/search/${search}`);
+      if (res) {
+        if (res.data.devits.length === 0) {
+          toast.error("No devits found");
+          return setLoading(false);
+        }
+        setSrhDevits(res.data.devits);
+        return setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <div className={styles.search_wrapper}>
@@ -92,10 +115,18 @@ const Discover = () => {
           </div>
         ))}
       </div>
-      {alldevits.length > 0 ? (
+      {search !== "" ? (
+        loading ? (
+          <Loader height="50vh" />
+        ) : srhDevits?.length > 0 ? (
+          srhDevits?.map((data) => <Post key={data._id} data={data} />)
+        ) : (
+          <span className={styles.no_content}>Typing . . .</span>
+        )
+      ) : alldevits.length > 0 ? (
         alldevits.map((data) => <Post key={data._id} data={data} />)
       ) : (
-        <span className={styles.no_content}>No Devits yet</span>
+        <span className={styles.no_content}>Fetching . . .</span>
       )}
       {/* <Loader height="50vh" /> */}
     </>

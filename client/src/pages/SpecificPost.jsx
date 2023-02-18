@@ -29,6 +29,7 @@ const SpecificPost = () => {
     }
   };
   if (loading) return <Loader height="80vh" />;
+
   const GoBack = () => {
     window.history.back();
   };
@@ -49,13 +50,13 @@ const SpecificPost = () => {
         </div>
         <Post data={data} />
         <div className={styles.post_comment}>
-          {/* <Avatar
+          <Avatar
             src="./pic.jpg"
             sx={{
               width: "45px",
               height: "45px",
             }}
-          /> */}
+          />
           <InputBase
             sx={{
               flex: 1,
