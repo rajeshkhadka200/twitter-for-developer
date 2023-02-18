@@ -9,7 +9,7 @@ import React from "react";
 import { BsSearch } from "react-icons/bs";
 import styles from "../css/components/Search.module.css";
 
-const SearchBox = () => {
+const SearchBox = ({ handleSearch, search, setSearch }) => {
   return (
     <>
       <div className={styles.search_container}>
@@ -21,6 +21,8 @@ const SearchBox = () => {
           name="search"
           autoComplete="search"
           size="medium"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
           sx={{
             backgroundColor: "hover",
             color: "white",
@@ -37,16 +39,18 @@ const SearchBox = () => {
             },
           }}
         />
-        <IconButton sx={{
+        <IconButton
+          sx={{
             backgroundColor: "hover",
             color: "text.light",
             width: "45px",
             height: "45px",
-            fontSize:"1.5rem",
-            position:"absolute",
-            right:"5px",
-
-        }}>
+            fontSize: "1.5rem",
+            position: "absolute",
+            right: "5px",
+          }}
+          onClick={() => handleSearch()}
+        >
           <BsSearch />
         </IconButton>
       </div>
