@@ -19,7 +19,7 @@ const Discover = () => {
   const q = query.get("q");
 
   useEffect(() => {
-      getAllDevits();
+    getAllDevits();
   }, []);
 
   const getAllDevits = async () => {
@@ -71,9 +71,11 @@ const Discover = () => {
               overlap="circular"
               anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
               badgeContent={
-                <span className={styles.green_tick}>
-                  <MdVerified />
-                </span>
+                user.verified && (
+                  <span className={styles.green_tick}>
+                    <MdVerified />
+                  </span>
+                )
               }
             >
               <Avatar
@@ -91,12 +93,7 @@ const Discover = () => {
         ))}
       </div>
       {alldevits.length > 0 ? (
-        alldevits.map((data) => (
-          <Post
-            key={data._id}
-            data={data}
-          />
-        ))
+        alldevits.map((data) => <Post key={data._id} data={data} />)
       ) : (
         <span className={styles.no_content}>No Devits yet</span>
       )}

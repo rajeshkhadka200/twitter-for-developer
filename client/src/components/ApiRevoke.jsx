@@ -5,12 +5,13 @@ import { Button } from "@pankod/refine-mui";
 import style from "../css/components/Apirevoke.module.css";
 import { FaRegCopy } from "react-icons/fa";
 const ApiRevoke = () => {
-  // generate unique alphanumeric string
-
-  // copy to clipboard
-
+  const [key, setKey] = React.useState("");
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(Math.random().toString(36).substring(2, 15));
+    navigator.clipboard.writeText(key);
+  };
+
+  const revokeKey = () => {
+    setKey("");
   };
 
   return (
@@ -20,7 +21,7 @@ const ApiRevoke = () => {
       </p>
       <div className={style.input_con}>
         <TextField
-          defaultValue={"Rajeshkoapikeyyeixa"}
+          value={key}
           disabled
           inputProps={{
             style: {
@@ -55,7 +56,7 @@ const ApiRevoke = () => {
         </IconButton>
       </div>
       <Button
-        // onClick={() => revokeKey()}
+        onClick={() => revokeKey()}
         size="medium"
         variant="contained"
         sx={{
