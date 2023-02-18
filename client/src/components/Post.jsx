@@ -106,7 +106,7 @@ const Post = ({ data }) => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const goLink = `/devit/${data?._id}`;
   return (
@@ -138,217 +138,220 @@ const Post = ({ data }) => {
         )
       }
       <div className={styles.post_container}>
-        <div className={styles.post_left}>
-          <Avatar src={data?.avatar} sx={{ width: "45px", height: "45px" }} />
-        </div>
-        <div className={styles.post_right}>
-          <div className={styles.info_top}>
-            <div className={styles.info}>
-              <span className={styles.info_name}>{data?.name}</span>
-              {data?.verified && (
-                <span className={styles.green_tick}>
-                  <MdVerified />
-                </span>
-              )}
-              <span className={styles.username}>@{data?.username}</span>
-              <span className={styles.dot}></span>
-              <span className={styles.time}>{data?.createdAt}</span>
-            </div>
-            {token === data?.userid && (
-              <>
-                <IconButton
-                  sx={{
-                    width: "35px",
-                    height: "35px",
-                    color: "text.light",
-                    //make the primary hover color
-                    "&:hover": {
-                      color: "primary.main",
-                      //transparent green background
-                      backgroundColor: "rgba(29,161,242,0.1)",
-                    },
-                  }}
-                  onClick={handleClick}
-                >
-                  <FiMoreHorizontal />
-                </IconButton>
-                <Menu
-                  id="devit-menu"
-                  open={open}
-                  anchorEl={anchorEl}
-                  onClose={handleClose}
-                  //style the small menu with the theme color
-                  PaperProps={{
-                    sx: {
-                      backgroundColor: "background.default",
-                      color: "text.primary",
-                      width: "85px",
-                      padding: "0px",
-                      //remove top bottom padding
-                      "& .MuiMenu-list": {
-                        padding: "0px",
+        {reDevit && <span className={styles.devit}>You Redevited</span>}
+        <div className={styles.wrapper}>
+          <div className={styles.post_left}>
+            <Avatar src={data?.avatar} sx={{ width: "45px", height: "45px" }} />
+          </div>
+          <div className={styles.post_right}>
+            <div className={styles.info_top}>
+              <div className={styles.info}>
+                <span className={styles.info_name}>{data?.name}</span>
+                {user?.verified && (
+                  <span className={styles.green_tick}>
+                    <MdVerified />
+                  </span>
+                )}
+                <span className={styles.username}>@{data?.username}</span>
+                <span className={styles.dot}></span>
+                <span className={styles.time}>{data?.createdAt}</span>
+              </div>
+              {token === data?.userid && (
+                <>
+                  <IconButton
+                    sx={{
+                      width: "35px",
+                      height: "35px",
+                      color: "text.light",
+                      //make the primary hover color
+                      "&:hover": {
+                        color: "primary.main",
+                        //transparent green background
+                        backgroundColor: "rgba(29,161,242,0.1)",
                       },
-                    },
-                  }}
-                  //style the menu items
-                  MenuListProps={{
-                    sx: {
-                      "& .MuiMenuItem-root": {
-                        padding: "6px 8px",
-                        fontSize: "14px",
-                        fontFamily: "Poppins",
-                        "&:hover": {
-                          backgroundColor: "rgba(29,161,242,0.1)",
+                    }}
+                    onClick={handleClick}
+                  >
+                    <FiMoreHorizontal />
+                  </IconButton>
+                  <Menu
+                    id="devit-menu"
+                    open={open}
+                    anchorEl={anchorEl}
+                    onClose={handleClose}
+                    //style the small menu with the theme color
+                    PaperProps={{
+                      sx: {
+                        backgroundColor: "background.default",
+                        color: "text.primary",
+                        width: "85px",
+                        padding: "0px",
+                        //remove top bottom padding
+                        "& .MuiMenu-list": {
+                          padding: "0px",
                         },
                       },
-                    },
-                  }}
-                >
-                  <MenuItem>
-                    <ListItemIcon
-                      style={{
-                        minWidth: "0px",
-                        marginRight: "6px",
-                        fontSize: "16px",
-                      }}
-                    >
-                      <FiEdit />
-                    </ListItemIcon>
-                    Edit
-                  </MenuItem>
-                  <MenuItem>
-                    <ListItemIcon
-                      style={{
-                        minWidth: "0px",
-                        marginRight: "6px",
-                        fontSize: "16px",
-                      }}
-                      onClick={handleDelete}
-                    >
-                      <MdDelete />
-                    </ListItemIcon>
-                    Delete
-                  </MenuItem>
-                </Menu>
-              </>
-            )}
-          </div>
-
-          <div className={styles.content}>
-            <NavLink to={goLink}>
-              <Typography
-                varitant="p"
-                //style the text
-                sx={{
-                  fontSize: "16px",
-                  fontFamily: "Poppins",
-                  color: "text.normal",
-                  fontWeight: "400",
-                  marginTop: "-5px",
-                }}
-                //highlight the #hashtags and @mentions
-                component="p"
-                dangerouslySetInnerHTML={{
-                  //higlight #hashtag and @mentions with the theme color
-                  __html: data?.content
-                    ?.replace(
-                      /#(\w+)/g,
-                      '<span style="color: #00BA7C;">#$1</span>'
-                    )
-                    ?.replace(
-                      /@(\w+)/g,
-                      '<span style="color: #00BA7C;font-weight: 500;">@$1</span>'
-                    ),
-                }}
-              ></Typography>
-              {data?.image !== "" && (
-                <Card
-                  //make the image responsive
-                  sx={{
-                    height: "250px",
-                    width: "80%",
-                    marginBlock: "10px",
-                    borderRadius: "6px",
-                    cursor: "pointer",
-                  }}
-                >
-                  <img
-                    src={data?.image}
-                    alt="post"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
                     }}
-                    onClick={() => setOpenLightbox(true)}
-                  />
-                </Card>
+                    //style the menu items
+                    MenuListProps={{
+                      sx: {
+                        "& .MuiMenuItem-root": {
+                          padding: "6px 8px",
+                          fontSize: "14px",
+                          fontFamily: "Poppins",
+                          "&:hover": {
+                            backgroundColor: "rgba(29,161,242,0.1)",
+                          },
+                        },
+                      },
+                    }}
+                  >
+                    <MenuItem>
+                      <ListItemIcon
+                        style={{
+                          minWidth: "0px",
+                          marginRight: "6px",
+                          fontSize: "16px",
+                        }}
+                      >
+                        <FiEdit />
+                      </ListItemIcon>
+                      Edit
+                    </MenuItem>
+                    <MenuItem>
+                      <ListItemIcon
+                        style={{
+                          minWidth: "0px",
+                          marginRight: "6px",
+                          fontSize: "16px",
+                        }}
+                        onClick={handleDelete}
+                      >
+                        <MdDelete />
+                      </ListItemIcon>
+                      Delete
+                    </MenuItem>
+                  </Menu>
+                </>
               )}
-            </NavLink>
-            {data?.code !== "" && "Code to be included here"}
-          </div>
-          <div className={styles.action_con}>
-            <IconButton
-              sx={{
-                width: "37px",
-                height: "37px",
-                color: like ? "#f91880" : "text.light",
-                "&:hover": {
-                  color: "#f91880",
-                  backgroundColor: "#32253a",
-                },
-              }}
-              className={styles.icon}
-              onClick={handleLike}
-            >
-              {like ? <AiFillHeart /> : <AiOutlineHeart />}
-            </IconButton>
-            <span
-              className={styles.like}
-              style={{ color: like ? "#f91880" : "#5b6773" }}
-            >
-              {likeCount}
-            </span>
-            <IconButton
-              sx={{
-                width: "37px",
-                height: "37px",
-                color: reDevit ? "primary.main" : "text.light",
-                fontSize: "40px",
-                "&:hover": {
-                  color: "primary.main",
-                  backgroundColor: "rgba(29,161,242,0.1)",
-                },
-              }}
-              className={styles.icon}
-              onClick={handleReDevit}
-            >
-              <AiOutlineRetweet />
-            </IconButton>
-            <span
-              className={styles.retweet}
-              style={{ color: reDevit ? "#00ba7c" : "#5b6773" }}
-            >
-              {reDevitCount}
-            </span>
-            <NavLink to={goLink}>
+            </div>
+
+            <div className={styles.content}>
+              <NavLink to={goLink}>
+                <Typography
+                  varitant="p"
+                  //style the text
+                  sx={{
+                    fontSize: "16px",
+                    fontFamily: "Poppins",
+                    color: "text.normal",
+                    fontWeight: "400",
+                    marginTop: "-5px",
+                  }}
+                  //highlight the #hashtags and @mentions
+                  component="p"
+                  dangerouslySetInnerHTML={{
+                    //higlight #hashtag and @mentions with the theme color
+                    __html: data?.content
+                      ?.replace(
+                        /#(\w+)/g,
+                        '<span style="color: #00BA7C;">#$1</span>'
+                      )
+                      ?.replace(
+                        /@(\w+)/g,
+                        '<span style="color: #00BA7C;font-weight: 500;">@$1</span>'
+                      ),
+                  }}
+                ></Typography>
+                {data?.image !== "" && (
+                  <Card
+                    //make the image responsive
+                    sx={{
+                      height: "250px",
+                      width: "80%",
+                      marginBlock: "10px",
+                      borderRadius: "6px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <img
+                      src={data?.image}
+                      alt="post"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                      }}
+                      onClick={() => setOpenLightbox(true)}
+                    />
+                  </Card>
+                )}
+              </NavLink>
+              {data?.code !== "" && "Code to be included here"}
+            </div>
+            <div className={styles.action_con}>
               <IconButton
                 sx={{
                   width: "37px",
                   height: "37px",
-                  color: "text.light",
-                  fontSize: "19px",
+                  color: like ? "#f91880" : "text.light",
                   "&:hover": {
-                    color: "#1d9bf0",
-                    backgroundColor: "#1c3345",
+                    color: "#f91880",
+                    backgroundColor: "#32253a",
                   },
                 }}
                 className={styles.icon}
+                onClick={handleLike}
               >
-                <BiComment />
+                {like ? <AiFillHeart /> : <AiOutlineHeart />}
               </IconButton>
-            </NavLink>
-            <span className={styles.comment}>{data?.comments?.length}</span>
+              <span
+                className={styles.like}
+                style={{ color: like ? "#f91880" : "#5b6773" }}
+              >
+                {likeCount}
+              </span>
+              <IconButton
+                sx={{
+                  width: "37px",
+                  height: "37px",
+                  color: reDevit ? "primary.main" : "text.light",
+                  fontSize: "40px",
+                  "&:hover": {
+                    color: "primary.main",
+                    backgroundColor: "rgba(29,161,242,0.1)",
+                  },
+                }}
+                className={styles.icon}
+                onClick={handleReDevit}
+              >
+                <AiOutlineRetweet />
+              </IconButton>
+              <span
+                className={styles.retweet}
+                style={{ color: reDevit ? "#00ba7c" : "#5b6773" }}
+              >
+                {reDevitCount}
+              </span>
+              <NavLink to={goLink}>
+                <IconButton
+                  sx={{
+                    width: "37px",
+                    height: "37px",
+                    color: "text.light",
+                    fontSize: "19px",
+                    "&:hover": {
+                      color: "#1d9bf0",
+                      backgroundColor: "#1c3345",
+                    },
+                  }}
+                  className={styles.icon}
+                >
+                  <BiComment />
+                </IconButton>
+              </NavLink>
+              <span className={styles.comment}>{data?.comments?.length}</span>
+            </div>
           </div>
         </div>
       </div>

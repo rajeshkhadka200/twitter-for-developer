@@ -36,6 +36,7 @@ const SpecificPost = () => {
     }
   };
   if (loading) return <Loader height="80vh" />;
+
   const GoBack = () => {
     window.history.back();
   };

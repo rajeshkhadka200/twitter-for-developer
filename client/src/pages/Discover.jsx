@@ -7,6 +7,7 @@ import Loader from "../components/Loader";
 import { MdVerified, MdDelete } from "react-icons/md";
 import { ContextProvider } from "../config/Context";
 import provider from "../config/axios";
+import { toast } from "react-hot-toast";
 
 const Discover = () => {
   const [search, setSearch] = React.useState("");
@@ -33,6 +34,11 @@ const Discover = () => {
       console.log(error);
     }
   };
+  useEffect(() => {
+    if (srhDevits.length === 0) {
+      setSearch("");
+    }
+  }, [srhDevits]);
 
   useEffect(() => {
     if (q) {
@@ -61,14 +67,17 @@ const Discover = () => {
       setLoading(true);
       const res = await provider.get(`/devit/search/${search}`);
       if (res) {
+        if (res.data.devits.length === 0) {
+          toast.error("No devits found");
+          return setLoading(false);
+        }
         setSrhDevits(res.data.devits);
-        setLoading(false);
+        return setLoading(false);
       }
     } catch (error) {
       console.log(error);
     }
   };
-  console.log(srhDevits);
   return (
     <>
       <div className={styles.search_wrapper}>
