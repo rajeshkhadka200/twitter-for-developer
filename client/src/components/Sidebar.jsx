@@ -74,8 +74,9 @@ const Sidebar = () => {
               <SiCodemagic />
             </IconButton>
           </div>
-          {links.map((link) => (
+          {links.map((link, i) => (
             <NavLink
+              key={i}
               className={
                 pathname === link.link ? styles.link_active : styles.link
               }

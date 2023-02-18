@@ -10,11 +10,7 @@ const Home = () => {
       <PageTop label="Home" />
       <div className={styles.home_container}>
         <Devit/>
-        <Post/>
-        <Post/>
-        <Post/>
-        <Post/>
-        <Post/>
+
       </div>
     </>
   );

@@ -4,6 +4,9 @@ const schema = new mongoose.Schema({
   userid: {
     type: String,
   },
+  avatar: {
+    type: String,
+  },
   username: {
     type: String,
   },
@@ -15,12 +18,13 @@ const schema = new mongoose.Schema({
   },
   image: {
     type: String,
+    default: "",
   },
   code: {
     type: String,
+    default: "",
   },
   status: {
-    // to identify if it is a original post or a re-devit
     type: String,
   },
   likes: [
@@ -62,6 +66,7 @@ const schema = new mongoose.Schema({
       },
       avatar: {
         type: String,
+        default: new Date().toISOString(),
       },
       verified: {
         type: Boolean,
@@ -70,6 +75,7 @@ const schema = new mongoose.Schema({
   ],
   createdAt: {
     type: String,
+    default: new Date().toISOString(),
   },
 });
 

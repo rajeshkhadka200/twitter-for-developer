@@ -1,17 +1,38 @@
 import { Avatar, Badge } from "@pankod/refine-mui";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import SearchBox from "../components/SearchBox";
 import styles from "../css/pages/Discover.module.css";
 import Post from "../components/Post";
 import Loader from "../components/Loader";
 import { MdVerified, MdDelete } from "react-icons/md";
-import provider from "../config/axios.js";
+import { ContextProvider } from "../config/Context";
+import provider from "../config/axios";
+
 const Discover = () => {
   const [search, setSearch] = React.useState("");
+  const user = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const [loading, setLoading] = React.useState(false);
+  const [alldevits, setAllDevits] = React.useState([]);
+  const [srhDevits, setSrhDevits] = React.useState([]);
 
   //get the search query
   const query = new URLSearchParams(window.location.search);
   const q = query.get("q");
+
+  useEffect(() => {
+    getAllDevits();
+  }, []);
+
+  const getAllDevits = async () => {
+    try {
+      const res = await provider.get("/devit/getall");
+      if (res) {
+        setAllDevits(res?.data?.devits);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (q) {
@@ -20,21 +41,34 @@ const Discover = () => {
   }, [q]);
 
   const [allUser, setallUser] = React.useState([]);
-  console.log(allUser);
+
   useEffect(() => {
     const fetchallUser = async () => {
       try {
         const res = await provider.get(`/user/getall`);
         setallUser(res.data.users);
       } catch (error) {
-        alert("Something went wrong");
+        console.log(error);
       }
     };
 
     fetchallUser();
   }, []);
 
-  const handleSearch = () => {};
+  const handleSearch = async () => {
+    if (search === "") return;
+    try {
+      setLoading(true);
+      const res = await provider.get(`/devit/search/${search}`);
+      if (res) {
+        setSrhDevits(res.data.devits);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  console.log(srhDevits);
   return (
     <>
       <div className={styles.search_wrapper}>
@@ -51,9 +85,11 @@ const Discover = () => {
               overlap="circular"
               anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
               badgeContent={
-                <span className={styles.green_tick}>
-                  {user.verified && <MdVerified />}
-                </span>
+                user.verified && (
+                  <span className={styles.green_tick}>
+                    <MdVerified />
+                  </span>
+                )
               }
             >
               <Avatar
@@ -70,9 +106,20 @@ const Discover = () => {
           </div>
         ))}
       </div>
-      {/* <Post />
-      <Post /> */}
-      <Loader height="50vh" />
+      {search !== "" ? (
+        loading ? (
+          <Loader height="50vh" />
+        ) : srhDevits?.length > 0 ? (
+          srhDevits?.map((data) => <Post key={data._id} data={data} />)
+        ) : (
+          <span className={styles.no_content}>Typing . . .</span>
+        )
+      ) : alldevits.length > 0 ? (
+        alldevits.map((data) => <Post key={data._id} data={data} />)
+      ) : (
+        <span className={styles.no_content}>Fetching . . .</span>
+      )}
+      {/* <Loader height="50vh" /> */}
     </>
   );
 };

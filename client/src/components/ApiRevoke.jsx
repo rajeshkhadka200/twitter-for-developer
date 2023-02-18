@@ -1,16 +1,37 @@
-import React from "react";
-import { IconButton, TextField } from "@pankod/refine-mui";
+import React, { useContext } from "react";
+import { IconButton, LoadingButton, TextField } from "@pankod/refine-mui";
 import { Button } from "@pankod/refine-mui";
 
 import style from "../css/components/Apirevoke.module.css";
 import { FaRegCopy } from "react-icons/fa";
+import { toast } from "react-hot-toast";
+import provider from "../config/axios";
+import { ContextProvider } from "../config/Context";
 const ApiRevoke = () => {
-  // generate unique alphanumeric string
-
-  // copy to clipboard
-
+  const { userDetails } = useContext(ContextProvider);
+  const [user, setUser] = userDetails;
+  const [key, setKey] = React.useState(user?.apiKey);
+  const [loading, setLoading] = React.useState(false);
+  const token = localStorage.getItem("token");
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(Math.random().toString(36).substring(2, 15));
+    navigator.clipboard.writeText(key);
+  };
+
+  const revokeKey = async () => {
+    setKey("");
+    setLoading(true);
+    try {
+      const res = await provider.post(`/create`, {
+        userid: token,
+      });
+      if (res) {
+        setKey(res.data.apiKey);
+        toast.success("API key revoked");
+        setLoading(false);
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
   };
 
   return (
@@ -20,14 +41,14 @@ const ApiRevoke = () => {
       </p>
       <div className={style.input_con}>
         <TextField
-          defaultValue={"Rajeshkoapikeyyeixa"}
+          value={key}
           disabled
           inputProps={{
             style: {
               height: "15px",
               fontSize: "14px",
               fontFamily: "Poppins",
-              width: "300px",
+              width: "350px",
             },
           }}
           InputLabelProps={{
@@ -54,8 +75,8 @@ const ApiRevoke = () => {
           <FaRegCopy />
         </IconButton>
       </div>
-      <Button
-        // onClick={() => revokeKey()}
+      <LoadingButton
+        onClick={() => revokeKey()}
         size="medium"
         variant="contained"
         sx={{
@@ -68,10 +89,11 @@ const ApiRevoke = () => {
           padding: "7px 20px",
           borderRadius: "50vw",
         }}
+        loading={loading}
         // endIcon={<BsArrowRight size={"28"} />}
       >
         Revoke key
-      </Button>
+      </LoadingButton>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "@pankod/refine-react-router-v6";
 import styles from "../css/components/SpecificPost.module.css";
 import { Avatar, Button, IconButton, InputBase } from "@pankod/refine-mui";
@@ -6,18 +6,36 @@ import { BiArrowBack } from "react-icons/bi";
 import Post from "../components/Post";
 import Comment from "../components/Comment";
 import { ContextProvider } from "../config/Context";
-import provider from "../config/axios";
 import momnet from "moment";
-s;
+import provider from "../config/axios";
+import Loader from "../components/Loader";
+import { toast } from "react-hot-toast";
 const SpecificPost = () => {
   const { userDetails } = useContext(ContextProvider);
   const [user, setuser] = userDetails;
 
-  const { username, _id, firstname, lastname, avatar } = user;
-
   const { id } = useParams();
   const [comment, setComment] = React.useState("");
+  const [loading, setLoading] = React.useState(true);
+  const [data, setData] = React.useState({});
+  const [trigger, settrigger] = useState(false);
 
+  useEffect(() => {
+    fetchDevit();
+  }, [trigger, id]);
+
+  const fetchDevit = async () => {
+    try {
+      const res = await provider.get(`/devit/get/${id}`);
+      if (res) {
+        setData(res.data.devit);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  if (loading) return <Loader height="80vh" />;
   const GoBack = () => {
     window.history.back();
   };
@@ -28,17 +46,19 @@ const SpecificPost = () => {
       const res = await provider.post(
         `/devit/comment/63f083752039190626c09443`,
         {
-          userid: _id,
-          username,
-          name: firstname + " " + lastname,
+          userid: user?._id,
+          username: user?.username,
+          name: user?.firstname + " " + user?.lastname,
           content: comment,
           timestamp: Date.now(),
-          avatar,
+          avatar: user?.avatar,
           actual_date: momnet().format("MMM Do YY"),
         }
       );
-      console.log(res);
+
+      settrigger(!trigger);
       setComment("");
+      toast.success("You replied to this devit");
     } catch (error) {
       console.log(error);
     }
@@ -59,7 +79,7 @@ const SpecificPost = () => {
           </IconButton>
           <span className={styles.heading}>Devit</span>
         </div>
-        <Post />
+        <Post data={data} />
         <div className={styles.post_comment}>
           <Avatar
             src={user?.avatar}
@@ -71,7 +91,7 @@ const SpecificPost = () => {
           <InputBase
             sx={{
               flex: 1,
-              fontSize: "1.1rem",
+              fontSize: "14px",
               fontFamily: "Poppins",
               color: "text.normal",
               // style the placeholder
@@ -111,7 +131,7 @@ const SpecificPost = () => {
             Reply
           </Button>
         </div>
-        <Comment />
+        <Comment data={data} />
       </div>
     </>
   );

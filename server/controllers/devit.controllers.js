@@ -75,13 +75,15 @@ export const deleteDevit = async (req, res) => {
 };
 export const getMyDevits = async (req, res) => {
   try {
-    //get all devits of a specific user by user_id and redevit's user_id
     const devits = await Devit.find({
       $or: [
-        { userid: req.params.userid },
-        { "redevit.user_id": req.params.userid },
+        { userid: req.params.id },
+        { redevits: { $elemMatch: { userid: req.params.id } } },
       ],
     }).sort({ createdAt: -1 });
+    if (!devits)
+      return res.status(404).json({ error: true, msg: "Devits not found" });
+
     res
       .status(200)
       .json({ error: false, msg: "Devits fetched successfully", devits });
@@ -105,13 +107,17 @@ export const likeDevit = async (req, res) => {
         .indexOf(req.body.userid);
       devit.likes.splice(removeIndex, 1);
       await devit.save();
+      const count = devit?.likes?.length;
       return res
         .status(200)
-        .json({ error: false, msg: "Devit unliked successfully" });
+        .json({ error: false, msg: "Devit unliked successfully", count });
     }
     devit.likes.unshift({ userid: req.body.userid });
     await devit.save();
-    res.status(200).json({ error: false, msg: "Devit liked successfully" });
+    const count = devit?.likes?.length;
+    res
+      .status(201)
+      .json({ error: false, msg: "Devit liked successfully", count });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: true, msg: "Internal Server Error" });
@@ -134,13 +140,21 @@ export const redevitDevit = async (req, res) => {
         .indexOf(req.body.userid);
       devit.redevits.splice(removeIndex, 1);
       await devit.save();
+      const count = devit?.redevits?.length;
+
       return res
-        .status(400)
-        .json({ error: true, msg: "Devit unredevited successfully" });
+        .status(200)
+        .json({ error: true, msg: "Devit unredevited successfully", count });
     }
-    devit.redevits.unshift({ userid: req.body.userid });
+    devit.redevits.unshift({
+      userid: req.body.userid,
+      username: req.body.username,
+    });
     await devit.save();
-    res.status(200).json({ error: false, msg: "Devit redevited successfully" });
+    const count = devit?.redevits?.length;
+    res
+      .status(201)
+      .json({ error: false, msg: "Devit redevited successfully", count });
   } catch (error) {
     res.status(500).json({ error: true, msg: "Internal Server Error" });
   }
