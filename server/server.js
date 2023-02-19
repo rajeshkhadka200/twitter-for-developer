@@ -8,7 +8,7 @@ import devitRoutes from "./routes/devit.route.js";
 import userRoutes from "./routes/user.route.js";
 import apiRoutes from "./routes/api.route.js";
 import imageRoutes from "./routes/image.route.js";
-import botRoutes from "./routes/hackathons.route.js";
+import botRoutes from "./routes/bots.route.js";
 
 const app = express();
 
