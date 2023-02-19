@@ -21,7 +21,7 @@ import { ContextProvider } from "../config/Context";
 import { toast } from "react-hot-toast";
 
 // codemirror setup
-import CodeMirror from "codemirror";
+import Codemirror from "codemirror";
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/dracula.css";
 import "codemirror/mode/javascript/javascript";
@@ -29,7 +29,6 @@ import "codemirror/addon/edit/closebrackets";
 import "codemirror/addon/edit/closebrackets";
 
 const Post = ({ data }) => {
-  console.log(data);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [openLightbox, setOpenLightbox] = React.useState(false);
   const open = Boolean(anchorEl);
@@ -42,16 +41,9 @@ const Post = ({ data }) => {
     data?.redevits?.length
   );
   // all stup for code mirror read only
-  const [code, setCode] = React.useState(false);
+
   const { userDetails } = useContext(ContextProvider);
   const [user, setUser] = userDetails;
-
-  React.useEffect(() => {
-    if (data?.code !== "") {
-      setCode(true);
-    }
-    Editorinit();
-  }, [code]);
 
   useEffect(() => {
     //check if the token is equal to the array of likes object userid
@@ -135,8 +127,11 @@ const Post = ({ data }) => {
 
   const goLink = `/devit/${data?._id}`;
 
-  async function Editorinit() {
-    codeRef.current = CodeMirror.fromTextArea(
+  // handle code mirror
+  // useref for the code mirror
+  const codeRef = useRef(null);
+  React.useEffect(() => {
+    codeRef.current = Codemirror.fromTextArea(
       document.getElementById("editor"),
       {
         mode: { name: "javascript", json: true },
@@ -148,15 +143,7 @@ const Post = ({ data }) => {
         readOnly: true,
       }
     ).setValue(data?.code);
-    codeRef.current.on("change", (ins, changes) => {
-      const { origin } = changes;
-      const code = ins.getValue();
-      console.log(code);
-    });
-  }
-
-  const codeRef = React.useRef(null);
-
+  }, []);
   return (
     <>
       {
@@ -334,7 +321,7 @@ const Post = ({ data }) => {
                   </Card>
                 )}
               </NavLink>
-              {code && (
+              {data?.code && (
                 <div class={styles.codeBlock}>
                   <IconButton
                     sx={{
