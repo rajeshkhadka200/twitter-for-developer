@@ -2,25 +2,26 @@ import {} from "dotenv/config";
 import express from "express";
 import { connectDB } from "./db/connection.js";
 import cors from "cors";
+import fileupload from "express-fileupload";
 // import routes
 import devitRoutes from "./routes/devit.route.js";
 import userRoutes from "./routes/user.route.js";
 import apiRoutes from "./routes/api.route.js";
+import imageRoutes from "./routes/image.route.js";
 
 const app = express();
 
-// middleware
-app.use(express.json());
-//allow cors
-app.use(cors());
-
-// connect to db
-connectDB();
+app.use(express.json()); // handle json data
+app.use(cors()); //allow cors
+app.use(fileupload()); // file upload
+app.use("/uploads", express.static("uploads")); // for serving static files
+connectDB(); // connect to db
 
 // define routes
 app.use("/api/devit", devitRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api", apiRoutes);
+app.use("/api/image", imageRoutes);
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
