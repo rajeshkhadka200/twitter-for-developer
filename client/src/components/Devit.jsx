@@ -29,7 +29,8 @@ import { tags as t } from "@lezer/highlight";
 
 // codemirror setup
 import "codemirror/lib/codemirror.css";
-import "codemirror/theme/dracula.css";
+// import "codemirror/theme/dracula.css";
+import "codemirror/theme/material-palenight.css";
 import "codemirror/mode/javascript/javascript";
 import "codemirror/addon/edit/closebrackets";
 import "codemirror/addon/edit/closebrackets";
@@ -123,7 +124,7 @@ function Devit() {
       document.getElementById("editor"),
       {
         mode: { name: "javascript", json: true },
-        theme: "dracula",
+        theme: "material-palenight",
         autoCloseTags: true,
         autoCloseBrackets: true,
         lineNumbers: true,
