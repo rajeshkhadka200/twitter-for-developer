@@ -24,6 +24,23 @@ const Context = ({ children }) => {
     }
   }, []);
 
+  // get all devits
+  const getAllDevits = async () => {
+    try {
+      const res = await provider.get("/devit/getall");
+
+      if (res) {
+        setAllDevits(res?.data?.devits);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getAllDevits();
+  }, []);
+
   return (
     <>
       <ContextProvider.Provider

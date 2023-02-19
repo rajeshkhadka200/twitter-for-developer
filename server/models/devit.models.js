@@ -78,7 +78,7 @@ const schema = new mongoose.Schema({
   },
   timestamp: {
     type: String,
-    default: new Date().toISOString(),
+    default: Date.now(),
   },
 });
 
