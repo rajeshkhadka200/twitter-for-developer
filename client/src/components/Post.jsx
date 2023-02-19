@@ -295,43 +295,43 @@ const Post = ({ data }) => {
                     />
                   </Card>
                 )}
+                {data?.code !== "" && (
+                  <div class={styles.codeBlock}>
+                    <IconButton
+                      sx={{
+                        zIndex: "1",
+                        width: "30px",
+                        height: "30px",
+                        color: "text.adv",
+                        "&:hover": {
+                          color: "primary.main",
+                          backgroundColor: "hover",
+                        },
+                        position: "absolute",
+                        top: "5px",
+                        right: "5px",
+                      }}
+                      onClick={copyCode}
+                    >
+                      <FaRegCopy />
+                    </IconButton>
+                    <SyntaxHighlighter
+                      language="javascript"
+                      style={atomOneDark}
+                      wrapLines={true}
+                      showLineNumbers={true}
+                      customStyle={{
+                        fontFamily: "Poppins",
+                        fontWeight: "400",
+                        borderRadius: "6px",
+                        padding: "10px",
+                      }}
+                    >
+                      {data?.code}
+                    </SyntaxHighlighter>
+                  </div>
+                )}
               </NavLink>
-              {data?.code !== "" && (
-                <div class={styles.codeBlock}>
-                  <IconButton
-                    sx={{
-                      zIndex: "1",
-                      width: "30px",
-                      height: "30px",
-                      color: "text.adv",
-                      "&:hover": {
-                        color: "primary.main",
-                        backgroundColor: "hover",
-                      },
-                      position: "absolute",
-                      top: "5px",
-                      right: "5px",
-                    }}
-                    onClick={copyCode}
-                  >
-                    <FaRegCopy />
-                  </IconButton>
-                  <SyntaxHighlighter
-                    language="javascript"
-                    style={atomOneDark}
-                    wrapLines={true}
-                    showLineNumbers={true}
-                    customStyle={{
-                      fontFamily: "Poppins",
-                      fontWeight: "400",
-                      borderRadius: "6px",
-                      padding: "10px",
-                    }}
-                  >
-                    {data?.code}
-                  </SyntaxHighlighter>
-                </div>
-              )}
             </div>
             <div className={styles.action_con}>
               <IconButton

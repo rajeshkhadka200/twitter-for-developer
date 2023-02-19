@@ -49,6 +49,7 @@ function Devit() {
     code: "",
     image: "",
   });
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [emoji, setEmoji] = React.useState(false);
   const [code, setCode] = React.useState(false);
@@ -116,7 +117,7 @@ function Devit() {
   };
 
   const getImg = (e) => {
-    const [file] = e.target.files;
+    const [file] = e.target.files; 
     setImg(URL.createObjectURL(file));
   };
 
@@ -150,7 +151,6 @@ function Devit() {
     Editorinit();
   }, [code]);
 
-  console.log(value);
   return (
     <>
       <div className={styles.devit_container}>
