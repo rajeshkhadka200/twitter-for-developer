@@ -104,13 +104,16 @@ button {
   height: auto;
   font-size: 14px;
   line-height: 1.6;
-  padding-top: 10px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+
   letter-spacing: 1.2px;
   cursor: auto;
   font-family: inherit;
   font-weight: normal !important;
   border-radius: 5px;
 }
+/* select gutter */
 
 .CodeMirror-scroll {
   overflow-y: hidden;
