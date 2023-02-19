@@ -1,8 +1,17 @@
 import Devit from "../models/devit.models.js";
 export const postDevit = async (req, res) => {
   try {
-    const { userid, username, name, content, image, status, createdAt,avatar } =
-      req.body;
+    const {
+      userid,
+      username,
+      name,
+      content,
+      image,
+      status,
+      createdAt,
+      avatar,
+      code,
+    } = req.body;
     const newDevit = new Devit({
       userid,
       username,
@@ -11,7 +20,8 @@ export const postDevit = async (req, res) => {
       image,
       status,
       createdAt,
-      avatar
+      avatar,
+      code,
     });
     const devit = await newDevit.save();
     res

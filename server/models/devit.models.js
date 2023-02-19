@@ -75,6 +75,9 @@ const schema = new mongoose.Schema({
   ],
   createdAt: {
     type: String,
+  },
+  timestamp: {
+    type: String,
     default: new Date().toISOString(),
   },
 });

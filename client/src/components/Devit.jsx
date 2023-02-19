@@ -10,6 +10,7 @@ import {
   Menu,
   MenuItem,
   ListItemIcon,
+  LoadingButton,
 } from "@pankod/refine-mui";
 import Picker from "emoji-picker-react";
 import {
@@ -34,15 +35,22 @@ import "codemirror/addon/edit/closebrackets";
 import "codemirror/addon/edit/closebrackets";
 import { ContextProvider } from "../config/Context";
 import { toast } from "react-hot-toast";
+import provider from "../config/axios";
+import moment from "moment";
 
 function Devit() {
   const { userDetails } = useContext(ContextProvider);
   const [user, setuser] = userDetails;
   //input state
-  const [value, setValue] = React.useState("");
+  const [value, setValue] = React.useState({
+    content: "",
+    code: "",
+    image: "",
+  });
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [emoji, setEmoji] = React.useState(false);
   const [code, setCode] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
 
   const [img, setImg] = React.useState(null);
 
@@ -55,15 +63,53 @@ function Devit() {
     setAnchorEl(null);
   };
   const handleChange = (e) => {
-    setValue(e.target.value);
+    setValue({ ...value, content: e.target.value });
   };
 
   const handleEmoji = () => {
     setEmoji(!emoji);
   };
 
-  const handleDevit = () => {
-    toast.success("Devit posted successfully");
+  const handleDevit = async () => {
+    if (value.content === "" && value.code === "") {
+      toast.error("Please enter some content");
+      return;
+    }
+    try {
+      setLoading(true);
+      const res = await provider.post("/devit/post", {
+        userid: user?._id,
+        content: value.content,
+        code: value.code,
+        image: value.image,
+        name:
+          user?.firstname.charAt(0).toUpperCase() +
+          user?.firstname.slice(1) +
+          " " +
+          user?.lastname.charAt(0).toUpperCase() +
+          user?.lastname.slice(1),
+
+        username: user?.username,
+        avatar: user?.avatar,
+        status: "new",
+        createdAt: moment().format("MMM Do YY"),
+      });
+      if (res.status === 201) {
+        setLoading(false);
+        toast.success("Devit posted successfully");
+        setValue({
+          content: "",
+          code: "",
+          image: "",
+        });
+        setImg(null);
+        window.location.reload();
+      }
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+      toast.error("Something went wrong");
+    }
   };
 
   const getImg = (e) => {
@@ -84,18 +130,24 @@ function Devit() {
         lineWrapping: true,
         // readOnly: true,
       }
-    ).setValue(`// Code here`);
+    );
     codeRef.current.on("change", (ins, changes) => {
       const { origin } = changes;
       const code = ins.getValue();
-      console.log(code);
+      actualCodeRef.current = code;
+      if (origin !== "setValue") {
+        setValue({ ...value, code: actualCodeRef.current });
+      }
     });
   }
   const codeRef = React.useRef(null);
+  const actualCodeRef = React.useRef(null);
+
   React.useEffect(() => {
     Editorinit();
   }, [code]);
 
+  console.log(value);
   return (
     <>
       <div className={styles.devit_container}>
@@ -123,7 +175,7 @@ function Devit() {
             placeholder="What's happening?"
             inputProps={{ "aria-label": "search google maps" }}
             multiline
-            value={value}
+            value={value.content}
             onChange={handleChange}
           ></InputBase>
 
@@ -298,7 +350,8 @@ function Devit() {
                 </MenuItem>
               </Menu>
             </div>
-            <Button
+            <LoadingButton
+              loading={loading}
               variant="contained"
               sx={{
                 borderRadius: "100vw",
@@ -310,13 +363,16 @@ function Devit() {
               onClick={handleDevit}
             >
               Devit
-            </Button>
+            </LoadingButton>
           </div>
           <div className={styles.emoji_wrapper}>
             {emoji && (
               <Picker
                 onEmojiClick={(e) => {
-                  setValue(value + e.emoji);
+                  setValue({
+                    ...value,
+                    content: value.content + e.emoji,
+                  });
                 }}
                 groupNames={{
                   smileys_people: "PEOPLE",
