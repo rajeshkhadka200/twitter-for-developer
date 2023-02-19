@@ -8,7 +8,7 @@ const Context = ({ children }) => {
   const [theme, setTheme] = useState("dark");
   const [user, setUser] = useState();
   const [alldevits, setAllDevits] = useState([]);
-
+  console.log(alldevits);
   // fetch user
   useEffect(() => {
     const fetchUser = async () => {
