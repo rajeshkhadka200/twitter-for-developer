@@ -304,7 +304,7 @@ const Post = ({ data }) => {
                       zIndex: "1",
                       width: "30px",
                       height: "30px",
-                      color: "text.normal",
+                      color: "text.adv",
                       "&:hover": {
                         color: "primary.main",
                         backgroundColor: "hover",
@@ -324,7 +324,7 @@ const Post = ({ data }) => {
                     showLineNumbers={true}
                     customStyle={{
                       fontFamily: "Poppins",
-                      fontWeight: "500",
+                      fontWeight: "400",
                       borderRadius: "6px",
                       padding: "10px",
                     }}

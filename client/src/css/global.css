@@ -108,8 +108,8 @@ button {
   padding-top: 5px;
   letter-spacing: 1.2px;
   cursor: auto;
-  font-family: "Poppins";
-  font-weight: 500 !important;
+  font-family: 'Fira Code', monospace;
+  font-weight: 400 !important;
   border-radius: 5px;
 }
 /* select gutter */
