@@ -15,6 +15,7 @@ const Discover = () => {
   const [loading, setLoading] = React.useState(false);
   const [alldevits, setAllDevits] = React.useState([]);
   const [srhDevits, setSrhDevits] = React.useState([]);
+  const [userLoading, setUserLoading] = React.useState(true);
 
   //get the search query
   const query = new URLSearchParams(window.location.search);
@@ -53,6 +54,7 @@ const Discover = () => {
       try {
         const res = await provider.get(`/user/getall`);
         setallUser(res.data.users);
+        setUserLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -88,32 +90,36 @@ const Discover = () => {
         />
       </div>
       <div className={styles.user_list}>
-        {allUser.map((user) => (
-          <div className={styles.user}>
-            <Badge
-              overlap="circular"
-              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-              badgeContent={
-                user.verified && (
-                  <span className={styles.green_tick}>
-                    <MdVerified />
-                  </span>
-                )
-              }
-            >
-              <Avatar
-                src={user.avatar}
-                sx={{
-                  width: "50px",
-                  height: "50px",
-                  borderRadius: "50%",
-                  border: "2px solid var(--primary)",
-                }}
-              />
-            </Badge>
-            <span className={styles.user_info}>{user.firstname}</span>
-          </div>
-        ))}
+        {userLoading ? (
+          <Loader height="100px" size={30} />
+        ) : (
+          allUser.map((user) => (
+            <div className={styles.user}>
+              <Badge
+                overlap="circular"
+                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                badgeContent={
+                  user.verified && (
+                    <span className={styles.green_tick}>
+                      <MdVerified />
+                    </span>
+                  )
+                }
+              >
+                <Avatar
+                  src={user.avatar}
+                  sx={{
+                    width: "50px",
+                    height: "50px",
+                    borderRadius: "50%",
+                    border: "2px solid var(--primary)",
+                  }}
+                />
+              </Badge>
+              <span className={styles.user_info}>{user.firstname}</span>
+            </div>
+          ))
+        )}
       </div>
       {search !== "" ? (
         loading ? (
@@ -126,7 +132,7 @@ const Discover = () => {
       ) : alldevits.length > 0 ? (
         alldevits.map((data) => <Post key={data._id} data={data} />)
       ) : (
-        <span className={styles.no_content}>Fetching . . .</span>
+        <Loader height="50vh" />
       )}
       {/* <Loader height="50vh" /> */}
     </>

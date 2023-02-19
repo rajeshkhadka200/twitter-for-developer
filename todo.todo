@@ -7,8 +7,8 @@ API Key:
 
 TODO:
     ☐ Integrate the post api in frontend
-    ☐ Integrate the get my devits in profile
-    ☐ Code viewer in post 
+    ✔ Integrate the get my devits in profile @done(23-02-19 12:29)
+    ✔ Code viewer in post @done(23-02-19 12:29)
     ☐ Make hackathon bots
     ☐ Make top blogpost bots
     ☐ Edit the devits UI and integration
