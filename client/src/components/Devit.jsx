@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styles from "../css/components/Devit.module.css";
 import Codemirror from "codemirror";
 import {
@@ -42,7 +42,7 @@ import moment from "moment";
 function Devit() {
   const { userDetails } = useContext(ContextProvider);
   const [user, setuser] = userDetails;
-  
+
   //input state
   const [value, setValue] = React.useState({
     content: "",
@@ -54,7 +54,6 @@ function Devit() {
   const [emoji, setEmoji] = React.useState(false);
   const [code, setCode] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
-
   const [img, setImg] = React.useState(null);
 
   const open = Boolean(anchorEl);
@@ -73,52 +72,64 @@ function Devit() {
     setEmoji(!emoji);
   };
 
+  const [file, setfile] = useState(null);
+  const getImg = (e) => {
+    const [file] = e.target.files;
+    setImg(URL.createObjectURL(file));
+    setfile(e.target.files[0]);
+  };
+
   const handleDevit = async () => {
     if (value.content === "" && value.code === "") {
       toast.error("Please enter some content");
       return;
     }
     try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
       setLoading(true);
-      const res = await provider.post("/devit/post", {
-        userid: user?._id,
-        content: value.content,
-        code: value.code,
-        image: value.image,
-        name:
-          user?.firstname.charAt(0).toUpperCase() +
-          user?.firstname.slice(1) +
-          " " +
-          user?.lastname.charAt(0).toUpperCase() +
-          user?.lastname.slice(1),
+      const formData = new FormData();
+      formData.append("image", file);
+      const imgRes = await provider.post("/image/postimage", formData, config);
+      if (imgRes.status === 200) {
+        const res = await provider.post("/devit/post", {
+          userid: user?._id,
+          content: value.content,
+          code: value.code,
+          image: imgRes.data.url,
+          name:
+            user?.firstname.charAt(0).toUpperCase() +
+            user?.firstname.slice(1) +
+            " " +
+            user?.lastname.charAt(0).toUpperCase() +
+            user?.lastname.slice(1),
 
-        username: user?.username,
-        avatar: user?.avatar,
-        status: "new",
-        verified: user?.verified,
-        createdAt: moment().format("MMM Do YY"),
-      });
-      if (res.status === 201) {
-        setLoading(false);
-        toast.success("Devit posted successfully");
-        setValue({
-          content: "",
-          code: "",
-          image: "",
+          username: user?.username,
+          avatar: user?.avatar,
+          status: "new",
+          verified: user?.verified,
+          createdAt: moment().format("MMM Do YY"),
         });
-        setImg(null);
-        window.location.reload();
+        if (res.status === 201) {
+          setLoading(false);
+          toast.success("Devit posted successfully");
+          setValue({
+            content: "",
+            code: "",
+            image: "",
+          });
+          setImg(null);
+          window.location.reload();
+        }
       }
     } catch (error) {
       setLoading(false);
       console.log(error);
       toast.error("Something went wrong");
     }
-  };
-
-  const getImg = (e) => {
-    const [file] = e.target.files; 
-    setImg(URL.createObjectURL(file));
   };
 
   // handle code mirror editor

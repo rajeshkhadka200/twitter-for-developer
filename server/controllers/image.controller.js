@@ -1,5 +1,6 @@
 export const postImage = async (req, res) => {
   try {
+    console.log(req.files);
     const { image } = req.files;
     const filename = Date.now() + image.name.replace(/\s/g, "");
     const url = `${req.protocol}://${req.get("host")}/uploads/${filename}`;
@@ -9,7 +10,6 @@ export const postImage = async (req, res) => {
         throw err;
       }
     });
-
     return res.status(200).json({
       url,
     });

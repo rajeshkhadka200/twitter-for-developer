@@ -8,7 +8,7 @@ const Context = ({ children }) => {
   const [theme, setTheme] = useState("dark");
   const [user, setUser] = useState();
   const [alldevits, setAllDevits] = useState([]);
-
+  console.log(alldevits);
   // fetch user
   useEffect(() => {
     const fetchUser = async () => {
@@ -22,6 +22,23 @@ const Context = ({ children }) => {
     if (token) {
       fetchUser();
     }
+  }, []);
+
+  // get all devits
+  const getAllDevits = async () => {
+    try {
+      const res = await provider.get("/devit/getall");
+
+      if (res) {
+        setAllDevits(res?.data?.devits);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getAllDevits();
   }, []);
 
   return (

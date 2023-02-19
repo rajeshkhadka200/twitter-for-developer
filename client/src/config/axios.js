@@ -1,7 +1,8 @@
 // create axios instance
 import axios from "axios";
+const apiurl = import.meta.env.VITE_API_URL;
 const provider = axios.create({
-  baseURL: "http://localhost:8000/api",
+  baseURL: apiurl,
 });
 
 export default provider;

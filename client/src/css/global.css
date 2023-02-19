@@ -108,12 +108,16 @@ button {
   padding-top: 5px;
   letter-spacing: 1.2px;
   cursor: auto;
-  font-family: 'Fira Code', monospace;
+  font-family: "Fira Code", monospace;
   font-weight: 400 !important;
   border-radius: 5px;
+  width: 100%;
 }
 /* select gutter */
 
+.CodeMirror-wrap pre {
+  word-break: break-word;
+}
 .CodeMirror-scroll {
   overflow-y: hidden;
   overflow-x: auto;
