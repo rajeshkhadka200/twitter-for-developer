@@ -11,6 +11,7 @@ export const postDevit = async (req, res) => {
       createdAt,
       avatar,
       code,
+      verified
     } = req.body;
     const newDevit = new Devit({
       userid,
@@ -22,6 +23,7 @@ export const postDevit = async (req, res) => {
       createdAt,
       avatar,
       code,
+      verified
     });
     const devit = await newDevit.save();
     res

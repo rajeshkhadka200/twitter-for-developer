@@ -13,9 +13,9 @@ const app = express();
 
 app.use(express.json()); // handle json data
 app.use(cors()); //allow cors
+connectDB(); // connect to db
 app.use(fileupload()); // file upload
 app.use("/uploads", express.static("uploads")); // for serving static files
-connectDB(); // connect to db
 
 // define routes
 app.use("/api/devit", devitRoutes);

@@ -27,6 +27,13 @@ import { CgPoll } from "react-icons/cg";
 //import the theme
 import { tags as t } from "@lezer/highlight";
 
+// codemirror setup
+import "codemirror/lib/codemirror.css";
+// import "codemirror/theme/dracula.css";
+import "codemirror/theme/material-palenight.css";
+import "codemirror/mode/javascript/javascript";
+import "codemirror/addon/edit/closebrackets";
+import "codemirror/addon/edit/closebrackets";
 import { ContextProvider } from "../config/Context";
 import { toast } from "react-hot-toast";
 import provider from "../config/axios";
@@ -86,6 +93,7 @@ function Devit() {
         username: user?.username,
         avatar: user?.avatar,
         status: "new",
+        verified: user?.verified,
         createdAt: moment().format("MMM Do YY"),
       });
       if (res.status === 201) {

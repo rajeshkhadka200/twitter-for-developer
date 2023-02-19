@@ -119,28 +119,6 @@ const Post = ({ data }) => {
 
   const goLink = `/devit/${data?._id}`;
 
-  async function Editorinit() {
-    codeRef.current = CodeMirror.fromTextArea(
-      document.getElementById("editor"),
-      {
-        mode: { name: "javascript", json: true },
-        theme: "dracula",
-        autoCloseTags: true,
-        autoCloseBrackets: true,
-        lineNumbers: true,
-        lineWrapping: true,
-        readOnly: true,
-      }
-    ).setValue(data?.code);
-    codeRef.current.on("change", (ins, changes) => {
-      const { origin } = changes;
-      const code = ins.getValue();
-      console.log(code);
-    });
-  }
-
-  const codeRef = React.useRef(null);
-
   return (
     <>
       {
@@ -179,7 +157,7 @@ const Post = ({ data }) => {
             <div className={styles.info_top}>
               <div className={styles.info}>
                 <span className={styles.info_name}>{data?.name}</span>
-                {user?.verified && (
+                {data?.verified && (
                   <span className={styles.green_tick}>
                     <MdVerified />
                   </span>
