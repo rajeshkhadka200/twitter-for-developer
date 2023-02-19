@@ -73,12 +73,15 @@ const schema = new mongoose.Schema({
       },
     },
   ],
+  verified: {
+    type: Boolean,
+  },
   createdAt: {
     type: String,
   },
   timestamp: {
     type: String,
-    default: new Date().toISOString(),
+    default: Date.now(),
   },
 });
 
