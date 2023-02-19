@@ -8,8 +8,9 @@ import {
   Container,
   Card,
 } from "@pankod/refine-mui";
-// import { CopyBlock, dracula } from "react-code-blocks";
-import React, { useContext, useEffect } from "react";
+import { CodeViewer } from "react-extensible-code-viewer";
+import "react-extensible-code-viewer/dist/index.css";
+import React, { useContext, useEffect, useRef } from "react";
 import styles from "../css/components/Post.module.css";
 import { FiMoreHorizontal, FiEdit, FiX } from "react-icons/fi";
 import { MdVerified, MdDelete } from "react-icons/md";
@@ -19,6 +20,14 @@ import { NavLink } from "@pankod/refine-react-router-v6";
 import provider from "../config/axios";
 import { ContextProvider } from "../config/Context";
 import { toast } from "react-hot-toast";
+
+// codemirror setup
+import CodeMirror from "codemirror";
+import "codemirror/lib/codemirror.css";
+import "codemirror/theme/dracula.css";
+import "codemirror/mode/javascript/javascript";
+import "codemirror/addon/edit/closebrackets";
+import "codemirror/addon/edit/closebrackets";
 
 const Post = ({ data }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -110,6 +119,37 @@ const Post = ({ data }) => {
   };
 
   const goLink = `/devit/${data?._id}`;
+
+  // all stup for code mirror read only
+  const [code, setCode] = React.useState(false);
+  async function Editorinit() {
+    codeRef.current = CodeMirror.fromTextArea(
+      document.getElementById("editor"),
+      {
+        mode: { name: "javascript", json: true },
+        theme: "dracula",
+        autoCloseTags: true,
+        autoCloseBrackets: true,
+        lineNumbers: true,
+        lineWrapping: true,
+        readOnly: true,
+      }
+    ).setValue(data?.code);
+    codeRef.current.on("change", (ins, changes) => {
+      const { origin } = changes;
+      const code = ins.getValue();
+      console.log(code);
+    });
+  }
+
+  const codeRef = React.useRef(null);
+  React.useEffect(() => {
+    if (data?.code !== "") {
+      setCode(true);
+    }
+    Editorinit();
+  }, [code]);
+
   return (
     <>
       {
@@ -288,15 +328,11 @@ const Post = ({ data }) => {
                   </Card>
                 )}
               </NavLink>
-              {/* {data?.code !== "" && "Code to be included here"} */}
-              <div className={styles.codeBlock}>
-                {/* <CopyBlock
-                  text={"console.log('Hello World')"}
-                  language={"javascript"}
-                  showLineNumbers={true}
-                  theme={dracula}
-                /> */}
-              </div>
+              {code && (
+                <div class={styles.codeBlock}>
+                  <textarea id="editor" wrap="hard" />
+                </div>
+              )}
             </div>
             <div className={styles.action_con}>
               <IconButton

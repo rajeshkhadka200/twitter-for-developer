@@ -101,7 +101,7 @@ button {
 
 /* code mirror css */
 .CodeMirror {
-  height: 150px;
+  height: auto;
   font-size: 14px;
   line-height: 1.6;
   padding-top: 10px;
@@ -110,4 +110,9 @@ button {
   font-family: inherit;
   font-weight: normal !important;
   border-radius: 5px;
+}
+
+.CodeMirror-scroll {
+  overflow-y: hidden;
+  overflow-x: auto;
 }

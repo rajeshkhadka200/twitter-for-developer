@@ -30,7 +30,6 @@ import { tags as t } from "@lezer/highlight";
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/dracula.css";
 import "codemirror/mode/javascript/javascript";
-import "codemirror/mode/python/python";
 import "codemirror/addon/edit/closebrackets";
 import "codemirror/addon/edit/closebrackets";
 import { ContextProvider } from "../config/Context";
@@ -65,7 +64,7 @@ function Devit() {
 
   const handleDevit = () => {
     toast.success("Devit posted successfully");
-  }
+  };
 
   const getImg = (e) => {
     const [file] = e.target.files;
@@ -77,14 +76,15 @@ function Devit() {
     codeRef.current = Codemirror.fromTextArea(
       document.getElementById("editor"),
       {
-        mode: { name: "python", json: true },
+        mode: { name: "javascript", json: true },
         theme: "dracula",
         autoCloseTags: true,
         autoCloseBrackets: true,
         lineNumbers: true,
         lineWrapping: true,
+        // readOnly: true,
       }
-    );
+    ).setValue(`// Code here`);
     codeRef.current.on("change", (ins, changes) => {
       const { origin } = changes;
       const code = ins.getValue();
