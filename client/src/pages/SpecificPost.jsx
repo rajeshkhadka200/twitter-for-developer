@@ -6,7 +6,7 @@ import { BiArrowBack } from "react-icons/bi";
 import Post from "../components/Post";
 import Comment from "../components/Comment";
 import { ContextProvider } from "../config/Context";
-import momnet from "moment";
+import moment from "moment";
 import provider from "../config/axios";
 import Loader from "../components/Loader";
 import { toast } from "react-hot-toast";
@@ -51,7 +51,7 @@ const SpecificPost = () => {
         content: comment,
         timestamp: Date.now(),
         avatar: user?.avatar,
-        actual_date: momnet().format("MMM Do YY"),
+        actual_date: moment().format("MMM Do YY"),
         verified: user?.verified,
       });
 

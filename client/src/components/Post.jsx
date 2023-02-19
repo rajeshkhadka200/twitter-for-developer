@@ -29,6 +29,7 @@ import "codemirror/addon/edit/closebrackets";
 import "codemirror/addon/edit/closebrackets";
 
 const Post = ({ data }) => {
+  console.log(data);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [openLightbox, setOpenLightbox] = React.useState(false);
   const open = Boolean(anchorEl);
@@ -40,9 +41,17 @@ const Post = ({ data }) => {
   const [reDevitCount, setReDevitCount] = React.useState(
     data?.redevits?.length
   );
-
+  // all stup for code mirror read only
+  const [code, setCode] = React.useState(false);
   const { userDetails } = useContext(ContextProvider);
   const [user, setUser] = userDetails;
+
+  React.useEffect(() => {
+    if (data?.code !== "") {
+      setCode(true);
+    }
+    Editorinit();
+  }, [code]);
 
   useEffect(() => {
     //check if the token is equal to the array of likes object userid
@@ -74,7 +83,7 @@ const Post = ({ data }) => {
     //copy the code to the clipboard
     navigator.clipboard.writeText(data?.code);
     toast.success("Copied to clipboard");
-  }
+  };
 
   const handleLike = async () => {
     try {
@@ -117,6 +126,7 @@ const Post = ({ data }) => {
       const res = await provider.delete(`/devit/delete/${data?._id}`);
       if (res) {
         toast.success("Deleted!");
+        window.location.reload();
       }
     } catch (error) {
       console.log(error);
@@ -125,8 +135,6 @@ const Post = ({ data }) => {
 
   const goLink = `/devit/${data?._id}`;
 
-  // all stup for code mirror read only
-  const [code, setCode] = React.useState(false);
   async function Editorinit() {
     codeRef.current = CodeMirror.fromTextArea(
       document.getElementById("editor"),
@@ -148,12 +156,6 @@ const Post = ({ data }) => {
   }
 
   const codeRef = React.useRef(null);
-  React.useEffect(() => {
-    if (data?.code !== "") {
-      setCode(true);
-    }
-    Editorinit();
-  }, [code]);
 
   return (
     <>
@@ -334,22 +336,23 @@ const Post = ({ data }) => {
               </NavLink>
               {code && (
                 <div class={styles.codeBlock}>
-                  <IconButton sx={{
-                    zIndex: "1",
-                    width: "30px",
-                    height: "30px",
-                    color: "text.normal",
-                    "&:hover": {
-                      color: "primary.main",
-                      backgroundColor: "hover",
-                    },
-                    position: "absolute",
-                    top: "5px",
-                    right: "5px",
-                  }}
-                  onClick={copyCode}
+                  <IconButton
+                    sx={{
+                      zIndex: "1",
+                      width: "30px",
+                      height: "30px",
+                      color: "text.normal",
+                      "&:hover": {
+                        color: "primary.main",
+                        backgroundColor: "hover",
+                      },
+                      position: "absolute",
+                      top: "5px",
+                      right: "5px",
+                    }}
+                    onClick={copyCode}
                   >
-                    <FaRegCopy/>
+                    <FaRegCopy />
                   </IconButton>
                   <textarea id="editor" wrap="hard" />
                 </div>
