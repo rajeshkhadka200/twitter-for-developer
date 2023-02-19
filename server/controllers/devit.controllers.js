@@ -76,6 +76,7 @@ export const deleteDevit = async (req, res) => {
 export const getMyDevits = async (req, res) => {
   const { user_id } = req.params;
   const devits = await Devit.find({ userid: user_id });
+
   if (!devits)
     return res.status(404).json({ msg: "You don't have any devits." });
   res.status(200).json({ devits });

@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import ProfileHeader from "../components/ProfileHeader";
 import Post from "../components/Post";
 import provider from "../config/axios";
+import { ContextProvider } from "../config/Context";
 
 const Profile = () => {
   const token = localStorage.getItem("token");
@@ -21,7 +22,6 @@ const Profile = () => {
     }
   };
 
-  console.log(mydevits);
   return (
     <>
       <ProfileHeader />
