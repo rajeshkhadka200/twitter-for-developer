@@ -66,7 +66,6 @@ const schema = new mongoose.Schema({
       },
       avatar: {
         type: String,
-        default: new Date().toISOString(),
       },
       verified: {
         type: Boolean,

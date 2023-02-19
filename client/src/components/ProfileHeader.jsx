@@ -27,7 +27,6 @@ const ProfileHeader = () => {
                 color: "var(--text)",
                 fontFamily: "Poppins",
                 textTransform: "none",
-                backgroundColor: "var(--primary)",
                 fontSize: "16px",
                 padding: "5px 15px",
                 backgroundColor: "#344454",

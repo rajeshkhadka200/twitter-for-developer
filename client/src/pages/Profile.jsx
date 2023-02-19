@@ -15,8 +15,7 @@ const Profile = () => {
   const fetchMyDevits = async () => {
     try {
       const res = await provider.get(`/devit/getmydevits/${token}`);
-      setMyDevits(res.data.devits);
-      console.log(res);
+      setMyDevits(res.data.allMyDevits);
     } catch (error) {
       console.log(error);
     }
