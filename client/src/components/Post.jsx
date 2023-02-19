@@ -21,7 +21,7 @@ import { ContextProvider } from "../config/Context";
 import { toast } from "react-hot-toast";
 
 // codemirror setup
-import Codemirror from "codemirror";
+import CodeMirror from "codemirror";
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/dracula.css";
 import "codemirror/mode/javascript/javascript";
@@ -41,7 +41,7 @@ const Post = ({ data }) => {
     data?.redevits?.length
   );
   // all stup for code mirror read only
-
+  const [code, setCode] = React.useState(false);
   const { userDetails } = useContext(ContextProvider);
   const [user, setUser] = userDetails;
 
@@ -127,11 +127,8 @@ const Post = ({ data }) => {
 
   const goLink = `/devit/${data?._id}`;
 
-  // handle code mirror
-  // useref for the code mirror
-  const codeRef = useRef(null);
-  React.useEffect(() => {
-    codeRef.current = Codemirror.fromTextArea(
+  async function Editorinit() {
+    codeRef.current = CodeMirror.fromTextArea(
       document.getElementById("editor"),
       {
         mode: { name: "javascript", json: true },
@@ -143,7 +140,15 @@ const Post = ({ data }) => {
         readOnly: true,
       }
     ).setValue(data?.code);
-  }, []);
+    codeRef.current.on("change", (ins, changes) => {
+      const { origin } = changes;
+      const code = ins.getValue();
+      console.log(code);
+    });
+  }
+
+  const codeRef = React.useRef(null);
+
   return (
     <>
       {
@@ -321,14 +326,14 @@ const Post = ({ data }) => {
                   </Card>
                 )}
               </NavLink>
-              {data?.code && (
+              {code && (
                 <div class={styles.codeBlock}>
                   <IconButton
                     sx={{
                       zIndex: "1",
                       width: "30px",
                       height: "30px",
-                      color: "text.normal",
+                      color: "text.adv",
                       "&:hover": {
                         color: "primary.main",
                         backgroundColor: "hover",
@@ -341,7 +346,20 @@ const Post = ({ data }) => {
                   >
                     <FaRegCopy />
                   </IconButton>
-                  <textarea id="editor" wrap="hard" />
+                  <SyntaxHighlighter
+                    language="javascript"
+                    style={atomOneDark}
+                    wrapLines={true}
+                    showLineNumbers={true}
+                    customStyle={{
+                      fontFamily: "Poppins",
+                      fontWeight: "400",
+                      borderRadius: "6px",
+                      padding: "10px",
+                    }}
+                  >
+                    {data?.code}
+                  </SyntaxHighlighter>
                 </div>
               )}
             </div>
