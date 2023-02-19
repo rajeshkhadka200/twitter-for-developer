@@ -6,7 +6,7 @@ API Key:
     localhost:8000/api/:apikey/:username/update/:devitid => To update specific devit
 
 TODO:
-    ☐ Integrate the post api in frontend
+    ✔ Integrate the post api in frontend @done(23-02-19 18:32)
     ✔ Integrate the get my devits in profile @done(23-02-19 12:29)
     ✔ Code viewer in post @done(23-02-19 12:29)
     ☐ Make hackathon bots
