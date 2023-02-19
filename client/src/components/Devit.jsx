@@ -42,6 +42,7 @@ import moment from "moment";
 function Devit() {
   const { userDetails } = useContext(ContextProvider);
   const [user, setuser] = userDetails;
+  
   //input state
   const [value, setValue] = React.useState({
     content: "",

@@ -8,6 +8,7 @@ import devitRoutes from "./routes/devit.route.js";
 import userRoutes from "./routes/user.route.js";
 import apiRoutes from "./routes/api.route.js";
 import imageRoutes from "./routes/image.route.js";
+import botRoutes from "./routes/hackathons.route.js";
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use("/api/devit", devitRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api", apiRoutes);
 app.use("/api/image", imageRoutes);
+app.use("/api/bot",botRoutes);
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {

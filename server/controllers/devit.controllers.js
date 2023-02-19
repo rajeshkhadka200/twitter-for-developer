@@ -11,7 +11,7 @@ export const postDevit = async (req, res) => {
       createdAt,
       avatar,
       code,
-      verified
+      verified,
     } = req.body;
     const newDevit = new Devit({
       userid,
@@ -23,7 +23,7 @@ export const postDevit = async (req, res) => {
       createdAt,
       avatar,
       code,
-      verified
+      verified,
     });
     const devit = await newDevit.save();
     res
@@ -37,7 +37,7 @@ export const postDevit = async (req, res) => {
 
 export const getDevits = async (req, res) => {
   try {
-    const devits = await Devit.find();
+    const devits = await Devit.find().sort({ timestamp: -1 });
     res
       .status(200)
       .json({ error: false, msg: "Devits fetched successfully", devits });
