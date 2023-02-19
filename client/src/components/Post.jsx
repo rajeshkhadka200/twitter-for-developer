@@ -8,9 +8,8 @@ import {
   Container,
   Card,
 } from "@pankod/refine-mui";
-import { CodeViewer } from "react-extensible-code-viewer";
-import "react-extensible-code-viewer/dist/index.css";
 import React, { useContext, useEffect, useRef } from "react";
+import { FaRegCopy } from "react-icons/fa";
 import styles from "../css/components/Post.module.css";
 import { FiMoreHorizontal, FiEdit, FiX } from "react-icons/fi";
 import { MdVerified, MdDelete } from "react-icons/md";
@@ -70,6 +69,12 @@ const Post = ({ data }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const copyCode = () => {
+    //copy the code to the clipboard
+    navigator.clipboard.writeText(data?.code);
+    toast.success("Copied to clipboard");
+  }
 
   const handleLike = async () => {
     try {
@@ -329,6 +334,23 @@ const Post = ({ data }) => {
               </NavLink>
               {code && (
                 <div class={styles.codeBlock}>
+                  <IconButton sx={{
+                    zIndex: "1",
+                    width: "30px",
+                    height: "30px",
+                    color: "text.normal",
+                    "&:hover": {
+                      color: "primary.main",
+                      backgroundColor: "hover",
+                    },
+                    position: "absolute",
+                    top: "5px",
+                    right: "5px",
+                  }}
+                  onClick={copyCode}
+                  >
+                    <FaRegCopy/>
+                  </IconButton>
                   <textarea id="editor" wrap="hard" />
                 </div>
               )}

@@ -73,6 +73,7 @@
   display: flex;
   align-items: center;
   gap: 2rem;
+  margin-top: 8px;
 }
 .like,
 .comment,
@@ -122,4 +123,5 @@
 .codeBlock {
   width: 100%;
   margin-top: 10px;
+  position: relative;
 }
