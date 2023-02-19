@@ -14,6 +14,7 @@ import styles from "../css/components/Comment.module.css";
 
 const Comment = ({ data }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const token = localStorage.getItem("token");
   const open = Boolean(anchorEl);
   // short array with latest timestam
   const sortedComments = data.comments.sort((a, b) => {
@@ -47,8 +48,16 @@ const Comment = ({ data }) => {
   return (
     <>
       {sortedComments.map((comment, i) => {
-        const { _id, name, avatar, content, timestamp, actual_date, verified } =
-          comment;
+        const {
+          _id,
+          name,
+          userid,
+          avatar,
+          content,
+          timestamp,
+          actual_date,
+          verified,
+        } = comment;
         return (
           <div className={styles.comment_container} key={_id}>
             <div className={styles.left}>
@@ -73,25 +82,27 @@ const Comment = ({ data }) => {
               </div>
               <div className={styles.comment_text}>{content}</div>
             </div>
-            <IconButton
-              sx={{
-                width: "30px",
-                height: "30px",
-                color: "text.light",
-                position: "absolute",
-                right: "5px",
-                top: "5px",
-                //make the primary hover color
-                "&:hover": {
-                  color: "primary.main",
-                  //transparent green background
-                  backgroundColor: "rgba(29,161,242,0.1)",
-                },
-              }}
-              onClick={handleClick}
-            >
-              <FiMoreHorizontal />
-            </IconButton>
+            {token === userid && (
+              <IconButton
+                sx={{
+                  width: "30px",
+                  height: "30px",
+                  color: "text.light",
+                  position: "absolute",
+                  right: "5px",
+                  top: "5px",
+                  //make the primary hover color
+                  "&:hover": {
+                    color: "primary.main",
+                    //transparent green background
+                    backgroundColor: "rgba(29,161,242,0.1)",
+                  },
+                }}
+                onClick={handleClick}
+              >
+                <FiMoreHorizontal />
+              </IconButton>
+            )}
             <Menu
               id="devit-menu"
               open={open}
