@@ -93,6 +93,7 @@ function Devit() {
         username: user?.username,
         avatar: user?.avatar,
         status: "new",
+        verified: user?.verified,
         createdAt: moment().format("MMM Do YY"),
       });
       if (res.status === 201) {

@@ -119,7 +119,6 @@ const Post = ({ data }) => {
 
   const goLink = `/devit/${data?._id}`;
 
-
   return (
     <>
       {
@@ -158,7 +157,7 @@ const Post = ({ data }) => {
             <div className={styles.info_top}>
               <div className={styles.info}>
                 <span className={styles.info_name}>{data?.name}</span>
-                {user?.verified && (
+                {data?.verified && (
                   <span className={styles.green_tick}>
                     <MdVerified />
                   </span>

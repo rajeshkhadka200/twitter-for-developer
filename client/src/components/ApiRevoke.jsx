@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { IconButton, LoadingButton, TextField } from "@pankod/refine-mui";
 import { Button } from "@pankod/refine-mui";
 
@@ -10,12 +10,16 @@ import { ContextProvider } from "../config/Context";
 const ApiRevoke = () => {
   const { userDetails } = useContext(ContextProvider);
   const [user, setUser] = userDetails;
-  const [key, setKey] = React.useState(user?.apiKey);
+  const [key, setKey] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const token = localStorage.getItem("token");
   const copyToClipboard = () => {
     navigator.clipboard.writeText(key);
   };
+
+  useEffect(() => {
+    setKey(user?.apiKey);
+  }, []);
 
   const revokeKey = async () => {
     setKey("");
@@ -58,7 +62,6 @@ const ApiRevoke = () => {
             fontFamily: "Poppins",
           }}
           id="outlined-basic"
-          // label="Username"
           variant="outlined"
         />
         <IconButton
