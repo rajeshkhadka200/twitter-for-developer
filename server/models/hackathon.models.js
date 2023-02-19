@@ -4,10 +4,10 @@ const schema = new mongoose.Schema({
   title: {
     type: String,
   },
-  description: {
+  image: {
     type: String,
   },
-  image: {
+  time_left: {
     type: String,
   },
   date: {
@@ -19,11 +19,21 @@ const schema = new mongoose.Schema({
   source: {
     type: String,
   },
-  prize:{
-    type:String
+  prize: {
+    type: String,
+  },
+  url: {
+    type: String,
+  },
+  participants: {
+    type: String,
   },
   createdAt: {
     type: String,
+  },
+  timestamp: {
+    type: String,
+    default: Date.now(),
   },
 });
 

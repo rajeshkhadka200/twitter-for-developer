@@ -5,20 +5,20 @@ import { BsArrowDownLeft, BsBook, BsCalendar2Event } from "react-icons/bs";
 import { SiJsonwebtokens } from "react-icons/si";
 import { FiGlobe } from "react-icons/fi";
 
-const HackathonCard = () => {
+const HackathonCard = ({ hackathon }) => {
   return (
     <>
       <div className={style.hack_card}>
         <div className={style.wrapper}>
           <div className={style.hack_left}>
             <div className={style.img}>
-              <img src="/assets/hack.avif" alt="hack_cover" />
+              <img src={hackathon?.image} alt="hack_cover" />
             </div>
             <div className={style.hack_info}>
-              <p className={style.tittle}>Hack with linode</p>
-              <p className={style.days_left}>3 days left</p>
+              <p className={style.tittle}>{hackathon?.title}</p>
+              <p className={style.days_left}>{hackathon?.time_left}</p>
               <p className={style.participents}>
-                <span>333</span>{" "}
+                <span>{hackathon?.participants}</span>{" "}
                 <span className={style.seperate}> participents</span>
               </p>
             </div>
@@ -44,7 +44,7 @@ const HackathonCard = () => {
                   },
                 }}
               >
-                $ 1000
+                {hackathon?.prize}
               </Button>
               <Button
                 size="medium"
@@ -61,6 +61,8 @@ const HackathonCard = () => {
                   alignItems: "center",
                   gap: "5px",
                 }}
+                href={hackathon?.url}
+                target="_blank"
               >
                 Hack it{" "}
                 <BsArrowDownLeft
@@ -85,19 +87,21 @@ const HackathonCard = () => {
             >
               <FiGlobe />
             </IconButton>
-            <span>Hashnode</span>
+            <span>{hackathon?.source}</span>
           </div>
-          <div className={style.source}>
-            <IconButton
-              sx={{
-                color: "var(--light-text)",
-                fontSize: "15px",
-              }}
-            >
-              <BsCalendar2Event />
-            </IconButton>
-            <span>12 Jan - 12 Feb</span>
-          </div>
+          {hackathon?.date && (
+            <div className={style.source}>
+              <IconButton
+                sx={{
+                  color: "var(--light-text)",
+                  fontSize: "15px",
+                }}
+              >
+                <BsCalendar2Event />
+              </IconButton>
+              <span>{hackathon?.date}</span>
+            </div>
+          )}
         </div>
       </div>
     </>

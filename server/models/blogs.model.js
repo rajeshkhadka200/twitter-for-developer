@@ -3,28 +3,34 @@ import mongoose from "mongoose";
 const schema = new mongoose.Schema({
   title: {
     type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
   },
   image: {
     type: String,
-    required: true,
   },
   date: {
     type: String,
-    required: true,
   },
-  status: {
-    // ongoing, finished, cancelled or upcoming
+  read_time: {
     type: String,
-    required: true,
+  },
+  source: {
+    type: String,
   },
   createdAt: {
-    required: true,
     type: String,
+  },
+  user_name: {
+    type: String,
+  },
+  user_image: {
+    type: String,
+  },
+  url: {
+    type: String,
+  },
+  timestamp: {
+    type: String,
+    default: Date.now(),
   },
 });
 
