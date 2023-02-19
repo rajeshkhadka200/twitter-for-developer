@@ -54,6 +54,7 @@ const SpecificPost = () => {
           timestamp: Date.now(),
           avatar: user?.avatar,
           actual_date: momnet().format("MMM Do YY"),
+          verified: user?.verified,
         }
       );
 

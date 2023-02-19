@@ -1,0 +1,20 @@
+API Key:
+    localhost:8000/api/create => To create api
+    localhost:8000/api/:apikey/:username/getall => To get all your devits
+    localhost:8000/api/:apikey/:username/get/:devitid => To get specific devit
+    localhost:8000/api/:apikey/:username/delete/:devitid => To delete specific devit
+    localhost:8000/api/:apikey/:username/update/:devitid => To update specific devit
+
+TODO:
+    ☐ Integrate the post api in frontend
+    ☐ Integrate the get my devits in profile
+    ☐ Code viewer in post 
+    ☐ Make hackathon bots
+    ☐ Make top blogpost bots
+    ☐ Edit the devit's UI and integration
+    ☐ Hosting frontend
+    ☐ Hosting backend
+    ☐ Hosting bot's
+    
+
+
