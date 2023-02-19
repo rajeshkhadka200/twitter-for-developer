@@ -44,6 +44,7 @@
   font-weight: 600;
   color: var(--text);
   cursor: pointer;
+  text-transform: capitalize;
 }
 .green_tick {
   color: var(--primary);

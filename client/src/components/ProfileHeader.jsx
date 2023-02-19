@@ -21,14 +21,14 @@ const ProfileHeader = () => {
           <p className={style.bio}>{user?.bio}</p>
           <div className={style.button_con}>
             <Button
-              size="small"
+              size="medium"
               variant="contained"
               sx={{
                 color: "var(--text)",
                 fontFamily: "Poppins",
                 textTransform: "none",
-                fontSize: "16px",
-                padding: "5px 15px",
+                // fontSize: "16px",
+                // padding: "10px 15px",
                 backgroundColor: "#344454",
                 "&:hover": {
                   backgroundColor: "#344454",

@@ -974,11 +974,6 @@
   dependencies:
     "@types/unist" "*"
 
-"@types/highlight.js@^9.12.3":
-  version "9.12.4"
-  resolved "https://registry.yarnpkg.com/@types/highlight.js/-/highlight.js-9.12.4.tgz#8c3496bd1b50cc04aeefd691140aa571d4dbfa34"
-  integrity sha512-t2szdkwmg2JJyuCM20e8kR2X59WCE5Zkl4bzm1u1Oukjm79zpbiAv+QjnwLnuuV0WHEcX2NgUItu0pAMKuOPww==
-
 "@types/mdast@^3.0.0":
   version "3.0.10"
   resolved "https://registry.yarnpkg.com/@types/mdast/-/mdast-3.0.10.tgz#4724244a82a4598884cbbe9bcfd73dff927ee8af"
@@ -2201,11 +2196,6 @@ has@^1.0.3:
   integrity sha512-f2dvO0VU6Oej7RkWJGrehjbzMAjFp5/VKPp5tTpWIV4JHHZK1/BxbFRtf/siA2SWTe09caDmVtYYzWEIbBS4zw==
   dependencies:
     function-bind "^1.1.1"
-
-highlight.js@^10.0.3:
-  version "10.7.3"
-  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-10.7.3.tgz#697272e3991356e40c3cac566a74eef681756531"
-  integrity sha512-tzcUFauisWKNHaRkN4Wjl/ZA07gENAjFl3J/c480dprkGTg5EQstgaNFqBfUqCq54kZRIEcreTsAgF/m2quD7A==
 
 history@^5.2.0:
   version "5.3.0"
@@ -3465,14 +3455,6 @@ react-dom@^18.2.0:
   dependencies:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
-
-react-extensible-code-viewer@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/react-extensible-code-viewer/-/react-extensible-code-viewer-1.0.0.tgz#ad5d59dd9da0ea8569a280ab0ed3c8ef01eaeba1"
-  integrity sha512-cmBcXo53FCZ7IvD15EOJ0sooH2u/vRWkPMmP5vfDvBAtFT2hJ/aX1cO6YJrzjyjvTVAL/A4ddOCi17XQwOwQ2A==
-  dependencies:
-    "@types/highlight.js" "^9.12.3"
-    highlight.js "^10.0.3"
 
 react-google-login@^5.2.2:
   version "5.2.2"
