@@ -219,14 +219,13 @@ const Post = ({ data }) => {
                       </ListItemIcon>
                       Edit
                     </MenuItem>
-                    <MenuItem>
+                    <MenuItem onClick={handleDelete}>
                       <ListItemIcon
                         style={{
                           minWidth: "0px",
                           marginRight: "6px",
                           fontSize: "16px",
                         }}
-                        onClick={handleDelete}
                       >
                         <MdDelete />
                       </ListItemIcon>

@@ -1,7 +1,7 @@
 import Devit from "../models/devit.models.js";
 export const postDevit = async (req, res) => {
   try {
-    const { userid, username, name, content, image, status, createdAt } =
+    const { userid, username, name, content, image, status, createdAt,avatar } =
       req.body;
     const newDevit = new Devit({
       userid,
@@ -11,6 +11,7 @@ export const postDevit = async (req, res) => {
       image,
       status,
       createdAt,
+      avatar
     });
     const devit = await newDevit.save();
     res
@@ -24,7 +25,7 @@ export const postDevit = async (req, res) => {
 
 export const getDevits = async (req, res) => {
   try {
-    const devits = await Devit.find().sort({ createdAt: -1 });
+    const devits = await Devit.find();
     res
       .status(200)
       .json({ error: false, msg: "Devits fetched successfully", devits });
@@ -76,10 +77,25 @@ export const deleteDevit = async (req, res) => {
 export const getMyDevits = async (req, res) => {
   const { user_id } = req.params;
   const devits = await Devit.find({ userid: user_id });
-
+  //Now fetch the redevits of the user by userid
+  const redevits = await Devit.find({
+    redevits: { $elemMatch: { userid: user_id } },
+  });
+  const myDevits = [...devits, ...redevits];
+  const allMyDevits = myDevits.filter(
+    (devit, index, self) =>
+      index ===
+      self.findIndex(
+        (t) =>
+          t._id.toString() === devit._id.toString() &&
+          t.userid.toString() === devit.userid.toString()
+      )
+  );
   if (!devits)
     return res.status(404).json({ msg: "You don't have any devits." });
-  res.status(200).json({ devits });
+  res
+    .status(200)
+    .json({ error: false, msg: "Devits fetched successfully", allMyDevits });
 };
 
 export const likeDevit = async (req, res) => {
@@ -182,9 +198,14 @@ export const deleteComment = async (req, res) => {
     const devit = await Devit.findById(req.params.id);
     if (!devit)
       return res.status(404).json({ error: true, msg: "Devit not found" });
-    //get the comment index
+    const comment = devit.comments.find(
+      (comment) => comment._id.toString() === req.params.comment_id
+    );
+    console.log(comment);
+    if (!comment)
+      return res.status(404).json({ error: true, msg: "Comment not found" });
     const removeIndex = devit.comments
-      .map((comment) => comment._id)
+      .map((comment) => comment._id.toString())
       .indexOf(req.params.comment_id);
     devit.comments.splice(removeIndex, 1);
     await devit.save();

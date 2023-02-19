@@ -6,8 +6,10 @@ import {
   MenuItem,
 } from "@pankod/refine-mui";
 import React from "react";
+import { toast } from "react-hot-toast";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { MdDelete, MdVerified } from "react-icons/md";
+import provider from "../config/axios";
 import styles from "../css/components/Comment.module.css";
 
 const Comment = ({ data }) => {
@@ -28,11 +30,13 @@ const Comment = ({ data }) => {
 
   const handleDelete = async (id) => {
     try {
-      const res = await provider.delete(`/devit/comment/${data._id}`, {
+      const res = await provider.delete(`/devit/comment/${data?._id}/${id}`, {
         comment_id: id,
       });
       if (res) {
+        console.log(res.data);
         toast.success("Comment deleted");
+        window.location.reload();
       }
     } catch (error) {
       console.log(error);
@@ -46,7 +50,7 @@ const Comment = ({ data }) => {
         const { _id, name, avatar, content, timestamp, actual_date, verified } =
           comment;
         return (
-          <div className={styles.comment_container}>
+          <div className={styles.comment_container} key={_id}>
             <div className={styles.left}>
               <Avatar
                 src={avatar}
@@ -74,6 +78,9 @@ const Comment = ({ data }) => {
                 width: "30px",
                 height: "30px",
                 color: "text.light",
+                position: "absolute",
+                right: "5px",
+                top: "5px",
                 //make the primary hover color
                 "&:hover": {
                   color: "primary.main",
@@ -90,7 +97,6 @@ const Comment = ({ data }) => {
               open={open}
               anchorEl={anchorEl}
               onClose={handleClose}
-              //style the small menu with the theme color
               PaperProps={{
                 sx: {
                   backgroundColor: "background.default",
@@ -117,14 +123,13 @@ const Comment = ({ data }) => {
                 },
               }}
             >
-              <MenuItem>
+              <MenuItem onClick={() => handleDelete(_id)}>
                 <ListItemIcon
                   style={{
                     minWidth: "0px",
                     marginRight: "6px",
                     fontSize: "16px",
                   }}
-                  onClick={() => handleDelete(_id)}
                 >
                   <MdDelete />
                 </ListItemIcon>

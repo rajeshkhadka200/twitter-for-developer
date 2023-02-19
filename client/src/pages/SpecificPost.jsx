@@ -44,19 +44,16 @@ const SpecificPost = () => {
   // create a comment
   const createComment = async () => {
     try {
-      const res = await provider.post(
-        `/devit/comment/63f083752039190626c09443`,
-        {
-          userid: user?._id,
-          username: user?.username,
-          name: user?.firstname + " " + user?.lastname,
-          content: comment,
-          timestamp: Date.now(),
-          avatar: user?.avatar,
-          actual_date: momnet().format("MMM Do YY"),
-          verified: user?.verified,
-        }
-      );
+      const res = await provider.post(`/devit/comment/${id}`, {
+        userid: user?._id,
+        username: user?.username,
+        name: user?.firstname + " " + user?.lastname,
+        content: comment,
+        timestamp: Date.now(),
+        avatar: user?.avatar,
+        actual_date: momnet().format("MMM Do YY"),
+        verified: user?.verified,
+      });
 
       settrigger(!trigger);
       setComment("");
@@ -93,7 +90,7 @@ const SpecificPost = () => {
           <InputBase
             sx={{
               flex: 1,
-              fontSize: "14px",
+              fontSize: "16px",
               fontFamily: "Poppins",
               color: "text.normal",
               // style the placeholder

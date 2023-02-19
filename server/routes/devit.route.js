@@ -26,7 +26,7 @@ router.get("/getmydevits/:user_id", getMyDevits); // to get all devits of a spec
 router.patch("/like/:id", likeDevit); // to like a devit
 router.patch("/redevit/:id", redevitDevit); // to redevit a devit
 router.post("/comment/:id", commentDevit); // to comment on a devit
-router.delete("/comment/:id", deleteComment); // to delete a comment on a devit
+router.delete("/comment/:id/:comment_id", deleteComment); // to delete a comment on a devit
 router.get("/trends",getTrends);
 router.get("/search/:search",searchDevits);
 export default router;
