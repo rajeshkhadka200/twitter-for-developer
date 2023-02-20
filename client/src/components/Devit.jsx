@@ -42,6 +42,7 @@ import moment from "moment";
 function Devit() {
   const { userDetails } = useContext(ContextProvider);
   const [user, setuser] = userDetails;
+  const [imgUrl, setimgUrl] = useState(null);
 
   //input state
   const [value, setValue] = React.useState({
@@ -85,45 +86,80 @@ function Devit() {
       return;
     }
     try {
-      const config = {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      };
-      setLoading(true);
-      const formData = new FormData();
-      formData.append("image", file);
-      const imgRes = await provider.post("/image/postimage", formData, config);
-      if (imgRes.status === 200) {
-        const res = await provider.post("/devit/post", {
-          userid: user?._id,
-          content: value.content,
-          code: value.code,
-          image: imgRes.data.url,
-          name:
-            user?.firstname.charAt(0).toUpperCase() +
-            user?.firstname.slice(1) +
-            " " +
-            user?.lastname.charAt(0).toUpperCase() +
-            user?.lastname.slice(1),
+      if (img !== null) {
+        const config = {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        };
+        setLoading(true);
+        const formData = new FormData();
+        formData.append("image", file);
+        const imgRes = await provider.post(
+          "/image/postimage",
+          formData,
+          config
+        );
+        if (imgRes.status === 200) {
+          const res = await provider.post("/devit/post", {
+            userid: user?._id,
+            content: value.content,
+            code: value.code,
+            image: imgRes.data.url,
+            name:
+              user?.firstname.charAt(0).toUpperCase() +
+              user?.firstname.slice(1) +
+              " " +
+              user?.lastname.charAt(0).toUpperCase() +
+              user?.lastname.slice(1),
 
-          username: user?.username,
-          avatar: user?.avatar,
-          status: "new",
-          verified: user?.verified,
-          createdAt: moment().format("MMM Do YY"),
-        });
-        if (res.status === 201) {
-          setLoading(false);
-          toast.success("Devit posted successfully");
-          setValue({
-            content: "",
-            code: "",
-            image: "",
+            username: user?.username,
+            avatar: user?.avatar,
+            status: "new",
+            verified: user?.verified,
+            createdAt: moment().format("MMM Do YY"),
           });
-          setImg(null);
-          window.location.reload();
+          if (res.status === 201) {
+            setLoading(false);
+            toast.success("Devit posted successfully");
+            setValue({
+              content: "",
+              code: "",
+              image: "",
+            });
+            setImg(null);
+            window.location.reload();
+          }
         }
+      }
+      const res = await provider.post("/devit/post", {
+        userid: user?._id,
+        content: value.content,
+        code: value.code,
+        image: "",
+        name:
+          user?.firstname.charAt(0).toUpperCase() +
+          user?.firstname.slice(1) +
+          " " +
+          user?.lastname.charAt(0).toUpperCase() +
+          user?.lastname.slice(1),
+
+        username: user?.username,
+        avatar: user?.avatar,
+        status: "new",
+        verified: user?.verified,
+        createdAt: moment().format("MMM Do YY"),
+      });
+      if (res.status === 201) {
+        setLoading(false);
+        toast.success("Devit posted successfully");
+        setValue({
+          content: "",
+          code: "",
+          image: "",
+        });
+        setImg(null);
+        window.location.reload();
       }
     } catch (error) {
       setLoading(false);
