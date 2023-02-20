@@ -26,11 +26,11 @@ app.use("/api/image", imageRoutes);
 app.use("/api/bot", botRoutes);
 
 // Set static folder
-app.use(express.static("../client/dist"));
+// app.use(express.static("../client/dist"));
 
-app.get("*", (req, res) => {
-  res.sendFile("/root/twitter-for-developer/client/dist/index.html"); // absolute path configured for server
-});
+// app.get("*", (req, res) => {
+//   res.sendFile("/root/twitter-for-developer/client/dist/index.html"); // absolute path configured for server
+// });
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
