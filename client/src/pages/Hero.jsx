@@ -84,7 +84,9 @@ const Hero = () => {
       </div>
       <div className={styles.mid_con}>
         <div className={styles.box}>
-          <div className={styles.img_con}></div>
+          <div className={styles.img_con}>
+            <img src="/assets/hero.png" alt="image__" srcset="" />
+          </div>
         </div>
       </div>
       <div className={styles.bottom_con}>

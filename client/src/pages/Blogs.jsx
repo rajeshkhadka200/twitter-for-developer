@@ -4,37 +4,33 @@ import PageTop from "../components/PageTop";
 import Loader from "../components/Loader";
 import provider from "../config/axios";
 
-
-
 const Blogs = () => {
-   const [blogs, setBlogs] = React.useState([]);
-   const [loading, setLoading] = React.useState(true);
+  const [blogs, setBlogs] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
 
-   useEffect(() => {
-     getBlogs();
-   }, []);
+  useEffect(() => {
+    getBlogs();
+  }, []);
 
-   const getBlogs = async () => {
-     try {
-       const res = await provider.get("/bot/blogs/all");
-       if (res) {
-         setBlogs(res.data.blogs);
-         setLoading(false);
-       }
-     } catch (error) {
-       console.log(error);
-       setLoading(false);
-     }
-   };
+  const getBlogs = async () => {
+    try {
+      const res = await provider.get("/bot/blogs/all");
+      if (res) {
+        setBlogs(res.data.blogs);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
   return (
     <>
       <PageTop label="Blogs" />
       {loading ? (
         <Loader height="80vh" />
       ) : blogs?.length > 0 ? (
-        blogs.map((blog) => (
-          <BlogCard key={blog._id} blog={blog} />
-        ))
+        blogs.map((blog) => <BlogCard key={blog._id} blog={blog} />)
       ) : (
         <div
           style={{
