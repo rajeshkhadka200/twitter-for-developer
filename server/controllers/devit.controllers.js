@@ -230,34 +230,16 @@ export const deleteComment = async (req, res) => {
 export const getTrends = async (req, res) => {
   try {
     const devits = await Devit.find();
-    // const trends = [
-    //   "#dev",
-    //   "#dev",
-    //   "#dev",
-    //   "#opensource",
-    //   "#opensource",
-    //   "#pro",
-    //   "#devhub",
-    //   "#pro",
-    //   "#devhub",
-    //   "#hello",
-    //   "#hello",
-    //   "#hi",
-    // ];
     const trends = [];
     devits.forEach((devit) => {
-      const { content } = devit;
-      const words = content.split(" ");
-      words.forEach((word) => {
-        if (word.startsWith("#")) {
-          const trend = word.toLowerCase();
-          if (trends.includes(trend)) return;
-          trends.push(trend);
-        }
-      });
+      const hashtags = devit.content.match(/#\w+/g);
+      if (hashtags) {
+        hashtags.forEach((hashtag) => {
+          trends.push(hashtag);
+        });
+      }
     });
     const topTrends = [];
-    //get the top 5 different trends with their count in array of objects and remove the repeated trends
     trends.forEach((trend) => {
       const index = topTrends.findIndex((t) => t.trend === trend);
       if (index === -1) {

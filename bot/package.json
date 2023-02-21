@@ -1,19 +1,19 @@
 {
   "name": "bot",
   "version": "1.0.0",
-  "description": "bot to fetch the hackathon and popular blogpost from internet.",
-  "main": "index.js",
-  "author": "rajesh, utsav",
-  "license": "MIT",
+  "description": "Bot to scrap top blogs post",
+  "main": "server.js",
   "type": "module",
-  "dependencies": {
-    "mongoose": "^6.9.0",
-    "puppeteer": "^19.7.1"
-  },
   "scripts": {
-    "start": "node crawlers/blogPost.js"
+    "bot": "node server.js"
   },
-  "devDependencies": {
-    "dotenv": "^16.0.3"
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "dotenv": "^16.0.3",
+    "mongoose": "^6.9.2",
+    "playwright": "^1.30.0"
   }
 }
