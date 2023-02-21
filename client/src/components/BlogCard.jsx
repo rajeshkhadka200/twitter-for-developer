@@ -10,6 +10,10 @@ const BlogCard = ({ blog }) => {
     }
     return `https://${author.publicationDomain}/${slug}`;
   }
+
+  function getBlogDate(date) {
+    return new Date(date).toDateString();
+  }
   return (
     <>
       <a target={"_blank"} href={makeURL(blog?.author, blog?.slug)}>
@@ -20,7 +24,7 @@ const BlogCard = ({ blog }) => {
             </div>
             <div className={style.right_details}>
               <p className={style.name}>{blog?.author.name}</p>
-              <p className={style.date}>{blog?.dateAdded}</p>
+              <p className={style.date}>{getBlogDate(blog?.dateAdded)}</p>
             </div>
           </div>
           <div className={style.card_body}>
