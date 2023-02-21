@@ -4,24 +4,28 @@ import { BsBook } from "react-icons/bs";
 import { SiJsonwebtokens } from "react-icons/si";
 import { Tooltip } from "@pankod/refine-mui";
 const BlogCard = ({ blog }) => {
+  function makeURL(author, slug) {
+    if (!author.publicationDomain) {
+      return `https://${author.username}.hashnode.dev/${slug}`;
+    }
+    return `https://${author.publicationDomain}/${slug}`;
+  }
   return (
     <>
-      <a target={"_blank"} href={blog?.url}>
+      <a target={"_blank"} href={makeURL(blog?.author, blog?.slug)}>
         <div className={style.blog_card}>
           <div className={style.card_header}>
             <div className={style.profile_img_left}>
-              <img src={blog?.user_image} alt="profile" />
+              <img src={blog?.author.photo} alt="profile" />
             </div>
             <div className={style.right_details}>
-              <p className={style.name}>{blog?.user_name}</p>
-              <p className={style.date}>{blog?.date}</p>
+              <p className={style.name}>{blog?.author.name}</p>
+              <p className={style.date}>{blog?.dateAdded}</p>
             </div>
           </div>
           <div className={style.card_body}>
             <div className={style.left}>
-              <p className={style.tittle}>
-                {blog?.title}
-              </p>
+              <p className={style.tittle}>{blog?.title}</p>
               <div className={style.footer_desc}>
                 <Tooltip
                   title="Read time"
@@ -33,7 +37,7 @@ const BlogCard = ({ blog }) => {
                   }}
                 >
                   <span>
-                    <BsBook /> {blog?.read_time}
+                    <BsBook /> {blog?.readTime} min
                   </span>
                 </Tooltip>
 
@@ -48,14 +52,14 @@ const BlogCard = ({ blog }) => {
                 >
                   <span>
                     <SiJsonwebtokens />
-                    {blog?.source}
+                    {blog?.source || "hashnode"}
                   </span>
                 </Tooltip>
               </div>
             </div>
 
             <div className={style.right}>
-              <img src={blog?.image} alt="blog_cover_img" />
+              <img src={blog?.coverImage} alt="blog_cover_img" />
             </div>
           </div>
         </div>

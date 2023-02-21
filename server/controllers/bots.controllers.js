@@ -3,12 +3,11 @@ import axios from "axios";
 import Blog from "../models/blogs.model.js";
 
 export const getHackathons = async (req, res) => {
-  const page = 1 - 6; // default to page 1
   try {
     const response = await axios.get(
-      `https://devpost.com/api/hackathons?page=1-6&status[]=open`
+      `https://devpost.com/api/hackathons?page=1&status[]=open`
     );
-    console.log(response.data.hackathons);
+
     res.status(200).json(response.data.hackathons);
   } catch (error) {
     console.error(error);
@@ -18,13 +17,17 @@ export const getHackathons = async (req, res) => {
 
 export const getBlogs = async (req, res) => {
   try {
-    const blogs = await Blog.find();
-    res.status(200).json({
-      error: false,
-      msg: "Blogs retrieved successfully",
-      blogs,
-    });
+    const response = await axios.get(
+      `https://hashnode.com/api/feed/featured?page=1`
+    );
+
+    const filteredResponse = response.data.posts.filter(
+      (post) => post.coverImage !== ""
+    );
+
+    res.status(200).json(filteredResponse);
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    console.error(error);
+    res.status(500).send("Error fetching hackathons");
   }
 };

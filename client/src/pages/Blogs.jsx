@@ -12,11 +12,12 @@ const Blogs = () => {
     getBlogs();
   }, []);
 
+  console.log(blogs);
   const getBlogs = async () => {
     try {
       const res = await provider.get("/bot/blogs/all");
       if (res) {
-        setBlogs(res.data.blogs);
+        setBlogs(res.data);
         setLoading(false);
       }
     } catch (error) {

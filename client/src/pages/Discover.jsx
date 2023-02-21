@@ -85,7 +85,6 @@ const Discover = () => {
     <>
       <div className={styles.search_wrapper}>
         <SearchBox
-          handleKeyPress={handleKeyPress}
           search={search}
           setSearch={setSearch}
           handleSearch={handleSearch}
