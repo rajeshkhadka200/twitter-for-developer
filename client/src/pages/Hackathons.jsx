@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import { duration } from "@pankod/refine-mui";
+import React, { useEffect, useState } from "react";
 import HackathonCard from "../components/HackathonCard";
 import Loader from "../components/Loader";
 import PageTop from "../components/PageTop";
@@ -6,24 +7,34 @@ import provider from "../config/axios";
 
 const Hackathons = () => {
   const [hackathons, setHackathons] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
+  console.log(hackathons);
+  const [loading, setLoading] = React.useState(false);
+  const [page, setPage] = useState(10);
 
   useEffect(() => {
     getHackathons();
-  }, []);
+  }, [page]);
 
-  const getHackathons = async () => {
+  // bot/hacks/all
+  const getHackathons = async (page) => {
     try {
-      const res = await provider.get("/bot/hacks/all");
-      if (res) {
-        setHackathons(res.data.hackathons);
-        setLoading(false);
-      }
-    } catch (error) {
-      console.log(error);
+      setLoading(true);
+      const res = await provider.get(`/bot/hacks/all?page=${page}`);
+      setHackathons((prevHackathons) => prevHackathons.concat(res.data));
       setLoading(false);
-    }
+    } catch (error) {}
   };
+
+  function handleScroll() {
+    const scrollY = window.scrollY || document.documentElement.scrollTop;
+    const windowHeight = window.innerHeight;
+    const bodyHeight = document.body.offsetHeight;
+    if (scrollY + windowHeight >= bodyHeight) {
+      setPage((prevPage) => prevPage + 1);
+    }
+  }
+  window.addEventListener("touchmove", handleScroll);
+
   return (
     <>
       <PageTop label="Hackathons" />

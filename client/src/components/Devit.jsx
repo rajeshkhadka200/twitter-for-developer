@@ -128,7 +128,7 @@ function Devit() {
               image: "",
             });
             setImg(null);
-            window.location.reload();
+            return window.location.reload();
           }
         }
       }
@@ -159,7 +159,7 @@ function Devit() {
           image: "",
         });
         setImg(null);
-        window.location.reload();
+        return window.location.reload();
       }
     } catch (error) {
       setLoading(false);

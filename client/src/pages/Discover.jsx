@@ -77,13 +77,15 @@ const Discover = () => {
         return setLoading(false);
       }
     } catch (error) {
-      console.log(error);
+      toast.error("Something went wrong");
     }
   };
+
   return (
     <>
       <div className={styles.search_wrapper}>
         <SearchBox
+          handleKeyPress={handleKeyPress}
           search={search}
           setSearch={setSearch}
           handleSearch={handleSearch}
