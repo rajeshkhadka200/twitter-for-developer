@@ -37,7 +37,7 @@ export const postDevit = async (req, res) => {
 
 export const getDevits = async (req, res) => {
   try {
-    const devits = await Devit.find().sort({ timestamp: -1 });
+    const devits = await Devit.find().sort({ _id: -1 });
     res
       .status(200)
       .json({ error: false, msg: "Devits fetched successfully", devits });

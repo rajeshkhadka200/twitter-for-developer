@@ -28,7 +28,6 @@ app.use("/api/bot", botRoutes);
 if (process.env.NODE_ENV === "production") {
   //Set static folder
   app.use(express.static("../client/dist"));
-
   app.get("*", (req, res) => {
     res.sendFile("/root/twitter-for-developer/client/dist/index.html"); // absolute path configured for server
   });

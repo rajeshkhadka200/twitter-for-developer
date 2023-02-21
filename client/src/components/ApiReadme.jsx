@@ -4,7 +4,7 @@ import { Chip, margin } from "@pankod/refine-mui";
 import { toast } from "react-hot-toast";
 
 const ApiReadme = () => {
-  const apiurl = import.meta.env.VITE_API_URL;
+  const apiurl = import.meta.env.VITE_API;
   const api = [
     {
       name: "Apiurl/:apikey/:username/getall",
