@@ -50,10 +50,6 @@ In DevHub, we use tools like Puppeteer, a Node.js library, to automate the web s
 
 ---
 
-### Preview
-
-[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/vt5fpE0bzSY)
-
 ### Set up Project
 
 In this section I'm going to provide the clear instruction to follow up inorder to run the project locally.
