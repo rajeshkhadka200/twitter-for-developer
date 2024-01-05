@@ -6,7 +6,7 @@
 
 ## Project Demo link
 
-👉 [DevHub](https:devhubs.tech)
+👉 [DevHub](https://devhubs.tech/)
 
 ---
 
